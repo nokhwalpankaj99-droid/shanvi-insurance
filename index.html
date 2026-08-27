@@ -19,7 +19,7 @@
       <a href="renewal.html">Renewal</a>
       <a href="documents.html">Documents</a>
       <a href="about.html">About Us</a>
-      <a href="contact.html">Contact Us</a>
+      <a href="contact.html">Contact Us</a><a href="agent-portal.html">Agent Portal</a>
     </nav>
     <a class="call-top" href="tel:9664029638">☎ 96640-29638</a>
   </div>
@@ -41,6 +41,33 @@
   <article class="service-card"><div class="service-icon purple-bg">👨‍👩‍👧</div><h2>Term Insurance</h2><p>Help secure your family’s financial future with suitable cover.</p><a class="small-btn purple-btn" href="term-insurance.html">View Details</a></article>
   <article class="service-card"><div class="service-icon orange-bg">↻</div><h2>Renew Your Policy</h2><p>Renew your existing policy with quick, easy assistance.</p><a class="small-btn orange-btn" href="renewal.html">Renew Now</a></article>
 </section>
+
+<section class="vehicle-quote section" id="vehicle-quote">
+  <div class="vehicle-head">
+    <span class="eyebrow">MOTOR INSURANCE</span>
+    <h2>Enter Vehicle Number &amp; Get a Quick Quote</h2>
+    <p>Vehicle details, current insurer and premium options can be auto-filled after connecting a verified vehicle/insurer API.</p>
+  </div>
+  <div class="vehicle-form-card">
+    <div class="vehicle-input-row">
+      <input id="vehicleNumber" placeholder="Enter Vehicle Number e.g. RJ13AB1234" maxlength="14" autocomplete="off">
+      <button class="btn green" id="vehicleSearchBtn" type="button">Check Vehicle</button>
+    </div>
+    <div id="vehicleStatus" class="vehicle-status"></div>
+    <div id="vehicleResult" class="vehicle-result" hidden>
+      <div class="vehicle-summary">
+        <div><small>Vehicle</small><b id="vVehicle">—</b></div>
+        <div><small>Make / Model</small><b id="vModel">—</b></div>
+        <div><small>Fuel</small><b id="vFuel">—</b></div>
+        <div><small>Registration</small><b id="vRegDate">—</b></div>
+      </div>
+      <h3>Available Insurance Options</h3>
+      <div id="insurerCards" class="insurer-cards"></div>
+      <p class="api-note">* Premiums shown in this demo are indicative. Exact live premiums require a licensed insurer/aggregator quote API and applicable underwriting.</p>
+    </div>
+  </div>
+</section>
+
 <section class="why section"><h2>Why Choose Shanvi Insurance Services?</h2><div class="why-grid">
 <div>🤝 <b>Trusted &amp;<br>Reliable</b></div><div>％ <b>Best Premium<br>Deals</b></div><div>🎧 <b>Customer<br>Support</b></div><div>📄 <b>Hassle Free<br>Documentation</b></div><div>🤝 <b>Claim Assistance<br>Support</b></div></div></section>
 
