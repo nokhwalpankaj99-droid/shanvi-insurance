@@ -19,3 +19,7 @@ Suggested integration flow:
 5. Agent portal stores issued policies and commission records in a secure database.
 
 The current vehicle cards are clearly marked indicative/demo so customers are not misled.
+
+Vehicle quote button interaction fixed: entering a number and clicking Check Vehicle now displays demo insurer/premium cards. Replace demo data with an authorized live API for real vehicle/premium results.
+
+Added insurer comparison UI with 23 major general insurers, plus Comprehensive, Third Party and Standalone OD plan tabs. The insurer list is based on IRDAI's current general-insurer listing; exact live availability/quotes require authorized API/aggregator integration.

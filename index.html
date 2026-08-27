@@ -44,14 +44,23 @@
 
 <section class="vehicle-quote section" id="vehicle-quote">
   <div class="vehicle-head">
-    <span class="eyebrow">MOTOR INSURANCE</span>
-    <h2>Enter Vehicle Number &amp; Get a Quick Quote</h2>
-    <p>Vehicle details, current insurer and premium options can be auto-filled after connecting a verified vehicle/insurer API.</p>
+    <span class="eyebrow">MOTOR INSURANCE PARTNER DESK</span>
+    <h2>Enter Vehicle Number &amp; Compare Insurance Quotes</h2>
+    <p>Choose your vehicle type and cover. Compare insurer options in one place.</p>
   </div>
   <div class="vehicle-form-card">
+    <div class="quote-tabs" role="tablist">
+      <button class="quote-tab active" data-type="car">🚗 Car</button>
+      <button class="quote-tab" data-type="bike">🏍️ Bike</button>
+    </div>
     <div class="vehicle-input-row">
       <input id="vehicleNumber" placeholder="Enter Vehicle Number e.g. RJ13AB1234" maxlength="14" autocomplete="off">
       <button class="btn green" id="vehicleSearchBtn" type="button">Check Vehicle</button>
+    </div>
+    <div class="cover-row">
+      <label class="cover-option active"><input type="radio" name="coverType" value="comprehensive" checked> <b>Comprehensive</b><small>Own damage + third-party</small></label>
+      <label class="cover-option"><input type="radio" name="coverType" value="thirdparty"> <b>Third Party</b><small>Third-party liability cover</small></label>
+      <label class="cover-option"><input type="radio" name="coverType" value="od"> <b>Standalone OD</b><small>Own damage cover</small></label>
     </div>
     <div id="vehicleStatus" class="vehicle-status"></div>
     <div id="vehicleResult" class="vehicle-result" hidden>
@@ -59,15 +68,19 @@
         <div><small>Vehicle</small><b id="vVehicle">—</b></div>
         <div><small>Make / Model</small><b id="vModel">—</b></div>
         <div><small>Fuel</small><b id="vFuel">—</b></div>
-        <div><small>Registration</small><b id="vRegDate">—</b></div>
+        <div><small>Cover</small><b id="vCover">—</b></div>
       </div>
-      <h3>Available Insurance Options</h3>
-      <div id="insurerCards" class="insurer-cards"></div>
-      <p class="api-note">* Premiums shown in this demo are indicative. Exact live premiums require a licensed insurer/aggregator quote API and applicable underwriting.</p>
+      <div class="quote-result-head"><h3>Available Insurance Companies</h3><span id="quoteCount"></span></div>
+      <div id="insurerCards" class="insurer-cards insurer-grid"></div>
+      <p class="api-note">Indicative/demo premiums are shown until an authorized live insurer/aggregator quote API is connected. Final premium is subject to insurer underwriting and policy details.</p>
     </div>
   </div>
 </section>
 
+<section class="insurer-directory section" id="insurer-directory">
+  <div class="directory-head"><span class="eyebrow">INSURER NETWORK</span><h2>Insurance Companies</h2><p>Motor insurance options can be displayed from authorized insurer/aggregator integrations.</p></div>
+  <div class="insurer-directory-grid" id="insurerDirectory"></div>
+</section>
 <section class="why section"><h2>Why Choose Shanvi Insurance Services?</h2><div class="why-grid">
 <div>🤝 <b>Trusted &amp;<br>Reliable</b></div><div>％ <b>Best Premium<br>Deals</b></div><div>🎧 <b>Customer<br>Support</b></div><div>📄 <b>Hassle Free<br>Documentation</b></div><div>🤝 <b>Claim Assistance<br>Support</b></div></div></section>
 
