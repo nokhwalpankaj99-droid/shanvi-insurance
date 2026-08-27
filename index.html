@@ -1,158 +1,94 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Home | Shanvi Insurance Services</title>
-<meta name="theme-color" content="#0b2b5c"><meta name="description" content="Car, bike, term insurance and policy renewal assistance from Shanvi Insurance Services."><link rel="stylesheet" href="style.css"><link rel="icon" href="favicon.svg" type="image/svg+xml">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shanvi Insurance Services</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="header">
-  <div class="nav-wrap">
-    <a class="brand" href="index.html">
-      <div class="brand-mark">🛡️</div>
-      <div><div class="brand-name">Shanvi</div><div class="brand-sub">Insurance Services</div><small>Secure Today, Protected Tomorrow</small></div>
-    </a>
-    <button class="menu-btn" aria-label="Open menu" aria-expanded="false">☰</button>
-    <nav class="nav">
-      <a href="index.html">Home</a>
-      <a href="car-insurance.html">Car Insurance</a>
-      <a href="bike-insurance.html">Bike Insurance</a>
-      <a href="term-insurance.html">Term Insurance</a>
-      <a href="renewal.html">Renewal</a>
-      <a href="documents.html">Documents</a><a href="pi.html">PI Upload</a>
-      <a href="about.html">About Us</a>
-      <a href="contact.html">Contact Us</a><a href="agent-login.html">Agent Portal</a>
-    </nav>
-    <a class="call-top" href="tel:9664029638">☎ 96640-29638</a>
-  </div>
+<header class="topbar">
+  <div class="brand"><div class="brandmark">🛡️</div><div><b>Shanvi</b><span>Insurance Services</span></div></div>
+  <nav>
+    <a class="active" href="index.html">Home</a>
+    <a href="#quote">Get Quote</a><a href="#plans">Plans</a><a href="pi-upload.html">PI Upload</a>
+    <a href="agent-portal.html">Agent Portal</a><a href="#contact">Contact</a>
+  </nav>
+  <a class="call" href="tel:9664029638">☎ 96640-29638</a>
 </header>
 
 <main>
-<section class="page-hero section"><h1>Insurance Made Simple</h1><p>Car, bike, term insurance and policy renewal assistance from Shanvi Insurance Services.</p></section>
-
 <section class="hero">
-  <div class="hero-copy"><h1>Protect What Matters</h1><div class="script">We Make It Simple!</div>
-  <p>Get the best Insurance plans for your <b>Car, Bike &amp; Family</b> at affordable prices.</p>
-  <div class="trust-row"><span>🛡️ <b>Trusted</b><small>Insurance Advisor</small></span><span>₹ <b>Best Price</b><small>Guarantee</small></span><span>◷ <b>Quick &amp; Easy</b><small>Policy Issuance</small></span></div>
-  <div class="hero-buttons"><a class="btn green" href="https://wa.me/919664029638?text=Hello%20Shanvi%20Insurance%20Services%2C%20I%20need%20an%20insurance%20quote." target="_blank" rel="noopener">◉ Get Quote on WhatsApp</a><a class="btn blue" href="pi.html">📤 Submit PI Documents</a></div></div>
-  <div class="hero-art"><div class="umbrella">☂</div><div class="family">👨‍👩‍👦</div><div class="car-art">🚗</div><div class="bike-art">🏍️</div><div class="secure-badge">🛡️ <b>Secure Future<br>Secure Life</b></div></div>
-</section>
-<section class="cards section">
-  <article class="service-card"><div class="service-icon blue-bg">🚗</div><h2>Car Insurance</h2><p>Comprehensive coverage for your car with quick assistance.</p><a class="small-btn blue-btn" href="car-insurance.html">View Details</a></article>
-  <article class="service-card"><div class="service-icon green-bg">🏍️</div><h2>Bike Insurance</h2><p>Protect your bike with competitive plans and quick policy assistance.</p><a class="small-btn green-btn" href="bike-insurance.html">View Details</a></article>
-  <article class="service-card"><div class="service-icon purple-bg">👨‍👩‍👧</div><h2>Term Insurance</h2><p>Help secure your family’s financial future with suitable cover.</p><a class="small-btn purple-btn" href="term-insurance.html">View Details</a></article>
-  <article class="service-card"><div class="service-icon orange-bg">↻</div><h2>Renew Your Policy</h2><p>Renew your existing policy with quick, easy assistance.</p><a class="small-btn orange-btn" href="renewal.html">Renew Now</a></article>
-</section>
-
-<section class="trust-strip section">
-  <div><b>⚡ Quick Quote Assistance</b><small>Vehicle number se request start karein aur fast assistance paayein.</small></div>
-  <div><b>🏢 Multiple Insurer Options</b><small>Major insurance providers ko ek hi place par explore karein.</small></div>
-  <div><b>📑 Easy PI Documents</b><small>RC, KYC, photos aur video securely submit karne ka simple flow.</small></div>
-</section>
-
-
-<section class="trust-strip section" aria-label="Shanvi Premium Trust">
-  <div><b>🛡️ Shanvi Premium Trust</b><small>Clear insurance options, helpful assistance aur customer-first service.</small></div>
-  <div><b>⚡ Fast Quote Assistance</b><small>Car ya bike details submit karke quick assistance request karein.</small></div>
-  <div><b>📞 Personal Support</b><small>Policy, renewal aur PI documents ke liye direct support.</small></div>
-</section>
-<section class="vehicle-quote section" id="vehicle-quote">
-  <div class="vehicle-head">
-    <span class="eyebrow">MOTOR INSURANCE PARTNER DESK</span>
-    <h2>Enter Vehicle Number &amp; Compare Insurance Quotes</h2>
-    <p>Choose your vehicle type and cover. Compare insurer options in one place.</p>
+  <div>
+    <span class="pill">🚗 CAR • 🏍️ BIKE • 🏢 COMMERCIAL</span>
+    <h1>Insurance made simple.</h1>
+    <p>Enter your vehicle number and get a quick <b>demo quote preview</b>. For live insurer pricing, an authorised insurer/PB Partners API connection is required.</p>
+    <div class="hero-actions">
+      <a class="btn primary" href="#quote">Get Vehicle Quote</a>
+      <a class="btn whatsapp" href="https://wa.me/919664029638?text=Hello%20Shanvi%20Insurance%2C%20I%20need%20a%20vehicle%20insurance%20quote.">💬 Get Quote on WhatsApp</a>
+    </div>
   </div>
-  <div class="vehicle-form-card">
-    <div class="quote-tabs" role="tablist">
-      <button class="quote-tab active" data-type="car">🚗 Car</button>
-      <button class="quote-tab" data-type="bike">🏍️ Bike</button>
-    </div>
-    <div class="vehicle-input-row">
-      <input id="vehicleNumber" placeholder="Enter Vehicle Number e.g. RJ13AB1234" maxlength="14" autocomplete="off">
-      <button class="btn green" id="vehicleSearchBtn" type="button">Check Vehicle</button>
-    </div>
-    <div class="cover-row">
-      <label class="cover-option active"><input type="radio" name="coverType" value="comprehensive" checked> <b>Comprehensive</b><small>Own damage + third-party</small></label>
-      <label class="cover-option"><input type="radio" name="coverType" value="thirdparty"> <b>Third Party</b><small>Third-party liability cover</small></label>
-      <label class="cover-option"><input type="radio" name="coverType" value="od"> <b>Standalone OD</b><small>Own damage cover</small></label>
-    </div>
-    <div id="vehicleStatus" class="vehicle-status"></div>
-    <div id="vehicleResult" class="vehicle-result" hidden>
-      <div class="vehicle-summary">
-        <div><small>Vehicle</small><b id="vVehicle">—</b></div>
-        <div><small>Make / Model</small><b id="vModel">—</b></div>
-        <div><small>Fuel</small><b id="vFuel">—</b></div>
-        <div><small>Cover</small><b id="vCover">—</b></div>
-      </div>
-      <div class="quote-result-head"><h3>Available Insurance Companies</h3><span id="quoteCount"></span></div>
-      <div id="insurerCards" class="insurer-cards insurer-grid"></div>
-      <p class="api-note">Indicative/demo premiums are shown until an authorized live insurer/aggregator quote API is connected. Final premium is subject to insurer underwriting and policy details.</p>
-    </div>
+  <div class="hero-card">
+    <div class="mini-icon">🔐</div><b>Trusted Assistance</b>
+    <p>Quick comparison • Third Party • Comprehensive • Renewal</p>
   </div>
 </section>
 
-<section class="insurer-directory section" id="insurer-directory">
-  <div class="directory-head"><span class="eyebrow">INSURER NETWORK</span><h2>Insurance Companies</h2><p>Major motor insurance providers are shown below. Actual insurer logo use should follow the applicable brand permissions.</p></div>
-  <div class="insurer-directory-grid" id="insurerDirectory"></div>
-</section>
-<section class="why section"><h2>Why Choose Shanvi Insurance Services?</h2><div class="why-grid">
-<div>🤝 <b>Trusted &amp;<br>Reliable</b></div><div>％ <b>Best Premium<br>Deals</b></div><div>🎧 <b>Customer<br>Support</b></div><div>📄 <b>Hassle Free<br>Documentation</b></div><div>🤝 <b>Claim Assistance<br>Support</b></div></div></section>
-
-<section class="quote-doc section">
+<section id="quote" class="quote-section">
+  <div class="section-head"><div><span class="eyebrow">QUICK QUOTE</span><h2>Enter Vehicle Number & Get a Quick Quote</h2></div></div>
   <div class="quote-box">
-    <h2>Get Insurance Quote</h2>
-    <form id="quoteForm">
-      <div class="form-grid">
-        <input name="name" required placeholder="Full Name">
-        <input name="mobile" required placeholder="Mobile Number" type="tel" pattern="[0-9+ ()-]{10,}">
-        <input name="email" placeholder="Email Address" type="email">
-        <select name="type" required><option value="">Select Insurance Type</option><option>Car Insurance</option><option>Bike Insurance</option><option>Term Insurance</option><option>Policy Renewal</option></select>
-        <select name="vehicle"><option value="">Vehicle Type</option><option>Car</option><option>Bike</option></select>
-        <input name="reg" placeholder="Registration Number">
-        <input name="city" placeholder="City">
-        <input name="pin" placeholder="Pin Code" inputmode="numeric">
-      </div>
-      <button class="btn green full" type="submit">◉ Get Quote on WhatsApp</button>
-      <p class="form-note">Your details will open in WhatsApp for quick assistance.</p>
-    </form>
-  </div>
-</section>
-
-
-<section class="info-section section" style="padding-top:15px;padding-bottom:35px">
-  <div class="quote-box" style="background:linear-gradient(135deg,#062b68,#1769ff);color:#fff;border:0;text-align:center">
-    <h2 style="color:#fff;margin-bottom:8px">Need Help Choosing the Right Cover?</h2>
-    <p style="color:#e5efff">Comprehensive, Third Party ya renewal — Shanvi Insurance Services se assistance lein.</p>
-    <div class="hero-buttons" style="justify-content:center;margin-top:18px">
-      <a class="btn green" href="https://wa.me/919664029638?text=Hello%20Shanvi%20Insurance%20Services%2C%20I%20need%20help%20choosing%20an%20insurance%20plan." target="_blank" rel="noopener">💬 WhatsApp Us</a>
-      <a class="btn blue" href="contact.html">☎ Contact Us</a>
+    <label>Vehicle Number</label>
+    <div class="quote-row">
+      <input id="vehicleNo" placeholder="e.g. RJ13AB1234" maxlength="13" autocomplete="off">
+      <button class="btn primary" onclick="getQuote()">Get Quote</button>
     </div>
+    <small>Example demo vehicle numbers: RJ13AB1234, RJ13ES8650, RJ13EC6126</small>
+    <div id="quoteResult" class="quote-result hidden"></div>
   </div>
 </section>
 
+<section id="plans" class="section">
+  <div class="section-head"><div><span class="eyebrow">INSURANCE OPTIONS</span><h2>Choose the cover you need</h2></div></div>
+  <div class="plan-grid">
+    <div class="plan"><div class="plan-icon">🛡️</div><h3>Comprehensive</h3><p>Own damage + third party protection, subject to insurer terms.</p><a href="#quote">Check Premium →</a></div>
+    <div class="plan"><div class="plan-icon">⚖️</div><h3>Third Party</h3><p>Mandatory third-party liability cover as applicable.</p><a href="#quote">Check Premium →</a></div>
+    <div class="plan"><div class="plan-icon">🔄</div><h3>Renewal</h3><p>Submit your existing policy details for renewal assistance.</p><a href="pi-upload.html">Send Details →</a></div>
+  </div>
+</section>
+
+<section class="section insurers">
+  <div class="section-head"><div><span class="eyebrow">INSURER NETWORK</span><h2>Insurance companies</h2><p class="muted">Names shown for comparison/assistance. Live availability depends on the authorised integration.</p></div></div>
+  <div class="insurer-grid">
+    <div class="insurer"><b>UI</b>United India Insurance</div>
+    <div class="insurer"><b>NI</b>National Insurance</div>
+    <div class="insurer"><b>OI</b>Oriental Insurance</div>
+    <div class="insurer"><b>SG</b>Shri Ram General</div>
+    <div class="insurer"><b>DI</b>Digit Insurance</div>
+    <div class="insurer"><b>IC</b>ICICI Lombard</div>
+    <div class="insurer"><b>BA</b>Bajaj Allianz</div>
+    <div class="insurer"><b>TA</b>Tata AIG</div>
+    <div class="insurer"><b>HI</b>HDFC ERGO</div>
+    <div class="insurer"><b>RE</b>Reliance General</div>
+    <div class="insurer"><b>KO</b>Kotak General</div>
+    <div class="insurer"><b>SB</b>SBI General</div>
+    <div class="insurer"><b>CH</b>Cholamandalam MS</div>
+    <div class="insurer"><b>FG</b>Future Generali</div>
+    <div class="insurer"><b>RG</b>Royal Sundaram</div>
+    <div class="insurer"><b>LI</b>Liberty General</div>
+  </div>
+</section>
+
+<section class="cta section">
+  <div><span class="eyebrow">PI / DOCUMENTS</span><h2>Need a PI?</h2><p>Upload RC, KYC, photos, date/time details and video through the PI request page.</p></div>
+  <a class="btn primary" href="pi-upload.html">📤 Submit PI Documents</a>
+</section>
 </main>
 
-<footer>
-  <div class="footer-grid">
-    <div><div class="footer-brand">🛡️ <b>Shanvi</b><br><small>Insurance Services</small></div>
-      <p>We are committed to providing simple, reliable and affordable insurance solutions to protect you and your loved ones.</p>
-    </div>
-    <div><h3>Quick Links</h3>
-      <a href="index.html">Home</a><a href="car-insurance.html">Car Insurance</a><a href="bike-insurance.html">Bike Insurance</a>
-      <a href="term-insurance.html">Term Insurance</a><a href="renewal.html">Renewal</a><a href="documents.html">Documents Required</a>
-      <a href="about.html">About Us</a><a href="contact.html">Contact Us</a>
-    </div>
-    <div><h3>Our Services</h3>
-      <a href="car-insurance.html">✓ Car Insurance</a><a href="bike-insurance.html">✓ Bike Insurance</a>
-      <a href="term-insurance.html">✓ Term Insurance</a><a href="renewal.html">✓ Policy Renewal</a>
-      <a href="contact.html">✓ Claim Assistance</a><a href="contact.html">✓ Insurance Advisory</a>
-    </div>
-    <div><h3>Contact Us</h3>
-      <a href="tel:9664029638">☎ 96640-29638</a>
-      <a href="mailto:nokhwalpankaj99@gmail.com">✉ nokhwalpankaj99@gmail.com</a>
-      <p>📍 Sri Ganganagar, Rajasthan</p>
-    </div>
-  </div>
-  <div class="copyright">© 2026 Shanvi Insurance Services. All Rights Reserved. <span>Terms &amp; Conditions &nbsp; | &nbsp; Privacy Policy</span></div>
+<footer id="contact">
+  <div><b>Shanvi Insurance Services</b><p>Secure Today, Protected Tomorrow</p></div>
+  <div><b>Customer Requests</b><p>nokhwalpankaj99@gmail.com</p><p>☎ 96640-29638</p></div>
+  <div><b>Agent</b><p><a href="agent-portal.html">Open Agent Portal</a></p><p>Commission: Bike ₹75 • Car ₹210</p></div>
 </footer>
-<a class="whatsapp-float" href="https://wa.me/919664029638?text=Hello%20Shanvi%20Insurance%20Services%2C%20I%20need%20an%20insurance%20quote." target="_blank" rel="noopener">◉ <span>Chat on<br>WhatsApp</span></a>
-<script src="script.js"></script><script>document.querySelectorAll(".nav a").forEach(a=>a.classList.toggle("active", a.getAttribute("href")==="index.html"));</script></body></html>
+<script src="script.js"></script>
+</body>
+</html>
