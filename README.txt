@@ -1,25 +1,26 @@
-Shanvi Insurance Services - professional website + vehicle quote UI + agent portal
+SHANVI INSURANCE - UPDATED STATIC WEBSITE
 
-NEW:
-- Vehicle number quick-quote section on homepage.
-- Displays vehicle summary and insurer/premium option cards in demo mode.
-- Agent Portal page with login, dashboard, policies, commission calculation and configurable commission rate.
-- Demo login: agent01 / demo123 (preview only; replace with real authentication before production).
+Included:
+- index.html: polished insurance-company style homepage
+- Vehicle number quote UI with Car/Bike + Comprehensive/Third Party/Standalone OD
+- Major insurer directory with logo/favicons
+- pi.html: PI / policy issuance document upload page
+  RC Copy, KYC documents, customer/vehicle photos, optional short video, submission timestamp
+- agent-login.html -> agent-dashboard.html: separate Agent Portal login/dashboard
+- Fixed commission: Bike Rs.75 per policy; Car Rs.210 per policy
+- Customer and PI requests are configured to email: nokhwalpankaj99@gmail.com
 
-LIVE VEHICLE/INSURANCE DATA:
-The front-end cannot legally or reliably derive an exact live premium from a registration number by itself.
-For production, connect a verified RC/vehicle-data API and licensed insurer/aggregator quote APIs on a secure server.
-The UI is ready for that integration. Do not put secret API keys in GitHub/client-side JavaScript.
+IMPORTANT EMAIL SETUP:
+The static site uses FormSubmit for email delivery. On the first form submission, FormSubmit may ask the recipient to confirm/activate the email address. Complete that confirmation once.
 
-Suggested integration flow:
-1. Registration number -> secure backend -> RC/vehicle API.
-2. Backend returns vehicle make/model/fuel/registration/insurance status.
-3. Backend calls authorized insurer/aggregator quote APIs.
-4. Return live insurer quotes and final premium to the browser.
-5. Agent portal stores issued policies and commission records in a secure database.
+PI FILE LIMIT:
+The browser blocks PI submissions above 9.5 MB total to stay below the free FormSubmit 10 MB attachment limit. Keep the video short/compressed.
 
-The current vehicle cards are clearly marked indicative/demo so customers are not misled.
+IMPORTANT QUOTE NOTE:
+The vehicle-number interface is fixed and now gives a clear result state, but it does NOT invent live premiums. Actual live insurer premium/vehicle data requires an authorized insurer/aggregator API. PB Partners private authenticated endpoints must not be copied into frontend code.
 
-Vehicle quote button interaction fixed: entering a number and clicking Check Vehicle now displays demo insurer/premium cards. Replace demo data with an authorized live API for real vehicle/premium results.
+AGENT LOGIN (PREVIEW ONLY):
+Agent ID: agent01
+Password: demo123
 
-Added insurer comparison UI with 23 major general insurers, plus Comprehensive, Third Party and Standalone OD plan tabs. The insurer list is based on IRDAI's current general-insurer listing; exact live availability/quotes require authorized API/aggregator integration.
+GitHub Pages is static hosting. This login is only a front-end preview and is NOT secure production authentication. For real authentication/database, move auth to a backend/Supabase/Firebase/etc.
