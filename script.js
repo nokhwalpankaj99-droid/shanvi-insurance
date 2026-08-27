@@ -57,18 +57,33 @@
   if(searchBtn)searchBtn.addEventListener('click',runQuote); if(input)input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();runQuote();}});
   if(input)input.addEventListener('input',()=>input.value=input.value.toUpperCase());
 
-  // PI upload timestamp
-  const stamp=qs('#piTimestamp'); if(stamp){const now=new Date();stamp.value=now.toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'medium'});setInterval(()=>{stamp.value=new Date().toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'medium'});},1000);}
+  // PI upload timestamp + client-side size validation. The actual PI form uses
+  // native multipart/form-data POST so FormSubmit can deliver file attachments.
+  const stamp=qs('#piTimestamp');
+  if(stamp){
+    const updateStamp=()=>{stamp.value=new Date().toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'medium'});};
+    updateStamp(); setInterval(updateStamp,1000);
+  }
   const pi=qs('#piForm');
   if(pi){
-    pi.addEventListener('submit',async e=>{
-      e.preventDefault();
+    pi.addEventListener('submit',e=>{
       const files=qsa('input[type="file"]',pi).flatMap(x=>[...x.files]);
-      const total=files.reduce((n,f)=>n+f.size,0); const max=9.5*1024*1024;
-      if(total>max){alert('Files ka total size 9.5 MB se kam rakhein. Video ko chhota/compress karke upload karein.');return;}
-      const btn=qs('button[type="submit"]',pi), old=btn.textContent;btn.disabled=true;btn.textContent='Uploading...';
-      const fd=new FormData(pi); fd.append('_subject','New PI / Policy Issuance Request - Shanvi Insurance');fd.append('_captcha','false');fd.append('_template','table');
-      try{const r=await fetch('https://formsubmit.co/ajax/nokhwalpankaj99@gmail.com',{method:'POST',headers:{Accept:'application/json'},body:fd});const j=await r.json();if(j.success){alert('PI request aur documents email par bhej diye gaye hain.');pi.reset();if(stamp)stamp.value=new Date().toLocaleString('en-IN',{dateStyle:'medium',timeStyle:'medium'});}else throw new Error(j.message||'Upload failed');}catch(err){alert('Upload fail hua. Please files size check karein aur dobara try karein.');}finally{btn.disabled=false;btn.textContent=old;}
+      const total=files.reduce((n,f)=>n+f.size,0), max=9.5*1024*1024;
+      if(total>max){
+        e.preventDefault();
+        alert('Files ka total size 9.5 MB se kam rakhein. Video ko compress karke upload karein.');
+        return;
+      }
+      const video=files.find(f=>f.type.startsWith('video/'));
+      if(video && video.size>7*1024*1024){
+        e.preventDefault();
+        alert('Video 7 MB se chhota rakhein, taaki RC/KYC/photos ke liye bhi email attachment limit ke andar jagah rahe.');
+        return;
+      }
+      const btn=qs('button[type="submit"]',pi);
+      if(btn){btn.disabled=true;btn.textContent='Uploading documents...';}
+      // Do not preventDefault: native multipart POST is required for attachments.
     });
   }
+
 })();
