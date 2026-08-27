@@ -1,6 +1,6 @@
 
 :root{
-  --navy:#0b2b5c;--blue:#0d5bd7;--blue2:#164a9c;--green:#12a56b;
+  --navy:#082b63;--blue:#1769ff;--blue2:#0b4db7;--green:#10b981;
   --ink:#14233b;--muted:#637083;--line:#e5eaf1;--bg:#f5f8fc;--white:#fff;
   --shadow:0 12px 35px rgba(13,43,92,.10);--radius:14px;
 }
@@ -60,3 +60,40 @@ footer{background:#071f42;color:#c7d5e8;margin-top:30px}.footer-grid{width:min(1
 footer{background:#071b39;color:#c8d5e8;margin-top:40px}.footer-grid{max-width:1180px;margin:auto;padding:42px 20px;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px}.footer-grid h3{color:#fff}.footer-grid a{display:block;text-decoration:none;margin:8px 0;font-size:13px}.copyright{border-top:1px solid rgba(255,255,255,.1);padding:15px 20px;text-align:center;font-size:12px;color:#9db0ca}.whatsapp-float{position:fixed;right:20px;bottom:20px;background:#1aa65c;color:#fff;border-radius:999px;padding:12px 17px;text-decoration:none;font-weight:900;box-shadow:var(--shadow);z-index:25}.whatsapp-float span{display:inline-block;font-size:11px;margin-left:5px;line-height:1.1}
 @media(max-width:950px){.nav{display:none}.nav.open{display:flex;position:absolute;top:69px;left:0;right:0;background:#fff;padding:10px 20px;flex-direction:column;align-items:stretch;border-bottom:1px solid var(--line)}.menu-btn{display:block}.brand{flex:1}.call-top{font-size:11px}.hero{grid-template-columns:1fr}.cards,.insurer-directory-grid{grid-template-columns:repeat(2,1fr)}.why-grid{grid-template-columns:repeat(2,1fr)}.insurer-cards{grid-template-columns:repeat(2,1fr)}.pi-layout{grid-template-columns:1fr}}
 @media(max-width:620px){.page-hero h1{font-size:32px}.hero{padding:36px 22px}.hero h1{font-size:38px}.cards,.insurer-directory-grid,.insurer-cards,.why-grid,.form-grid,.portal-grid,.stat-grid,.upload-grid,.info-grid,.doc-list.large,.trust-strip{grid-template-columns:1fr}.vehicle-input-row{grid-template-columns:1fr}.cover-row{grid-template-columns:1fr}.vehicle-summary{grid-template-columns:1fr 1fr}.footer-grid{grid-template-columns:1fr}.brand{min-width:0}.brand small{display:none}.call-top{display:none}.section{padding:40px 16px}}
+
+
+/* Colorful customer-facing refresh */
+body{background:linear-gradient(180deg,#f6f9ff 0%,#ffffff 38%,#f7fbff 100%)}
+.header{background:rgba(255,255,255,.96);box-shadow:0 4px 20px rgba(8,43,99,.06)}
+.brand-mark{background:linear-gradient(135deg,#1769ff,#7c3aed 55%,#10b981);box-shadow:0 8px 22px rgba(23,105,255,.28)}
+.brand-sub{color:#1769ff}
+.call-top{background:linear-gradient(135deg,#10b981,#059669);box-shadow:0 7px 18px rgba(16,185,129,.2)}
+.hero{background:
+ radial-gradient(circle at 84% 18%,rgba(255,255,255,.22),transparent 18%),
+ linear-gradient(115deg,#062b68 0%,#1769ff 53%,#e8f2ff 53%,#f8fbff 100%)}
+.hero-copy h1{letter-spacing:-1.4px}
+.script{color:#8ff1c8}
+.trust-row span{background:linear-gradient(145deg,rgba(255,255,255,.16),rgba(255,255,255,.06));backdrop-filter:blur(5px)}
+.btn.green{background:linear-gradient(135deg,#10b981,#059669);box-shadow:0 8px 20px rgba(16,185,129,.22)}
+.btn.blue{background:linear-gradient(135deg,#fff,#eef5ff)}
+.service-card{position:relative;overflow:hidden}
+.service-card:before{content:"";position:absolute;left:0;top:0;width:100%;height:4px;background:linear-gradient(90deg,#1769ff,#7c3aed,#10b981,#f59e0b)}
+.service-card:nth-child(1) .service-icon{background:linear-gradient(135deg,#dbeafe,#bfdbfe)}
+.service-card:nth-child(2) .service-icon{background:linear-gradient(135deg,#d1fae5,#a7f3d0)}
+.service-card:nth-child(3) .service-icon{background:linear-gradient(135deg,#ede9fe,#ddd6fe)}
+.service-card:nth-child(4) .service-icon{background:linear-gradient(135deg,#ffedd5,#fed7aa)}
+.service-card:hover{transform:translateY(-6px);box-shadow:0 20px 45px rgba(8,43,99,.14)}
+.vehicle-quote{background:linear-gradient(180deg,#f7fbff 0%,#fff 100%)}
+.vehicle-form-card{border:1px solid #d7e6ff;box-shadow:0 18px 48px rgba(23,105,255,.10)}
+.quote-tab.active{background:linear-gradient(135deg,#1769ff,#4f46e5);color:#fff;border-color:#1769ff;box-shadow:0 6px 16px rgba(23,105,255,.22)}
+.cover-option.active{border-color:#1769ff;background:linear-gradient(135deg,#f3f7ff,#eef2ff);box-shadow:0 5px 16px rgba(23,105,255,.08)}
+.vehicle-summary>div{background:linear-gradient(135deg,#f8fbff,#eef5ff);border-color:#d9e7fb}
+.insurer-card{background:linear-gradient(145deg,#fff,#f8fbff);border-color:#dce7f7;transition:.2s}
+.insurer-card:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(8,43,99,.10)}
+.premium{color:#059669}
+.page-hero{background:radial-gradient(circle at 15% 20%,rgba(16,185,129,.25),transparent 24%),linear-gradient(120deg,#062b68,#1769ff 65%,#4f46e5)}
+.why-grid>div{background:linear-gradient(145deg,#fff,#f7fbff);border-color:#dce7f7}
+.trust-strip>div{background:linear-gradient(135deg,#fff,#f4f8ff);border-color:#dce7f7}
+.insurer-directory-grid .directory-card{transition:.2s}
+.directory-card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(8,43,99,.10);border-color:#bcd3f6}
+.whatsapp-float{background:linear-gradient(135deg,#18c77a,#059669)}
