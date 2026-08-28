@@ -36,3 +36,22 @@ This is a static/GitHub Pages frontend. `localStorage` is browser/device-specifi
 - Agent payout cannot exceed available earned commission
 - Corrected wallet accounting: Earned / Pending / Paid / Available
 - Local insurer wordmark assets included so logos do not depend on external URLs
+
+
+## Policy / PI document workflow
+- Policy PDF upload is Admin-only. Admin links it to a Customer UID and optionally a Sub-Agent UID.
+- Customer Portal can download its linked Policy PDF.
+- Linked Sub-Agent can download the Policy PDF from Sub-Agent Portal.
+- PI PDF remains Admin-uploaded after verification and is available to the linked Sub-Agent and Customer where the request is associated.
+- Static hosting limitation remains: localStorage is browser/device specific; central multi-device document delivery requires a backend/database/object storage.
+
+
+## v22 visual/link reliability patch
+- Raksha Bandhan poster embedded directly in Home page.
+- Insurance partner SVG logos embedded directly in Home page.
+- ₹190 PI QR embedded directly in PI page.
+- Strong portal isolation: Website/other portal links blocked until Logout.
+- Agent certificate link remains available inside authenticated Sub-Agent Portal.
+
+## Important
+Payment requests stored in browser localStorage cannot travel from an Agent device to an Admin device. A central backend/database is required for real cross-device payment requests and document delivery.

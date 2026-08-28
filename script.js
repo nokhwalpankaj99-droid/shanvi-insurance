@@ -107,11 +107,28 @@ function updateSessionUI(remaining){
   if(sec<=120){n.textContent='⚠️ Session soon expire hogi — activity karein ya Logout karein.';document.getElementById('shanviSessionBar').classList.add('warning')}
 }
 function protectPortalLinks(type){
-  const other={admin:['agent-login.html','agent-portal.html','customer-login.html','customer-portal.html'],agent:['admin-login.html','admin-portal.html','customer-login.html','customer-portal.html'],customer:['admin-login.html','admin-portal.html','agent-login.html','agent-portal.html']};
-  document.querySelectorAll('a[href]').forEach(a=>a.addEventListener('click',e=>{
-    const href=(a.getAttribute('href')||'').split('?')[0];
-    if(other[type]?.includes(href)){e.preventDefault();alert('Pehle current portal se Logout karein, uske baad dusre portal mein login karein.');}
-  }));
+  const safe={
+    admin:new Set(['admin-portal.html','admin-settings.html','admin-login.html']),
+    agent:new Set(['agent-portal.html','agent-certificate.html','agent-login.html','pi.html']),
+    customer:new Set(['customer-portal.html','customer-login.html','pi.html'])
+  };
+  const current=(location.pathname.split('/').pop()||'index.html').toLowerCase();
+  document.querySelectorAll('a[href]').forEach(a=>{
+    if(a.dataset.portalGuardBound==='1')return;
+    a.dataset.portalGuardBound='1';
+    a.addEventListener('click',e=>{
+      const href=(a.getAttribute('href')||'').split('#')[0].split('?')[0];
+      if(!href || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('upi:'))return;
+      const file=(href.split('/').pop()||'').toLowerCase();
+      if(file==='')return;
+      const isLogout=(a.textContent||'').toLowerCase().includes('logout') || a.getAttribute('onclick')?.includes('logoutPortal');
+      if(isLogout)return;
+      if(!safe[type]?.has(file)){
+        e.preventDefault();
+        alert('Pehle current portal se Logout karein. Uske baad Website ya kisi doosre portal par ja sakte hain.');
+      }
+    });
+  });
 }
 function recordSiteVisit(page='index.html', customer){
   try{
