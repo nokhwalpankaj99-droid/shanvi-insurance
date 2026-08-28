@@ -1,16 +1,29 @@
-# Shanvi Insurance Services — Updated Website Package
+# Shanvi Insurance Services — V9
 
-## Included
-- Separate Customer account creation/login with mandatory email, User ID and password.
-- Separate Agent registration/login. Agent gets a certificate immediately after registration and before first portal login.
-- Agent code sequence starts at `SIS2022601`, then `SIS2022602`, etc.
-- Agent Portal: insurance request, policy PDF upload, commission view. PI document upload is not present.
-- Customer Portal: PI request, PI status, policy PDF download.
-- PI processing fee: ₹190 with supplied PhonePe QR.
-- Owner/admin screen for headline/poster controls and PI payment verification.
-- Support: 96640-29638 / nokhwalpankaj99@gmail.com
+## Central Admin + Agent + Customer workflow
+- Admin Login + Admin Portal
+- Agent Registration with own User ID, password and mandatory email
+- Registration is pending until Admin issues certificate
+- Certificate code starts at SIS2022601
+- Agent Login is blocked until certificate is issued
+- Agent Portal: Insurance Request + Policy PDF upload + commission
+- Agent Portal has NO PI upload
+- Customer Login + Customer Portal
+- PI request with ₹190 and supplied PhonePe QR
+- Admin PI payment verification
+- Customer PI/policy download UI
+- Rotating homepage headlines
+- Admin headline settings
+- Raksha Bandhan/promotion poster upload control
+- Insurer/broker marketplace-style section
+- Support: 96640-29638
+- Email: nokhwalpankaj99@gmail.com
 - Address: 58 LNP Ridmalsar Road, Sri Ganganagar, Rajasthan - 335061
-- Insurance marketplace-style homepage with insurer brand marks and broker/marketplace section.
 
-## Important deployment note
-The package contains the complete browser-side workflow and storage for the current website package. For a real multi-user public website, connect the forms and document storage to your server/database/storage and email service. Do not place PB Partners credentials, cookies, session tokens, OTPs or private API keys in browser JavaScript.
+## Frontend demo credentials
+Admin: admin / admin123
+Agent: create through Agent Registration; admin must issue certificate first
+Customer: create through Customer Registration
+
+## Production
+This package is still browser-side/static. GitHub Pages cannot provide secure multi-user database, private file storage, real payment verification, server-side certificate generation, or protected customer-only downloads. For a real production system, connect these screens to a backend/database/storage and email service. Do not put PB Partners credentials/session tokens/private API keys in GitHub JavaScript.

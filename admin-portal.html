@@ -1,0 +1,28 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Admin Portal | Shanvi</title><link rel="stylesheet" href="style.css"></head>
+<body><header class="topbar"><div class="brand"><div class="logo">🛡️</div><div><b>Shanvi</b><span>Admin Portal</span><small>Central Owner Control</small></div></div><nav><a href="index.html">Website</a><a href="admin-settings.html">Settings</a><a href="#" onclick="logout()">Logout</a></nav></header>
+<main class="panel"><div class="hero admin-hero"><div><span class="eyebrow">CENTRAL CONTROL</span><h1>Shanvi Admin Dashboard</h1><p>Agent registration, certificates, PI payment, insurance requests, policy delivery और website promotion एक जगह से manage करें.</p></div><div class="hero-card"><div class="hero-icon">⚙️</div><b>Owner Control</b><span>All browser-side demo records are linked through localStorage.</span></div></div>
+
+<div class="dashboard-grid" style="margin-top:22px"><div class="stat"><span>Agents</span><b id="agentCount">0</b><small>registered</small></div><div class="stat"><span>PI Requests</span><b id="piCount">0</b><small>received</small></div><div class="stat"><span>Insurance Requests</span><b id="insCount">0</b><small>raised</small></div><div class="stat"><span>Verified PI</span><b id="verifiedCount">0</b><small>payments</small></div></div>
+
+<section class="form-card" style="margin-top:20px"><h2>👨‍💼 Agent Registration & Certificate</h2><p>Agent registration के बाद यहां से certificate issue करें. Certificate issue होने के बाद ही agent login active होगा.</p><div id="agents"></div></section>
+
+<section class="form-card" style="margin-top:20px"><h2>💳 PI Payment Verification</h2><div id="piRequests"></div></section>
+
+<section class="form-card" style="margin-top:20px"><h2>🚗 Insurance Requests</h2><div id="insuranceRequests"></div></section>
+
+<section class="form-card" style="margin-top:20px"><h2>📑 Policy Delivery</h2><p>Agent द्वारा policy PDF upload होने के बाद customer account से download उपलब्ध कराया जाएगा.</p><div id="policyInfo" class="notice">Policy workflow is connected in the frontend portal.</div></section>
+
+<section class="form-card" style="margin-top:20px"><h2>🎨 Website Headline & Poster</h2><label>Headline 1<input id="h1" value="🎉 Raksha Bandhan Special — Protect your family & vehicle today"></label><label>Headline 2<input id="h2" value="💰 Agent Commission — Bike ₹75 | Car ₹210 per policy"></label><label>Headline 3<input id="h3" value="🛡️ Shanvi Insurance Services — Secure Today, Protected Tomorrow"></label><label>Promotion Poster<input id="poster" type="file" accept="image/*"></label><button class="btn primary" onclick="saveSettings()">Save Website Settings</button><div id="setMsg"></div></section>
+</main>
+<script src="script.js"></script><script>
+if(localStorage.getItem('shanviAdmin')!=='1') location.href='admin-login.html';
+function render(){const a=load('shanviAgents',[]),p=load('shanviPIRequests',[]),i=load('shanviInsuranceRequests',[]);agentCount.textContent=a.length;piCount.textContent=p.length;insCount.textContent=i.length;verifiedCount.textContent=p.filter(x=>x.paymentVerified).length;
+agents.innerHTML=a.length?a.map((x,n)=>`<div class="request-row"><div><b>${x.name}</b> · ${x.email}<br><small>Code: ${x.code||'Pending'} · ${x.uid} · ${x.certificateIssued?'Certificate Issued':'Pending Certificate'}</small></div><button class="btn primary" onclick="issueCert(${n})">${x.certificateIssued?'View Certificate':'Issue Certificate'}</button></div>`).join(''):'<div class="notice">No agent registrations yet.</div>';
+piRequests.innerHTML=p.length?p.map((x,n)=>`<div class="request-row"><div><b>${x.name}</b> · ${x.vehicle}<br><small>₹190 · UTR ${x.utr} · ${new Date(x.submittedAt).toLocaleString('en-IN')}<br>Status: ${x.status||'Received'}</small></div><button class="btn ${x.paymentVerified?'whatsapp':'primary'}" onclick="verifyPI(${n})">${x.paymentVerified?'Verified':'Verify ₹190'}</button></div>`).join(''):'<div class="notice">No PI requests.</div>';
+insuranceRequests.innerHTML=i.length?i.map(x=>`<div class="request-row"><div><b>${x.customer||'Customer'}</b> · ${x.vehicle||''}<br><small>${x.insurer||'Any insurer'} · ${x.cover||''}<br>${x.submittedAt?new Date(x.submittedAt).toLocaleString('en-IN'):''}</small></div><span class="notice">${x.status||'Received'}</span></div>`).join(''):'<div class="notice">No insurance requests.</div>'}
+function issueCert(n){let a=load('shanviAgents',[]),u=a[n];if(!u.code){u.code=nextAgentCode();u.certificateNo='SIS-CERT-'+u.code;u.issuedAt=new Date().toISOString()}u.certificateIssued=true;a[n]=u;store('shanviAgents',a);store('shanviCurrentAgent',u.uid);location.href='agent-certificate.html'}
+function verifyPI(n){let p=load('shanviPIRequests',[]);p[n].paymentVerified=true;p[n].status='Payment Verified';p[n].verifiedAt=new Date().toISOString();store('shanviPIRequests',p);render()}
+function saveSettings(){let heads=[h1.value,h2.value,h3.value].filter(Boolean);store('shanviSiteSettings',{headlines:heads,posterName:poster.files[0]?.name||'',updatedAt:new Date().toISOString()});document.getElementById('setMsg').innerHTML='<div class="notice">Settings saved. Homepage will use saved headlines on this browser.</div>'}
+function logout(){localStorage.removeItem('shanviAdmin');location.href='admin-login.html'}
+render()
+</script></body></html>

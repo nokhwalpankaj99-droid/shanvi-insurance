@@ -4,7 +4,7 @@
 <body>
 <header class="topbar">
 <div class="brand"><div class="logo">🛡️</div><div><b>Shanvi</b><span>Insurance Services</span><small>Secure Today, Protected Tomorrow</small></div></div>
-<nav><a href="index.html">Home</a><a href="customer-login.html">Customer Login</a><a href="pi.html">PI / Inspection</a><a href="#insurers">Insurers</a><a href="agent-login.html">Agent Portal</a></nav>
+<nav><a href="index.html">Home</a><a href="customer-login.html">Customer Login</a><a href="pi.html">PI / Inspection</a><a href="#insurers">Insurers</a><a href="agent-login.html">Agent Portal</a><a href="admin-login.html">Admin</a></nav>
 <a class="phone" href="tel:+919664029638">☎ 96640-29638</a></header>
 
 <section class="promo">
@@ -34,6 +34,7 @@
 <section class="cta"><h2>Need Help Choosing the Right Cover?</h2><p>Comprehensive, Third Party या renewal — Shanvi Insurance Services se assistance lein.</p><div class="actions"><a class="btn whatsapp" href="https://wa.me/919664029638" target="_blank">💬 WhatsApp Us</a><a class="btn light" href="mailto:nokhwalpankaj99@gmail.com">✉️ Contact Us</a></div></section>
 <footer><b>Shanvi Insurance Services</b><p>📞 96640-29638 | ✉️ nokhwalpankaj99@gmail.com</p><p class="small">Customer & agent services · PI processing · insurance assistance · policy document delivery</p><p class="small">58 LNP Ridmalsar Road, Sri Ganganagar, Rajasthan - 335061</p></footer>
 <script src="script.js"></script><script>
-const headlines=["🎉 Raksha Bandhan Special — Protect your family & vehicle today","💰 Agent Commission — Bike ₹75 | Car ₹210 per policy","🚗 Car Insurance — Comprehensive & Third Party options","🏍️ Bike Insurance — Quick quote & renewal assistance","📄 PI Service — Pay ₹190 and submit your documents","🛡️ Shanvi Insurance Services — Secure Today, Protected Tomorrow"];
-let hi=0; setInterval(()=>{hi=(hi+1)%headlines.length;document.getElementById('headline').textContent=headlines[hi]},3000);
+const saved=JSON.parse(localStorage.getItem('shanviSiteSettings')||'null');
+const headlines=(saved&&saved.headlines&&saved.headlines.length)?saved.headlines:["🎉 Raksha Bandhan Special — Protect your family & vehicle today","💰 Agent Commission — Bike ₹75 | Car ₹210 per policy","🚗 Car Insurance — Comprehensive & Third Party options","🏍️ Bike Insurance — Quick quote & renewal assistance","📄 PI Service — Pay ₹190 and submit your documents","🛡️ Shanvi Insurance Services — Secure Today, Protected Tomorrow"];
+let hi=0; document.getElementById('headline').textContent=headlines[0]; setInterval(()=>{hi=(hi+1)%headlines.length;document.getElementById('headline').textContent=headlines[hi]},3000);
 </script></body></html>

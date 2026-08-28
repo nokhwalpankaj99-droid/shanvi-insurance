@@ -20,9 +20,20 @@ function nextAgentCode(){let n=Number(localStorage.getItem('shanviAgentSerial')|
 function hashLite(s){let h=0;for(let i=0;i<s.length;i++)h=((h<<5)-h+s.charCodeAt(i))|0;return String(Math.abs(h));}
 function registerCustomer(e){e.preventDefault(); const name=c('cName').value.trim(),email=c('cEmail').value.trim().toLowerCase(),mobile=c('cMobile').value.trim(),pass=c('cPass').value,uid=c('cUid').value.trim(); if(!name||!email||!mobile||!pass||!uid)return; let users=load('shanviCustomers',[]); if(users.some(u=>u.uid===uid||u.email===email)){msg('regMsg','User ID or email already registered.','error');return} users.push({name,email,mobile,uid,pwd:hashLite(pass),createdAt:new Date().toISOString()});store('shanviCustomers',users);store('shanviCurrentCustomer',uid);location.href='customer-portal.html';}
 function loginCustomer(e){e.preventDefault();let uid=c('cLoginUid').value.trim(),pwd=c('cLoginPass').value,users=load('shanviCustomers',[]);let u=users.find(x=>x.uid===uid&&x.pwd===hashLite(pwd));if(!u){msg('loginMsg','Invalid User ID or Password.','error');return}store('shanviCurrentCustomer',u.uid);location.href='customer-portal.html'}
-function registerAgent(e){e.preventDefault();let name=c('aName').value.trim(),email=c('aEmail').value.trim().toLowerCase(),mobile=c('aMobile').value.trim(),uid=c('aUid').value.trim(),pass=c('aPass').value;if(!name||!email||!mobile||!uid||!pass){msg('agentRegMsg','All fields are mandatory.','error');return}let users=load('shanviAgents',[]);if(users.some(u=>u.uid===uid||u.email===email)){msg('agentRegMsg','User ID or email already registered.','error');return}let code=nextAgentCode();let u={name,email,mobile,uid,pwd:hashLite(pass),code,certificateIssued:true,certificateNo:`SIS-CERT-${code}`,issuedAt:new Date().toISOString()};users.push(u);store('shanviAgents',users);store('shanviCurrentAgent',uid);location.href='agent-certificate.html'}
+function registerAgent(e){
+ e.preventDefault();
+ let name=c('aName').value.trim(),email=c('aEmail').value.trim().toLowerCase(),mobile=c('aMobile').value.trim(),uid=c('aUid').value.trim(),pass=c('aPass').value;
+ if(!name||!email||!mobile||!uid||!pass){msg('agentRegMsg','All fields are mandatory.','error');return}
+ let users=load('shanviAgents',[]);
+ if(users.some(u=>u.uid===uid||u.email===email)){msg('agentRegMsg','User ID or email already registered.','error');return}
+ let u={name,email,mobile,uid,pwd:hashLite(pass),code:null,certificateIssued:false,certificateNo:null,issuedAt:null,createdAt:new Date().toISOString()};
+ users.push(u);store('shanviAgents',users);store('shanviCurrentAgent',uid);
+ msg('agentRegMsg',`Registration submitted successfully.<br><b>Agent:</b> ${name}<br><b>User ID:</b> ${uid}<br><br>Admin approval और certificate issue होने के बाद Agent Login active होगा.`,`success`);
+}
 function loginAgent(e){e.preventDefault();let uid=c('aLoginUid').value.trim(),pwd=c('aLoginPass').value,users=load('shanviAgents',[]),u=users.find(x=>x.uid===uid&&x.pwd===hashLite(pwd));if(!u){msg('agentLoginMsg','Invalid User ID or Password.','error');return}if(!u.certificateIssued){msg('agentLoginMsg','Agent certificate must be issued before login.','error');return}store('shanviCurrentAgent',u.uid);location.href='agent-portal.html'}
 function c(id){return document.getElementById(id)} function msg(id,text,cls='notice'){if(c(id))c(id).innerHTML=`<div class="${cls}">${text}</div>`}
 function currentAgent(){let uid=localStorage.getItem('shanviCurrentAgent');return load('shanviAgents',[]).find(x=>x.uid===uid)}
 function currentCustomer(){let uid=localStorage.getItem('shanviCurrentCustomer');return load('shanviCustomers',[]).find(x=>x.uid===uid)}
 function downloadText(filename,text){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type:'text/html'}));a.download=filename;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500)}
+
+function saveInsuranceRequest(req){let a=load('shanviInsuranceRequests',[]);a.push(req);store('shanviInsuranceRequests',a)}
