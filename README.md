@@ -31,3 +31,11 @@ Upload the complete extracted folder to the GitHub repository, keeping `assets/p
 
 ### Important hosting note
 This ZIP remains a frontend/static implementation. LocalStorage data (agents, customers, requests and site visits) is browser/device-specific. For real multi-device shared admin data, real email attachments, persistent uploads and secure user authentication, connect the included storage calls to a server/database/API.
+
+
+### PI Request Access
+- PI / Inspection request page is PUBLIC.
+- Customer Login ki requirement nahi hai.
+- Agent Login ki requirement nahi hai.
+- User payment ₹190 karta hai, UTR aur required documents submit karta hai.
+- Request admin data mein `shanviPIRequests` ke andar `source: Public PI Page` ke saath save hoti hai.
