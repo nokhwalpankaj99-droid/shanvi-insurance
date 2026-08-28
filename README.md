@@ -26,3 +26,13 @@ Owner: Pankaj Nokhwal
 
 ## Important
 This is a static/GitHub Pages frontend. `localStorage` is browser/device-specific. Secure multi-device accounts, permanent document storage, real server-side email attachments, and server-side payment verification require a backend/database. The commission wallet and payout workflow in this version are frontend-local until a backend is connected.
+
+## v19 final refresh
+- Home About Us navigation restored
+- Raksha Bandhan poster converted to a browser-safe JPEG
+- PI ₹190 QR has cache-busting, fallback link and clear ₹190 label
+- Admin Visit Details now has Clean Visit Details and visitor summary
+- Admin can credit earned commission to a Sub-Agent wallet
+- Agent payout cannot exceed available earned commission
+- Corrected wallet accounting: Earned / Pending / Paid / Available
+- Local insurer wordmark assets included so logos do not depend on external URLs
