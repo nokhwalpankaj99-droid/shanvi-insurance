@@ -116,30 +116,3 @@ function recordSiteVisit(page='index.html', customer){
   }catch(e){}
 }
 function logoutPortal(type, page){clearPortalSession(type);if(type==='agent')localStorage.removeItem('shanviCurrentAgent');if(type==='customer')localStorage.removeItem('shanviCurrentCustomer');if(type==='admin')localStorage.removeItem('shanviAdmin');location.href=page;}
-
-
-/* v17 Home + Admin helpers */
-function initHome(){
-  recordSiteVisit('index.html', currentCustomer());
-  const defaults=[
-    '💰 Agent Commission — Bike ₹75 | Car ₹210 per policy',
-    '🌸 Raksha Bandhan Special — Protect your family & vehicle today',
-    '🛡️ Shanvi Insurance Services — Secure Today, Protected Tomorrow'
-  ];
-  const saved=load('shanviSiteSettings',{}), heads=(saved.headlines&&saved.headlines.length?saved.headlines:defaults); const poster=document.querySelector('.festival-poster'); if(poster&&saved.poster?.data)poster.src=saved.poster.data;
-  const el=document.getElementById('headlineRotator');
-  if(el){let i=0;el.textContent=heads[0]||defaults[0];setInterval(()=>{i=(i+1)%heads.length;el.classList.remove('ticker-in');void el.offsetWidth;el.classList.add('ticker-in');el.textContent=heads[i]||defaults[0]},3500)}
-}
-function fileDataURL(file){
-  return new Promise((resolve,reject)=>{
-    if(!file){resolve(null);return}
-    if(file.size>3*1024*1024){reject(new Error('File 3 MB se chhoti rakhein static portal storage ke liye.'));return}
-    const r=new FileReader();r.onload=()=>resolve({name:file.name,type:file.type,size:file.size,data:r.result});r.onerror=reject;r.readAsDataURL(file);
-  });
-}
-function emailRequest(subject,body){
-  try{window.open(`mailto:${SHANVI.supportEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`,'_self')}catch(e){}
-}
-function getPIForCustomer(u){
-  return load('shanviPIRequests',[]).filter(x=>u && ((x.email||'').toLowerCase()===(u.email||'').toLowerCase())).pop();
-}
