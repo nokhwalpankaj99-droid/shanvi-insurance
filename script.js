@@ -1,3 +1,73 @@
+/* Shanvi Insurance Services - Supabase lead integration */
+const SUPABASE_URL = 'https://dwfhqjoidrgjszlpyejr.supabase.co';
+const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_O2Lj_PqZFP5k2ODiFmDXwA_03UoVRp3';
+
+async function submitLeadToSupabase(lead){
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/leads`, {
+    method:'POST',
+    headers:{
+      'apikey': SUPABASE_PUBLISHABLE_KEY,
+      'Authorization': `Bearer ${SUPABASE_PUBLISHABLE_KEY}`,
+      'Content-Type':'application/json',
+      'Prefer':'return=minimal'
+    },
+    body: JSON.stringify({
+      name: lead.name || '',
+      mobile: lead.mobile || '',
+      email: lead.email || '',
+      insurance_type: lead.insurance_type || '',
+      message: lead.message || '',
+      vehicle_number: lead.vehicle_number || '',
+      source: lead.source || 'website',
+      created_at: new Date().toISOString()
+    })
+  });
+  if(!res.ok){
+    let detail='';
+    try{detail=await res.text()}catch(e){}
+    throw new Error(detail || `Supabase request failed (${res.status})`);
+  }
+  return true;
+}
+
+function initLeadForm(){
+  const form=document.getElementById('leadForm');
+  if(!form || form.dataset.bound==='1')return;
+  form.dataset.bound='1';
+  form.addEventListener('submit', async e=>{
+    e.preventDefault();
+    const status=document.getElementById('leadMsg');
+    const btn=form.querySelector('button[type="submit"]');
+    const lead={
+      name:c('leadName').value.trim(),
+      mobile:c('leadMobile').value.trim(),
+      email:c('leadEmail').value.trim().toLowerCase(),
+      insurance_type:c('leadInsurance').value,
+      vehicle_number:c('leadVehicle').value.trim(),
+      message:c('leadMessage').value.trim(),
+      source:'website enquiry'
+    };
+    if(!lead.name || !lead.mobile || !lead.insurance_type){
+      msg('leadMsg','Name, Mobile aur Insurance Type required hai.','error'); return;
+    }
+    btn.disabled=true; btn.textContent='Submitting…';
+    try{
+      await submitLeadToSupabase(lead);
+      msg('leadMsg','✅ Enquiry successfully submit ho gayi. Hamari team aapse jaldi contact karegi.','success');
+      form.reset();
+    }catch(err){
+      console.error('Supabase lead error:',err);
+      /* Keep the enquiry locally so it is not lost if the database is temporarily unavailable. */
+      let pending=load('shanviPendingLeads',[]);
+      pending.push({...lead,created_at:new Date().toISOString()});
+      store('shanviPendingLeads',pending.slice(-200));
+      msg('leadMsg','⚠️ Enquiry locally save ho gayi, lekin online database connection mein problem aa rahi hai. Please WhatsApp/Call bhi kar sakte hain.','error');
+    }finally{
+      btn.disabled=false; btn.textContent='📨 Submit Enquiry';
+    }
+  });
+}
+
 const SHANVI={
   supportPhone:'96640-29638', supportEmail:'nokhwalpankaj99@gmail.com', address:'58 LNP Ridmalsar Road, Sri Ganganagar, Rajasthan - 335061', piFee:190,
   commission:{bike:75,car:210}, agentCodePrefix:'SIS2022'
@@ -167,3 +237,5 @@ function emailRequest(subject,body){
 function getPIForCustomer(u){
   return load('shanviPIRequests',[]).filter(x=>u && ((x.email||'').toLowerCase()===(u.email||'').toLowerCase())).pop();
 }
+
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initLeadForm)}else{initLeadForm()}

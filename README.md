@@ -55,3 +55,11 @@ This is a static/GitHub Pages frontend. `localStorage` is browser/device-specifi
 
 ## Important
 Payment requests stored in browser localStorage cannot travel from an Agent device to an Admin device. A central backend/database is required for real cross-device payment requests and document delivery.
+
+
+## Supabase lead integration
+- Website now includes an Online Enquiry form.
+- Form submits to `public.leads` in the connected Supabase project.
+- `SUPABASE_LEADS_SETUP.sql` contains the required table and INSERT-only RLS policy.
+- The website uses the Supabase Publishable Key only; no secret key is included.
+- If Supabase is temporarily unavailable, the enquiry is retained in browser localStorage under `shanviPendingLeads`.

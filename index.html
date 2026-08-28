@@ -19,8 +19,7 @@
     <a href="#insurers">Insurers</a>
     <a href="agent-login.html">Sub-Agent Portal</a>
     <a href="customer-login.html">Customer Login</a>
-    <a href="admin-login.html">Admin</a>
-  </nav>
+    <a href="admin-login.html">Admin</a> <a href="#enquiry">Enquiry</a></nav>
   <a class="phone" href="tel:9664029638">☎ 96640-29638</a>
 </header>
 
@@ -114,6 +113,23 @@
    <p><b>Owner:</b> Pankaj Nokhwal</p><a class="btn primary blue-btn" href="about-us.html">Know More About Us →</a>
   </div>
   <div class="about-facts"><div><b>₹190</b><span>PI service fee</span></div><div><b>₹75</b><span>Bike agent commission</span></div><div><b>₹210</b><span>Car agent commission</span></div><div><b>10 min</b><span>Portal inactivity session</span></div></div>
+ </div>
+</section>
+
+
+<section class="section" id="enquiry">
+ <div class="section-head"><span class="eyebrow">ONLINE ENQUIRY</span><h2>Need an insurance quote or assistance?</h2><p>Apni details submit karein. Aapki enquiry directly Shanvi Insurance Services ke online lead system mein save hogi.</p></div>
+ <div class="form-card" style="max-width:900px;margin:0 auto">
+  <form id="leadForm" class="form-grid">
+   <label>Name<input id="leadName" required autocomplete="name" placeholder="Enter your name"></label>
+   <label>Mobile<input id="leadMobile" required inputmode="tel" autocomplete="tel" placeholder="Enter mobile number"></label>
+   <label>Email<input id="leadEmail" type="email" autocomplete="email" placeholder="Enter email"></label>
+   <label>Insurance Type<select id="leadInsurance" required><option value="">Select</option><option>Car Insurance</option><option>Bike Insurance</option><option>Third Party</option><option>Comprehensive</option><option>Renewal</option><option>Other</option></select></label>
+   <label>Vehicle Number<input id="leadVehicle" placeholder="e.g. RJ13AB1234"></label>
+   <label class="full">Message<textarea id="leadMessage" rows="4" placeholder="Tell us what you need..."></textarea></label>
+   <button class="btn primary full" type="submit">📨 Submit Enquiry</button>
+  </form>
+  <div id="leadMsg"></div>
  </div>
 </section>
 
