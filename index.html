@@ -1,43 +1,134 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Shanvi Insurance Services</title><link rel="stylesheet" href="style.css"></head>
-<body>
-<header class="topbar">
-<div class="brand"><div class="logo">🛡️</div><div><b>Shanvi</b><span>Insurance Services</span><small>Secure Today, Protected Tomorrow</small></div></div>
-<nav><a href="index.html">Home</a><a href="customer-login.html">Customer Login</a><a href="#tp-rates">TP Rates</a><a href="#insurers">Insurers</a><a href="agent-login.html">Agent Portal</a><a href="admin-login.html">Admin</a></nav>
-<a class="phone" href="tel:+919664029638">☎ 96640-29638</a></header>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shanvi Insurance Services | Insurance Partner</title>
+<meta name="description" content="Shanvi Insurance Services - car, bike, health, travel, renewal, third-party and PI assistance.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body onload="initHome()">
+<header class="topbar pb-header">
+  <a class="brand brand-link" href="index.html">
+    <div class="logo">🛡️</div><div><b>Shanvi</b><span>Insurance Services</span><small>Secure Today, Protected Tomorrow</small></div>
+  </a>
+  <nav class="main-nav">
+    <a class="active" href="index.html">Home</a>
+    <a href="#quick-quote">Quick Quote</a>
+    <a href="pi.html">PI / Inspection</a>
+    <a href="third-party-rates.html">TP Rates</a>
+    <a href="#insurers">Insurers</a>
+    <a href="agent-login.html">Agent Portal</a>
+    <a href="customer-login.html">Customer Login</a>
+    <a href="admin-login.html">Admin</a>
+  </nav>
+  <a class="phone" href="tel:9664029638">☎ 96640-29638</a>
+</header>
 
-<section class="promo">
-<div class="headline-rotator" id="headline">🎉 Raksha Bandhan Special — Protect your family & vehicle today</div>
-<div class="promo-sub">Special offers, agent commission updates & important insurance messages appear here.</div>
+<div class="promo ticker-bar"><div id="headlineRotator" class="headline-rotator">💰 Agent Commission — Bike ₹75 | Car ₹210 per policy</div><div class="promo-sub">Special offers, agent commission updates & important insurance messages</div></div>
+
+<main>
+<section class="pb-hero">
+  <div class="hero-copy">
+    <span class="eyebrow">FAST • SIMPLE • TRUSTED</span>
+    <h1>Insurance made simple for every family.</h1>
+    <p>Car, bike, renewal, third-party, comprehensive, health, travel और PI assistance — सब एक जगह.</p>
+    <div class="actions">
+      <a class="btn primary" href="#quick-quote">🚗 Get Quick Quote</a>
+      <a class="btn whatsapp" href="https://wa.me/919664029638" target="_blank" rel="noopener">💬 WhatsApp Us</a>
+      <a class="btn light" href="customer-login.html">👤 Customer Login</a>
+    </div>
+    <div class="hero-points"><span>✓ Multiple insurers</span><span>✓ Fast assistance</span><span>✓ Policy delivery</span></div>
+  </div>
+  <div class="hero-side">
+    <div class="hero-side-icon">🚘</div>
+    <b>Multiple Insurance Options</b>
+    <span>Third Party • Comprehensive • Own Damage • Renewal</span>
+    <a href="#products">Explore Products →</a>
+  </div>
 </section>
 
-<section class="hero-wrap"><div class="hero">
-<div><span class="eyebrow">FAST • SIMPLE • TRUSTED</span><h1>Insurance Made Simple</h1>
-<p>Car, bike, renewal, third-party, comprehensive, PI assistance and policy delivery — all in one customer portal.</p>
-<div class="actions"><a class="btn primary" href="#quotes">🚗 Get Quick Quote</a><a class="btn whatsapp" href="https://wa.me/919664029638?text=Hello%20Shanvi%20Insurance%2C%20I%20need%20an%20insurance%20quote." target="_blank">💬 WhatsApp Us</a><a class="btn light" href="customer-login.html">👤 Customer Login</a></div></div>
-<div class="hero-card"><div class="hero-icon">🚘</div><b>Multiple insurance options</b><span>Third Party • Comprehensive • Own Damage</span></div></div></section>
+<section class="poster-wrap">
+  <div class="poster-heading"><span>🌸 TODAY'S HIGHLIGHT</span><b>Festival Campaign</b></div>
+  <img class="festival-poster" src="assets/raksha-bandhan-2026.jpg" alt="Happy Raksha Bandhan - Shanvi Insurance Services">
+</section>
 
-<section class="section poster-section"><div class="poster"><div><span class="eyebrow">TODAY'S HIGHLIGHT</span><h2>🎊 Raksha Bandhan</h2><p>Celebrate the bond of protection. Ask us about car & bike insurance assistance.</p></div><div class="poster-badge">POSTER<br>AREA</div></div><p class="hint">Admin/server version में इस area का poster बदल सकते हैं. GitHub Pages पर upload को permanent बनाने के लिए server storage चाहिए.</p></section>
+<section class="service-strip" id="products">
+  <a class="service-card" href="#quick-quote"><span>🚗</span><div><b>CAR INSURANCE</b><small>Comprehensive & Third Party</small></div></a>
+  <a class="service-card" href="#quick-quote"><span>🏍️</span><div><b>BIKE INSURANCE</b><small>Comprehensive & Third Party</small></div></a>
+  <a class="service-card" href="third-party-rates.html"><span>📋</span><div><b>OTHER INSURANCE</b><small>Health, Travel, Shop, Commercial & More</small></div></a>
+  <a class="service-card pi-highlight" href="pi.html"><span>📄</span><div><b>PI SERVICE</b><small>Get your PI assistance</small><strong>₹190/-</strong></div></a>
+</section>
 
-<section id="quotes" class="section"><span class="eyebrow">QUICK QUOTE</span><h2>Enter Vehicle Number & Get a Quick Quote</h2>
-<p class="muted-text">Vehicle number enter karke available insurance options dekhein aur request raise karein.</p>
-<div class="quote-box"><input id="vehicleNo" placeholder="e.g. RJ13BS5985" maxlength="12"><select id="vehicleType"><option value="car">🚗 Car</option><option value="bike">🏍️ Bike / Two Wheeler</option></select><select id="cover"><option value="comprehensive">Comprehensive</option><option value="thirdparty">Third Party</option><option value="limited">Limited Third Party</option></select><button class="btn primary" onclick="getQuote()">Get Quote</button></div>
-<div id="quoteStatus" class="status"></div><div id="quoteResults" class="quote-results"></div></section>
+<section class="broker-section">
+  <div class="section-title"><span>OUR BROKERS</span><h2>Trusted insurance marketplace partners</h2></div>
+  <div class="broker-grid">
+    <div class="broker-card"><div class="broker-logo insurance-dekho">iD</div><div><b>InsuranceDekho</b><small>Insurance marketplace</small></div></div>
+    <div class="broker-card"><div class="broker-logo policy-bazaar">PB</div><div><b>Policybazaar.com</b><small>Insurance marketplace</small></div></div>
+  </div>
+</section>
 
-<section id="insurers" class="section muted"><span class="eyebrow">INSURANCE NETWORK</span><h2>Leading Insurance Companies</h2><p class="center">Popular insurers ke original brand marks ke saath insurance options.</p><div class="insurers"><div class="insurer-tile"><img src="https://www.google.com/s2/favicons?domain=uiic.co.in&sz=128" alt="United India Insurance logo"><span>United India Insurance</span></div><div class="insurer-tile"><img src="https://www.google.com/s2/favicons?domain=nationalinsurance.nic.co.in&sz=128" alt="National Insurance logo"><span>National Insurance</span></div><div class="insurer-tile"><img src="https://www.google.com/s2/favicons?domain=orientalinsurance.org.in&sz=128" alt="The Oriental Insurance logo"><span>The Oriental Insurance</span></div><div class="insurer-tile"><img src="https://www.google.com/s2/favicons?domain=shriramgi.com&sz=128" alt="Shriram General Insurance logo"><span>Shriram General Insurance</span></div><div class="insurer-tile"><img src="https://www.google.com/s2/favicons?domain=godigit.com&sz=128" alt="Go Digit General Insurance logo"><span>Go Digit General Insurance</span></div><div class="insurer-tile"><img src="https://www.google.com/s2/favicons?domain=sbigeneral.in&sz=128" alt="SBI General Insurance logo"><span>SBI General Insurance</span></div><div class="insurer-tile"><img src="https://www.google.com/s2/favicons?domain=icicilombard.com&sz=128" alt="ICICI Lombard logo"><span>ICICI Lombard</span></div><div class="insurer-tile"><img src="https://www.google.com/s2/favicons?domain=hdfcergo.com&sz=128" alt="HDFC ERGO logo"><span>HDFC ERGO</span></div><div class="insurer-tile"><img src="https://www.google.com/s2/favicons?domain=bajajallianz.com&sz=128" alt="Bajaj Allianz General Insurance logo"><span>Bajaj Allianz General Insurance</span></div><div class="insurer-tile"><img src="https://www.google.com/s2/favicons?domain=tataaig.com&sz=128" alt="Tata AIG logo"><span>Tata AIG</span></div><div class="insurer-tile"><img src="https://www.google.com/s2/favicons?domain=reliancegeneral.co.in&sz=128" alt="Reliance General Insurance logo"><span>Reliance General Insurance</span></div><div class="insurer-tile"><img src="https://www.google.com/s2/favicons?domain=acko.com&sz=128" alt="ACKO General Insurance logo"><span>ACKO General Insurance</span></div></div><div class="broker-strip"><span>Broker / Marketplace Access</span><b>InsuranceDekho</b><b>Policybazaar</b></div></section>
+<section class="section quote-section" id="quick-quote">
+  <div class="section-title"><span>QUICK QUOTE</span><h2>Enter Vehicle Number & Get a Quick Quote</h2><p>Vehicle number se quick estimate compare karein. Final premium insurer terms ke according confirm hota hai.</p></div>
+  <div class="quote-box pb-quote">
+    <input id="vehicleNo" placeholder="Enter Vehicle Number e.g. RJ13BS5985" autocomplete="off">
+    <select id="vehicleType"><option value="bike">🏍️ Bike / Two Wheeler</option><option value="car">🚗 Car</option></select>
+    <select id="cover"><option value="comprehensive">Comprehensive</option><option value="thirdparty">Third Party</option><option value="limited">Limited Third Party</option></select>
+    <button class="btn quote-btn" onclick="getQuote()">Get Quote →</button>
+  </div>
+  <div id="quoteStatus" class="status"></div><div id="quoteResults" class="quote-results"></div>
+  <div class="quote-help"><b>Need help?</b> Call <a href="tel:9664029638">96640-29638</a> or <a href="https://wa.me/919664029638" target="_blank" rel="noopener">WhatsApp us</a>.</div>
+</section>
 
+<section class="section">
+ <div class="section-title"><span>INSURANCE PRODUCTS</span><h2>Protection for what matters</h2></div>
+ <div class="cards product-cards">
+  <div class="info-card"><div>🚗</div><h3>Car Insurance</h3><p>Third Party, Comprehensive and renewal assistance for private cars.</p><a href="#quick-quote">Get Quote →</a></div>
+  <div class="info-card"><div>🏍️</div><h3>Bike Insurance</h3><p>Two-wheeler insurance options with quick renewal and policy assistance.</p><a href="#quick-quote">Get Quote →</a></div>
+  <div class="info-card"><div>❤️</div><h3>Health & Life</h3><p>Explore health, term and life insurance assistance for individuals and families.</p><a href="mailto:nokhwalpankaj99@gmail.com">Ask Us →</a></div>
+  <div class="info-card"><div>✈️</div><h3>Travel & Other</h3><p>Travel, home, commercial and other general insurance assistance.</p><a href="mailto:nokhwalpankaj99@gmail.com">Ask Us →</a></div>
+ </div>
+</section>
 
-<section id="tp-rates" class="section rate-section"><span class="eyebrow">THIRD PARTY RATES</span><h2>Motor Third-Party Insurance Rates</h2><p class="muted-text">Uploaded rate chart ke anusaar basic premium aur 18% GST ke saath estimated annual premium.</p><div class="rate-grid"><div class="form-card"><h3>🚗 Private Car</h3><div class="rate-row"><b>≤ 1000 cc</b><span>₹2,094 + GST → ₹2,471</span></div><div class="rate-row"><b>1001–1500 cc</b><span>₹3,416 + GST → ₹4,031</span></div><div class="rate-row"><b>&gt; 1500 cc</b><span>₹7,897 + GST → ₹9,318</span></div></div><div class="form-card"><h3>🏍️ Two Wheeler</h3><div class="rate-row"><b>≤ 75 cc</b><span>₹538 + GST → ₹635</span></div><div class="rate-row"><b>76–150 cc</b><span>₹714 + GST → ₹843</span></div><div class="rate-row"><b>151–350 cc</b><span>₹1,366 + GST → ₹1,612</span></div><div class="rate-row"><b>&gt; 350 cc</b><span>₹2,804 + GST → ₹3,309</span></div></div></div><div class="actions center" style="margin-top:16px"><a class="btn light" href="assets/motor_third_party_insurance_rates.pdf" target="_blank">📄 View Uploaded TP Rate PDF</a></div></section>
-<section class="section cards"><div class="info-card"><div>🚗</div><h3>Car Insurance</h3><p>Comprehensive & third-party assistance.</p></div><div class="info-card"><div>🏍️</div><h3>Bike Insurance</h3><p>Two-wheeler insurance & renewal support.</p></div><div class="info-card"><div>📄</div><h3>PI / Inspection</h3><p>Anyone can submit PI / Inspection documents — login required nahi hai. Ready PI processing ke baad download ki ja sakti hai.</p><a href="pi.html">PI Service →</a></div><div class="info-card commission"><div>💰</div><h3>Agent Commission</h3><p><b>Bike ₹75</b> per policy<br><b>Car ₹210</b> per policy</p><a href="agent-login.html">Agent Portal →</a></div></section>
+<section class="section insurers-section" id="insurers">
+ <div class="section-title"><span>OUR INSURANCE PARTNERS</span><h2>Compare options from leading insurers</h2><p>Brand names and logos are shown for identification; policy issuance remains subject to the respective insurer's rules and availability.</p></div>
+ <div class="insurer-grid">
+  <div class="insurer-tile"><div class="brand-mark bajaj">BA</div><b>Bajaj Allianz</b></div>
+  <div class="insurer-tile"><div class="brand-mark icici">IL</div><b>ICICI Lombard</b></div>
+  <div class="insurer-tile"><div class="brand-mark hdfc">HE</div><b>HDFC ERGO</b></div>
+  <div class="insurer-tile"><div class="brand-mark sbi">SBI</div><b>SBI General</b></div>
+  <div class="insurer-tile"><div class="brand-mark digit">digit</div><b>Go Digit</b></div>
+  <div class="insurer-tile"><div class="brand-mark united">UI</div><b>United India</b></div>
+  <div class="insurer-tile"><div class="brand-mark national">NI</div><b>National Insurance</b></div>
+  <div class="insurer-tile"><div class="brand-mark oriental">OI</div><b>Oriental Insurance</b></div>
+  <div class="insurer-tile"><div class="brand-mark shriram">SG</div><b>Shriram General</b></div>
+  <div class="insurer-tile"><div class="brand-mark tata">TA</div><b>Tata AIG</b></div>
+  <div class="insurer-tile"><div class="brand-mark reliance">RG</div><b>Reliance General</b></div>
+  <div class="insurer-tile"><div class="brand-mark acko">ACKO</div><b>ACKO</b></div>
+ </div>
+</section>
 
-<section class="section workflow"><h2>How it works</h2><div class="steps"><div><b>1</b><span>Customer Login / Request</span></div><div><b>2</b><span>PI Documents & ₹190 payment</span></div><div><b>3</b><span>Agent/Admin verifies & prepares PI</span></div><div><b>4</b><span>Customer downloads PI</span></div><div><b>5</b><span>Agent raises insurance request</span></div><div><b>6</b><span>Policy PDF uploaded → Customer downloads</span></div></div></section>
+<section class="section about-preview" id="about">
+ <div class="about-grid">
+  <div><span class="eyebrow">ABOUT SHANVI</span><h2>Insurance assistance with a personal touch.</h2>
+   <p>Shanvi Insurance Services customer ko insurance options samajhne, quote compare karne, renewal aur policy-document assistance mein support karta hai. हमारा focus simple process, clear communication और timely assistance पर है.</p>
+   <p><b>Owner:</b> Pankaj Nokhwal</p><a class="btn primary blue-btn" href="about-us.html">Know More About Us →</a>
+  </div>
+  <div class="about-facts"><div><b>₹190</b><span>PI service fee</span></div><div><b>₹75</b><span>Bike agent commission</span></div><div><b>₹210</b><span>Car agent commission</span></div><div><b>10 min</b><span>Portal inactivity session</span></div></div>
+ </div>
+</section>
 
-<section class="cta"><h2>Need Help Choosing the Right Cover?</h2><p>Comprehensive, Third Party या renewal — Shanvi Insurance Services se assistance lein.</p><div class="actions"><a class="btn whatsapp" href="https://wa.me/919664029638" target="_blank">💬 WhatsApp Us</a><a class="btn light" href="mailto:nokhwalpankaj99@gmail.com">✉️ Contact Us</a></div></section>
-<footer><b>Shanvi Insurance Services</b><p>📞 96640-29638 | ✉️ nokhwalpankaj99@gmail.com</p><p class="small">Customer & agent services · PI processing · insurance assistance · policy document delivery</p><p class="small">58 LNP Ridmalsar Road, Sri Ganganagar, Rajasthan - 335061</p></footer>
-<script src="script.js"></script><script>
-recordSiteVisit('index.html', currentCustomer());
-const saved=JSON.parse(localStorage.getItem('shanviSiteSettings')||'null');
-const headlines=(saved&&saved.headlines&&saved.headlines.length)?saved.headlines:["🎉 Raksha Bandhan Special — Protect your family & vehicle today","💰 Agent Commission — Bike ₹75 | Car ₹210 per policy","🚗 Car Insurance — Comprehensive & Third Party options","🏍️ Bike Insurance — Quick quote & renewal assistance","📄 PI Service — Pay ₹190 and submit your documents","🛡️ Shanvi Insurance Services — Secure Today, Protected Tomorrow"];
-let hi=0; document.getElementById('headline').textContent=headlines[0]; setInterval(()=>{hi=(hi+1)%headlines.length;document.getElementById('headline').textContent=headlines[hi]},3000);
-</script></body></html>
+<section class="cta premium-cta"><h2>Need help choosing the right cover?</h2><p>Comprehensive, Third Party, renewal or PI assistance — Shanvi Insurance Services se assistance lein.</p><div class="actions center"><a class="btn whatsapp" href="https://wa.me/919664029638" target="_blank" rel="noopener">💬 WhatsApp Us</a><a class="btn light dark-text" href="mailto:nokhwalpankaj99@gmail.com">✉ Contact Us</a><a class="btn light dark-text" href="pi.html">📄 PI ₹190</a></div></section>
+</main>
+
+<footer>
+ <div class="footer-grid">
+  <div><b>Shanvi Insurance Services</b><p>Secure Today, Protected Tomorrow</p></div>
+  <div><b>Contact</b><p>96640-29638<br>nokhwalpankaj99@gmail.com</p></div>
+  <div><b>Office</b><p>58 LNP Ridmalsar Road<br>Sri Ganganagar, Rajasthan - 335061</p></div>
+  <div><b>Owner</b><p>Pankaj Nokhwal</p></div>
+ </div>
+ <div class="small">© 2026 Shanvi Insurance Services. Insurance assistance and facilitation subject to applicable insurer terms.</div>
+</footer>
+<a class="floating-wa" href="https://wa.me/919664029638" target="_blank" rel="noopener">💬</a>
+<script src="script.js"></script>
+</body></html>

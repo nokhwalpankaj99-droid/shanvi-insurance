@@ -1,41 +1,41 @@
-Shanvi Insurance Services — v14
+# Shanvi Insurance Services – v17 Premium Home + Portal Update
 
-PI / Inspection access is restricted to authorised Agent Portal sessions. Customer Portal no longer exposes PI submission.
+## What changed
+- Premium marketplace-style Home Page inspired by modern insurance partner dashboards (original Shanvi branding).
+- Today’s Raksha Bandhan poster added as `assets/raksha-bandhan-2026.jpg`.
+- Rotating headline for festival/commission messages.
+- Clear Home navigation: Home, Quick Quote, PI/Inspection, TP Rates, Insurers, Agent Portal, Customer Login, Admin.
+- Broker section for InsuranceDekho and Policybazaar.
+- Insurance partner grid with insurer brand marks and names.
+- About Us page expanded with Owner: **Pankaj Nokhwal** and Shanvi contact/address details.
+- Public PI page remains open without Customer/Agent login.
+- PI fee fixed at **₹190**.
+- PhonePe QR shown from `assets/phonepe-qr-190.png` with JPG fallback.
+- Public PI request now records submitted document files in browser storage (3 MB per file limit in static mode) and request metadata.
+- Admin can verify PI payment, download submitted documents, and upload the finished PI PDF.
+- Customer Portal can download the PI PDF when the request email matches the customer account, and can download policy PDFs.
+- Agent Portal keeps insurance request + policy PDF workflow; PI submission is not inside Agent Portal.
+- Agent registration requires email and own User ID/Password; admin certificate approval remains required before agent login.
+- Agent code sequence starts from `SIS2022601`.
+- Professional certificate includes Shanvi authorised signatory only.
+- 10-minute inactivity session timer and warning remain active.
+- Admin dashboard includes agent/customer/PI/insurance/site-visit counts.
+- Third-party rate PDF remains available under `assets/motor_third_party_insurance_rates.pdf`.
 
-# Shanvi Insurance Services – Final Portal Update
+## Admin login
+- User ID: `shanvi112`
+- Password: `Shanvi@123`
 
-## Included in this version
-- Agent and customer login with **Forgot User ID / Forgot Password** recovery page.
-- Admin agent controls: Issue/Re-issue Certificate, Reject Certificate, Deactivate/Activate Account.
-- Professional agent certificate layout with certificate number, agent code, verification mark and signature blocks.
-- PI payment page with a dedicated **₹190 UPI QR** and Open UPI App button.
-- QR is generated for the supplied UPI ID `9664029638-2@ybl` with ₹190 pre-filled.
-- Existing supplied PhonePe QR is retained as fallback.
-- Agent login is blocked when account is deactivated, certificate is rejected, or certificate has not been issued.
-- All current browser-side records continue to use localStorage.
+## Contact
+- Support: 96640-29638
+- Email: nokhwalpankaj99@gmail.com
+- Address: 58 LNP Ridmalsar Road, Sri Ganganagar, Rajasthan - 335061
+- Owner: Pankaj Nokhwal
 
 ## Important production note
-This GitHub Pages version is client-side. Real secure login, email OTP/password recovery, permanent document storage, server-side admin control and automatic email attachments require a backend/database and secure authentication. The recovery screen therefore performs local browser account recovery only; it does not send a real email OTP.
+This ZIP is still a **static/GitHub Pages frontend**. Browser `localStorage` is device/browser-specific. It cannot provide secure multi-device authentication, permanent server file storage, or true email attachments by itself.
 
-## Upload
-Upload the complete extracted folder to the GitHub repository, keeping `assets/phonepe-qr-190.png` and `assets/phonepe-qr.jpg` inside the `assets` folder.
+The PI page opens the user's mail client with request details after submission, but browsers do not allow a static page to silently attach the uploaded RC/KYC/photos/video to an email. For real email attachments, permanent document storage, secure admin control and multi-device customer/agent accounts, connect the frontend storage functions to a backend/API/database.
 
-
-## Latest v15 changes
-- Admin dashboard now shows agent/customer/PI/insurance/site-visit counts and recent visitor details.
-- 10-minute inactivity session timer is visible; warning appears in the final 2 minutes.
-- Cross-portal login links are blocked until the current portal is logged out.
-- Customer portal cannot raise PI; PI is Agent Portal only.
-- Agent certificate shows only Shanvi Insurance Services as authorised signatory.
-- Uploaded third-party rate PDF is included under `assets/motor_third_party_insurance_rates.pdf` and its rates are shown on the public website.
-
-### Important hosting note
-This ZIP remains a frontend/static implementation. LocalStorage data (agents, customers, requests and site visits) is browser/device-specific. For real multi-device shared admin data, real email attachments, persistent uploads and secure user authentication, connect the included storage calls to a server/database/API.
-
-
-### PI Request Access
-- PI / Inspection request page is PUBLIC.
-- Customer Login ki requirement nahi hai.
-- Agent Login ki requirement nahi hai.
-- User payment ₹190 karta hai, UTR aur required documents submit karta hai.
-- Request admin data mein `shanviPIRequests` ke andar `source: Public PI Page` ke saath save hoti hai.
+## GitHub Pages upload
+Upload the extracted contents of this ZIP to the repository root. Keep the complete `assets` folder.
