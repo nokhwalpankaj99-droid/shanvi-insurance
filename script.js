@@ -65,11 +65,54 @@ function guardPortalSession(type, loginPage){
   bindPortalSession(type); return true;
 }
 function bindPortalSession(type){
+  if(window.__shanviBound===type)return;
+  window.__shanviBound=type;
   ['click','keydown','mousemove','scroll','touchstart'].forEach(ev=>window.addEventListener(ev,()=>touchPortalSession(type),{passive:true}));
+  setupSessionUI(type);
   clearInterval(window.__shanviSessionTimer);
   window.__shanviSessionTimer=setInterval(()=>{
     const key='shanviSession_'+type;
-    try{const x=JSON.parse(localStorage.getItem(key)||'null');if(!x||Date.now()-Number(x.lastActivity||0)>SHANVI_SESSION_TIMEOUT){clearPortalSession(type);if(type==='agent')localStorage.removeItem('shanviCurrentAgent');if(type==='customer')localStorage.removeItem('shanviCurrentCustomer');if(type==='admin')localStorage.removeItem('shanviAdmin');location.href=(type==='agent'?'agent-login.html':type==='customer'?'customer-login.html':'admin-login.html')+'?timeout=1';}}catch(e){}
-  },15000);
+    try{
+      const x=JSON.parse(localStorage.getItem(key)||'null');
+      if(!x){return}
+      const remaining=Math.max(0,SHANVI_SESSION_TIMEOUT-(Date.now()-Number(x.lastActivity||0)));
+      updateSessionUI(remaining);
+      if(remaining<=0){
+        clearPortalSession(type);
+        if(type==='agent')localStorage.removeItem('shanviCurrentAgent');
+        if(type==='customer')localStorage.removeItem('shanviCurrentCustomer');
+        if(type==='admin')localStorage.removeItem('shanviAdmin');
+        location.href=(type==='agent'?'agent-login.html':type==='customer'?'customer-login.html':'admin-login.html')+'?timeout=1';
+      }
+    }catch(e){}
+  },1000);
+}
+function setupSessionUI(type){
+  if(document.getElementById('shanviSessionBar'))return;
+  const bar=document.createElement('div');bar.id='shanviSessionBar';bar.className='session-bar';
+  bar.innerHTML=`<span>🔐 Session active</span><b id="shanviSessionTimer">10:00</b><span id="shanviSessionNotice">Auto logout after 10 min inactivity</span>`;
+  document.body.appendChild(bar);
+  protectPortalLinks(type);
+}
+function updateSessionUI(remaining){
+  const el=document.getElementById('shanviSessionTimer'), n=document.getElementById('shanviSessionNotice'); if(!el)return;
+  const sec=Math.ceil(remaining/1000),m=Math.floor(sec/60),s=sec%60; el.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  if(sec<=120){n.textContent='⚠️ Session soon expire hogi — activity karein ya Logout karein.';document.getElementById('shanviSessionBar').classList.add('warning')}
+}
+function protectPortalLinks(type){
+  const other={admin:['agent-login.html','agent-portal.html','customer-login.html','customer-portal.html'],agent:['admin-login.html','admin-portal.html','customer-login.html','customer-portal.html'],customer:['admin-login.html','admin-portal.html','agent-login.html','agent-portal.html']};
+  document.querySelectorAll('a[href]').forEach(a=>a.addEventListener('click',e=>{
+    const href=(a.getAttribute('href')||'').split('?')[0];
+    if(other[type]?.includes(href)){e.preventDefault();alert('Pehle current portal se Logout karein, uske baad dusre portal mein login karein.');}
+  }));
+}
+function recordSiteVisit(page='index.html', customer){
+  try{
+    let visits=load('shanviSiteVisits',[]);
+    const visitorId=localStorage.getItem('shanviVisitorId')||('VIS-'+Math.random().toString(36).slice(2,10).toUpperCase());
+    localStorage.setItem('shanviVisitorId',visitorId);
+    visits.push({visitorId,page,customerUid:customer?.uid||'',customerName:customer?.name||'Guest',customerEmail:customer?.email||'',at:new Date().toISOString()});
+    store('shanviSiteVisits',visits.slice(-500));
+  }catch(e){}
 }
 function logoutPortal(type, page){clearPortalSession(type);if(type==='agent')localStorage.removeItem('shanviCurrentAgent');if(type==='customer')localStorage.removeItem('shanviCurrentCustomer');if(type==='admin')localStorage.removeItem('shanviAdmin');location.href=page;}

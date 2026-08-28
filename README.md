@@ -1,3 +1,7 @@
+Shanvi Insurance Services — v14
+
+PI / Inspection access is restricted to authorised Agent Portal sessions. Customer Portal no longer exposes PI submission.
+
 # Shanvi Insurance Services – Final Portal Update
 
 ## Included in this version
@@ -15,3 +19,15 @@ This GitHub Pages version is client-side. Real secure login, email OTP/password 
 
 ## Upload
 Upload the complete extracted folder to the GitHub repository, keeping `assets/phonepe-qr-190.png` and `assets/phonepe-qr.jpg` inside the `assets` folder.
+
+
+## Latest v15 changes
+- Admin dashboard now shows agent/customer/PI/insurance/site-visit counts and recent visitor details.
+- 10-minute inactivity session timer is visible; warning appears in the final 2 minutes.
+- Cross-portal login links are blocked until the current portal is logged out.
+- Customer portal cannot raise PI; PI is Agent Portal only.
+- Agent certificate shows only Shanvi Insurance Services as authorised signatory.
+- Uploaded third-party rate PDF is included under `assets/motor_third_party_insurance_rates.pdf` and its rates are shown on the public website.
+
+### Important hosting note
+This ZIP remains a frontend/static implementation. LocalStorage data (agents, customers, requests and site visits) is browser/device-specific. For real multi-device shared admin data, real email attachments, persistent uploads and secure user authentication, connect the included storage calls to a server/database/API.
