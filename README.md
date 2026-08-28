@@ -1,26 +1,16 @@
-# Shanvi Insurance Services — Final Static V6
+# Shanvi Insurance Services — Updated Website Package
 
-Included:
-- Premium colorful customer homepage
-- Vehicle-number quick quote demo
-- Third-party / comprehensive / limited third-party selector
-- Multiple insurer names
-- PI upload page
-- Fixed PI fee ₹190
-- Uploaded PhonePe QR
-- UTR/manual payment verification UI
-- Separate Agent Portal login/dashboard
-- Bike commission ₹75
-- Car commission ₹210
-- PI/PDF upload UI
-- WhatsApp + email contact links
-- Responsive design
+## Included
+- Separate Customer account creation/login with mandatory email, User ID and password.
+- Separate Agent registration/login. Agent gets a certificate immediately after registration and before first portal login.
+- Agent code sequence starts at `SIS2022601`, then `SIS2022602`, etc.
+- Agent Portal: insurance request, policy PDF upload, commission view. PI document upload is not present.
+- Customer Portal: PI request, PI status, policy PDF download.
+- PI processing fee: ₹190 with supplied PhonePe QR.
+- Owner/admin screen for headline/poster controls and PI payment verification.
+- Support: 96640-29638 / nokhwalpankaj99@gmail.com
+- Address: 58 LNP Ridmalsar Road, Sri Ganganagar, Rajasthan - 335061
+- Insurance marketplace-style homepage with insurer brand marks and broker/marketplace section.
 
-## Demo Agent Login
-User ID: `agent`
-Password: `agent123`
-
-## Important production note
-This ZIP is intentionally safe for GitHub Pages/static hosting. It does NOT contain PB Partners credentials, cookies, tokens, or private API keys, and it does not pretend to be synchronized with PB Partners.
-
-For live PB Partners pricing, customer document storage, email attachments, agent-created accounts, payment verification and secure PDF delivery, connect a backend/API (e.g. Supabase or another server) and use authorized integration credentials. Do not put private credentials in browser JavaScript or a public GitHub repository.
+## Important deployment note
+The package contains the complete browser-side workflow and storage for the current website package. For a real multi-user public website, connect the forms and document storage to your server/database/storage and email service. Do not place PB Partners credentials, cookies, session tokens, OTPs or private API keys in browser JavaScript.

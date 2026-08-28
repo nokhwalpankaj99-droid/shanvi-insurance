@@ -1,61 +1,39 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Shanvi Insurance Services | Insurance Made Simple</title>
-<link rel="stylesheet" href="style.css">
-</head>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shanvi Insurance Services</title><link rel="stylesheet" href="style.css"></head>
 <body>
 <header class="topbar">
-  <div class="brand"><div class="logo">🛡️</div><div><b>Shanvi</b><span>Insurance Services</span><small>Secure Today, Protected Tomorrow</small></div></div>
-  <nav>
-    <a href="index.html">Home</a><a href="#quotes">Quick Quote</a><a href="pi.html">PI Upload</a>
-    <a href="#insurers">Insurers</a><a href="#contact">Contact</a><a class="agent-link" href="agent-login.html">Agent Portal</a>
-  </nav>
-  <a class="phone" href="tel:+919664029638">☎ 96640-29638</a>
-</header>
+<div class="brand"><div class="logo">🛡️</div><div><b>Shanvi</b><span>Insurance Services</span><small>Secure Today, Protected Tomorrow</small></div></div>
+<nav><a href="index.html">Home</a><a href="customer-login.html">Customer Login</a><a href="pi.html">PI / Inspection</a><a href="#insurers">Insurers</a><a href="agent-login.html">Agent Portal</a></nav>
+<a class="phone" href="tel:+919664029638">☎ 96640-29638</a></header>
 
-<section class="headline">
-  <div class="ticker"><strong>🎉 Raksha Bandhan Special</strong> &nbsp; | &nbsp; Protect your family, vehicle & future with Shanvi Insurance Services</div>
-  <div class="hero">
-    <div><span class="eyebrow">FAST • SIMPLE • TRUSTED</span><h1>Insurance Made Simple</h1>
-    <p>Car, bike, renewal, third-party, comprehensive and PI assistance — all in one place.</p>
-    <div class="actions"><a class="btn primary" href="#quotes">🚗 Get Quick Quote</a><a class="btn whatsapp" href="https://wa.me/919664029638?text=Hello%20Shanvi%20Insurance%2C%20I%20need%20an%20insurance%20quote." target="_blank">💬 WhatsApp Us</a><a class="btn light" href="pi.html">📄 Submit PI Documents</a></div></div>
-    <div class="hero-card"><div class="hero-icon">🚘</div><b>Compare multiple insurers</b><span>Third Party • Comprehensive • Own Damage</span></div>
-  </div>
+<section class="promo">
+<div class="headline-rotator" id="headline">🎉 Raksha Bandhan Special — Protect your family & vehicle today</div>
+<div class="promo-sub">Special offers, agent commission updates & important insurance messages appear here.</div>
 </section>
 
-<section id="quotes" class="section">
-  <div class="section-head"><div><span class="eyebrow">INSTANT DEMO QUOTE</span><h2>Enter Vehicle Number & Get a Quick Quote</h2><p>Demo mode is ready now. Live PB Partners pricing requires an authorized API/backend connection.</p></div></div>
-  <div class="quote-box">
-    <input id="vehicleNo" placeholder="e.g. RJ13BS5985" maxlength="12">
-    <select id="vehicleType"><option value="car">🚗 Car</option><option value="bike">🏍️ Bike / Two Wheeler</option></select>
-    <select id="cover"><option value="comprehensive">Comprehensive</option><option value="thirdparty">Third Party</option><option value="limited">Limited Third Party</option></select>
-    <button class="btn primary" onclick="getQuote()">Get Quote</button>
-  </div>
-  <div id="quoteStatus" class="status"></div>
-  <div id="quoteResults" class="quote-results"></div>
-</section>
+<section class="hero-wrap"><div class="hero">
+<div><span class="eyebrow">FAST • SIMPLE • TRUSTED</span><h1>Insurance Made Simple</h1>
+<p>Car, bike, renewal, third-party, comprehensive, PI assistance and policy delivery — all in one customer portal.</p>
+<div class="actions"><a class="btn primary" href="#quotes">🚗 Get Quick Quote</a><a class="btn whatsapp" href="https://wa.me/919664029638?text=Hello%20Shanvi%20Insurance%2C%20I%20need%20an%20insurance%20quote." target="_blank">💬 WhatsApp Us</a><a class="btn light" href="customer-login.html">👤 Customer Login</a></div></div>
+<div class="hero-card"><div class="hero-icon">🚘</div><b>Multiple insurance options</b><span>Third Party • Comprehensive • Own Damage</span></div></div></section>
 
-<section id="insurers" class="section muted">
-<h2>Insurance Companies</h2><p class="center">Compare plans from leading insurers. Logos below are represented as clean text marks in this offline/static version.</p>
-<div class="insurers">
-  <div>🛡️ United India</div><div>🔵 National Insurance</div><div>◉ Oriental Insurance</div><div>🦁 Shriram General</div>
-  <div>🟣 Digit</div><div>🔴 SBI General</div><div>🟠 ICICI Lombard</div><div>🔵 HDFC ERGO</div>
-  <div>🟡 Bajaj Allianz</div><div>🟢 Tata AIG</div><div>🔴 Reliance General</div><div>🔷 ACKO</div>
-</div>
-</section>
+<section class="section poster-section"><div class="poster"><div><span class="eyebrow">TODAY'S HIGHLIGHT</span><h2>🎊 Raksha Bandhan</h2><p>Celebrate the bond of protection. Ask us about car & bike insurance assistance.</p></div><div class="poster-badge">POSTER<br>AREA</div></div><p class="hint">Admin/server version में इस area का poster बदल सकते हैं. GitHub Pages पर upload को permanent बनाने के लिए server storage चाहिए.</p></section>
 
-<section class="section cards">
-  <div class="info-card"><div>🚗</div><h3>Car Insurance</h3><p>Comprehensive and third-party options with quote assistance.</p></div>
-  <div class="info-card"><div>🏍️</div><h3>Bike Insurance</h3><p>Quick two-wheeler insurance assistance and renewal support.</p></div>
-  <div class="info-card"><div>📄</div><h3>PI / Inspection</h3><p>Upload RC, KYC, photos, date/time and video documents securely for processing.</p><a href="pi.html">Open PI Upload →</a></div>
-  <div class="info-card"><div>💰</div><h3>Agent Commission</h3><p>Bike: <b>₹75</b> per policy &nbsp; | &nbsp; Car: <b>₹210</b> per policy.</p><a href="agent-login.html">Agent Portal →</a></div>
-</section>
+<section id="quotes" class="section"><span class="eyebrow">QUICK QUOTE</span><h2>Enter Vehicle Number & Get a Quick Quote</h2>
+<p class="muted-text">Vehicle number enter karke available insurance options dekhein aur request raise karein.</p>
+<div class="quote-box"><input id="vehicleNo" placeholder="e.g. RJ13BS5985" maxlength="12"><select id="vehicleType"><option value="car">🚗 Car</option><option value="bike">🏍️ Bike / Two Wheeler</option></select><select id="cover"><option value="comprehensive">Comprehensive</option><option value="thirdparty">Third Party</option><option value="limited">Limited Third Party</option></select><button class="btn primary" onclick="getQuote()">Get Quote</button></div>
+<div id="quoteStatus" class="status"></div><div id="quoteResults" class="quote-results"></div></section>
 
-<section class="cta"><h2>Need Help Choosing the Right Cover?</h2><p>Comprehensive, Third Party or renewal — Shanvi Insurance Services se assistance lein.</p>
-<div class="actions"><a class="btn whatsapp" href="https://wa.me/919664029638" target="_blank">💬 WhatsApp Us</a><a class="btn light" href="mailto:nokhwalpankaj99@gmail.com">✉️ Contact Us</a></div></section>
+<section id="insurers" class="section muted"><span class="eyebrow">INSURANCE NETWORK</span><h2>Leading Insurance Companies</h2><p class="center">Popular insurers ke original brand marks ke saath insurance options.</p><div class="insurers"><div class="insurer-tile"><img src="https://www.google.com/s2/favicons?domain=uiic.co.in&sz=128" alt="United India Insurance logo"><span>United India Insurance</span></div><div class="insurer-tile"><img src="https://www.google.com/s2/favicons?domain=nationalinsurance.nic.co.in&sz=128" alt="National Insurance logo"><span>National Insurance</span></div><div class="insurer-tile"><img src="https://www.google.com/s2/favicons?domain=orientalinsurance.org.in&sz=128" alt="The Oriental Insurance logo"><span>The Oriental Insurance</span></div><div class="insurer-tile"><img src="https://www.google.com/s2/favicons?domain=shriramgi.com&sz=128" alt="Shriram General Insurance logo"><span>Shriram General Insurance</span></div><div class="insurer-tile"><img src="https://www.google.com/s2/favicons?domain=godigit.com&sz=128" alt="Go Digit General Insurance logo"><span>Go Digit General Insurance</span></div><div class="insurer-tile"><img src="https://www.google.com/s2/favicons?domain=sbigeneral.in&sz=128" alt="SBI General Insurance logo"><span>SBI General Insurance</span></div><div class="insurer-tile"><img src="https://www.google.com/s2/favicons?domain=icicilombard.com&sz=128" alt="ICICI Lombard logo"><span>ICICI Lombard</span></div><div class="insurer-tile"><img src="https://www.google.com/s2/favicons?domain=hdfcergo.com&sz=128" alt="HDFC ERGO logo"><span>HDFC ERGO</span></div><div class="insurer-tile"><img src="https://www.google.com/s2/favicons?domain=bajajallianz.com&sz=128" alt="Bajaj Allianz General Insurance logo"><span>Bajaj Allianz General Insurance</span></div><div class="insurer-tile"><img src="https://www.google.com/s2/favicons?domain=tataaig.com&sz=128" alt="Tata AIG logo"><span>Tata AIG</span></div><div class="insurer-tile"><img src="https://www.google.com/s2/favicons?domain=reliancegeneral.co.in&sz=128" alt="Reliance General Insurance logo"><span>Reliance General Insurance</span></div><div class="insurer-tile"><img src="https://www.google.com/s2/favicons?domain=acko.com&sz=128" alt="ACKO General Insurance logo"><span>ACKO General Insurance</span></div></div><div class="broker-strip"><span>Broker / Marketplace Access</span><b>InsuranceDekho</b><b>Policybazaar</b></div></section>
 
-<footer id="contact"><b>Shanvi Insurance Services</b><p>📞 96640-29638 &nbsp; | &nbsp; ✉️ nokhwalpankaj99@gmail.com</p><p class="small">© 2026 Shanvi Insurance Services. This static/demo portal does not directly access PB Partners systems.</p></footer>
-<script src="script.js"></script>
-</body></html>
+<section class="section cards"><div class="info-card"><div>🚗</div><h3>Car Insurance</h3><p>Comprehensive & third-party assistance.</p></div><div class="info-card"><div>🏍️</div><h3>Bike Insurance</h3><p>Two-wheeler insurance & renewal support.</p></div><div class="info-card"><div>📄</div><h3>PI / Inspection</h3><p>Customer submits documents; ready PI can be downloaded after processing.</p><a href="pi.html">PI Service →</a></div><div class="info-card commission"><div>💰</div><h3>Agent Commission</h3><p><b>Bike ₹75</b> per policy<br><b>Car ₹210</b> per policy</p><a href="agent-login.html">Agent Portal →</a></div></section>
+
+<section class="section workflow"><h2>How it works</h2><div class="steps"><div><b>1</b><span>Customer Login / Request</span></div><div><b>2</b><span>PI Documents & ₹190 payment</span></div><div><b>3</b><span>Agent/Admin verifies & prepares PI</span></div><div><b>4</b><span>Customer downloads PI</span></div><div><b>5</b><span>Agent raises insurance request</span></div><div><b>6</b><span>Policy PDF uploaded → Customer downloads</span></div></div></section>
+
+<section class="cta"><h2>Need Help Choosing the Right Cover?</h2><p>Comprehensive, Third Party या renewal — Shanvi Insurance Services se assistance lein.</p><div class="actions"><a class="btn whatsapp" href="https://wa.me/919664029638" target="_blank">💬 WhatsApp Us</a><a class="btn light" href="mailto:nokhwalpankaj99@gmail.com">✉️ Contact Us</a></div></section>
+<footer><b>Shanvi Insurance Services</b><p>📞 96640-29638 | ✉️ nokhwalpankaj99@gmail.com</p><p class="small">Customer & agent services · PI processing · insurance assistance · policy document delivery</p><p class="small">58 LNP Ridmalsar Road, Sri Ganganagar, Rajasthan - 335061</p></footer>
+<script src="script.js"></script><script>
+const headlines=["🎉 Raksha Bandhan Special — Protect your family & vehicle today","💰 Agent Commission — Bike ₹75 | Car ₹210 per policy","🚗 Car Insurance — Comprehensive & Third Party options","🏍️ Bike Insurance — Quick quote & renewal assistance","📄 PI Service — Pay ₹190 and submit your documents","🛡️ Shanvi Insurance Services — Secure Today, Protected Tomorrow"];
+let hi=0; setInterval(()=>{hi=(hi+1)%headlines.length;document.getElementById('headline').textContent=headlines[hi]},3000);
+</script></body></html>
