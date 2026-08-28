@@ -21,7 +21,7 @@
 - Address: 58 LNP Ridmalsar Road, Sri Ganganagar, Rajasthan - 335061
 
 ## Frontend demo credentials
-Admin: admin / admin123
+Admin: configured privately as requested
 Agent: create through Agent Registration; admin must issue certificate first
 Customer: create through Customer Registration
 
