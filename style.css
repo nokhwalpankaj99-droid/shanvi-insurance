@@ -54,3 +54,7 @@ body{background:#f4f7fc;color:#122750}
 .insurer-tile img{background:#fff;min-width:52px}
 .qr-fallback{padding:10px 14px;border:1px dashed #b7c7df;border-radius:10px;background:#f7faff}
 @media(max-width:700px){.insurer-grid{grid-template-columns:repeat(2,1fr)!important}.insurer-tile img{width:120px;height:48px}}
+
+/* v26 QR reliability */
+.qr-large{min-height:260px;}
+.tax-service-card{cursor:pointer;}
