@@ -252,3 +252,18 @@ async function savePIRequestBackend(req){
   if(!r.ok) throw new Error(await r.text()||'PI request could not be saved.');
   try{await fetch(`${SUPABASE_URL}/functions/v1/notify-pi`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(req)})}catch(e){console.warn('PI email notification failed',e)}
 }
+
+
+function calcGST(){
+  const amount=Number(document.getElementById('gstAmount')?.value||0);
+  const rate=Number(document.getElementById('gstRate')?.value||0);
+  const mode=document.getElementById('gstMode')?.value;
+  const out=document.getElementById('gstResult');
+  if(!out) return;
+  if(!amount || amount<0){ out.textContent='Please enter a valid amount.'; return; }
+  let base,gst,total;
+  if(mode==='inclusive'){ total=amount; base=amount/(1+rate/100); gst=amount-base; }
+  else { base=amount; gst=amount*rate/100; total=base+gst; }
+  const cgst=gst/2, sgst=gst/2;
+  out.innerHTML=`<b>Taxable Amount:</b> ₹${base.toFixed(2)} &nbsp; | &nbsp; <b>GST:</b> ₹${gst.toFixed(2)}<br><b>CGST:</b> ₹${cgst.toFixed(2)} &nbsp; <b>SGST:</b> ₹${sgst.toFixed(2)}<br><b>Total:</b> ₹${total.toFixed(2)}`;
+}
