@@ -48,3 +48,9 @@ body{background:#f4f7fc;color:#122750}
 .tax-service-card{background:linear-gradient(135deg,#f2f8ff,#eefaf6);border-color:#cfe0f3}.tax-service-card b{color:#0c5f9e}.tax-service-card strong{color:#0a9b76;font-size:12px}
 @media(max-width:1050px){.service-strip{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:650px){.service-strip{grid-template-columns:1fr}}
+
+/* v25 live reliability fixes */
+.insurer-tile .brand-mark{width:52px;height:52px;flex:0 0 52px}
+.insurer-tile img{background:#fff;min-width:52px}
+.qr-fallback{padding:10px 14px;border:1px dashed #b7c7df;border-radius:10px;background:#f7faff}
+@media(max-width:700px){.insurer-grid{grid-template-columns:repeat(2,1fr)!important}.insurer-tile img{width:120px;height:48px}}
