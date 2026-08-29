@@ -7,7 +7,7 @@
 <div class="form-card"><h2>📥 PI PDF</h2><p>Admin/Agent PI ready hone par yahin download karein.</p><div id="piDownload" class="notice">PI PDF abhi available nahi hai.</div></div>
 <div class="form-card"><h2>🚗 Insurance Policy</h2><p>Agent policy PDF upload karega aur aap yahin download kar sakenge.</p><div id="policyDownload" class="notice">Policy PDF abhi available nahi hai.</div></div>
 <div class="form-card"><h2>💬 Customer Support</h2><p>Quote, renewal ya document help ke liye contact karein.</p><div class="actions"><a class="btn whatsapp" href="https://wa.me/919664029638" target="_blank" rel="noopener">WhatsApp</a><a class="btn light dark-text" href="mailto:nokhwalpankaj99@gmail.com">Email</a></div></div>
-</div></main><script src="script.js"></script><script>
+</div></main><script src="supabase-config.js"></script><script src="script.js"></script><script>
 const u=currentCustomer();if(!u||!guardPortalSession('customer','customer-login.html')){}else{
  recordSiteVisit('customer-portal.html',u);document.getElementById('customerWelcome').innerHTML=`<span class="eyebrow">CUSTOMER DASHBOARD</span><h1>Hello, ${u.name}</h1><p class="muted-text">${u.email} · ${u.mobile}</p>`;
  const pol=load('shanviPolicies',{})[u.uid];if(pol){document.getElementById('policyStatus').textContent='Ready';document.getElementById('policyDownload').innerHTML=`<a class="btn primary" download="${pol.name}" href="${pol.data}">📥 Download Policy PDF</a><br><small>Uploaded ${new Date(pol.uploadedAt).toLocaleString('en-IN')}</small>`}

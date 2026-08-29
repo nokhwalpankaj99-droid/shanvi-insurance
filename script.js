@@ -1,77 +1,26 @@
-/* Shanvi Insurance Services - Supabase lead integration */
-const SUPABASE_URL = 'https://dwfhqjoidrgjszlpyejr.supabase.co';
-const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_O2Lj_PqZFP5k2ODiFmDXwA_03UoVRp3';
-
-async function submitLeadToSupabase(lead){
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/leads`, {
-    method:'POST',
-    headers:{
-      'apikey': SUPABASE_PUBLISHABLE_KEY,
-      'Authorization': `Bearer ${SUPABASE_PUBLISHABLE_KEY}`,
-      'Content-Type':'application/json',
-      'Prefer':'return=minimal'
-    },
-    body: JSON.stringify({
-      name: lead.name || '',
-      mobile: lead.mobile || '',
-      email: lead.email || '',
-      insurance_type: lead.insurance_type || '',
-      message: lead.message || '',
-      vehicle_number: lead.vehicle_number || '',
-      source: lead.source || 'website',
-      created_at: new Date().toISOString()
-    })
-  });
-  if(!res.ok){
-    let detail='';
-    try{detail=await res.text()}catch(e){}
-    throw new Error(detail || `Supabase request failed (${res.status})`);
-  }
-  return true;
-}
-
-function initLeadForm(){
-  const form=document.getElementById('leadForm');
-  if(!form || form.dataset.bound==='1')return;
-  form.dataset.bound='1';
-  form.addEventListener('submit', async e=>{
-    e.preventDefault();
-    const status=document.getElementById('leadMsg');
-    const btn=form.querySelector('button[type="submit"]');
-    const lead={
-      name:c('leadName').value.trim(),
-      mobile:c('leadMobile').value.trim(),
-      email:c('leadEmail').value.trim().toLowerCase(),
-      insurance_type:c('leadInsurance').value,
-      vehicle_number:c('leadVehicle').value.trim(),
-      message:c('leadMessage').value.trim(),
-      source:'website enquiry'
-    };
-    if(!lead.name || !lead.mobile || !lead.insurance_type){
-      msg('leadMsg','Name, Mobile aur Insurance Type required hai.','error'); return;
-    }
-    btn.disabled=true; btn.textContent='Submitting…';
-    try{
-      await submitLeadToSupabase(lead);
-      msg('leadMsg','✅ Enquiry successfully submit ho gayi. Hamari team aapse jaldi contact karegi.','success');
-      form.reset();
-    }catch(err){
-      console.error('Supabase lead error:',err);
-      /* Keep the enquiry locally so it is not lost if the database is temporarily unavailable. */
-      let pending=load('shanviPendingLeads',[]);
-      pending.push({...lead,created_at:new Date().toISOString()});
-      store('shanviPendingLeads',pending.slice(-200));
-      msg('leadMsg','⚠️ Enquiry locally save ho gayi, lekin online database connection mein problem aa rahi hai. Please WhatsApp/Call bhi kar sakte hain.','error');
-    }finally{
-      btn.disabled=false; btn.textContent='📨 Submit Enquiry';
-    }
-  });
-}
-
 const SHANVI={
   supportPhone:'96640-29638', supportEmail:'nokhwalpankaj99@gmail.com', address:'58 LNP Ridmalsar Road, Sri Ganganagar, Rajasthan - 335061', piFee:190,
   commission:{bike:75,car:210}, agentCodePrefix:'SIS2022'
 };
+
+
+/* Supabase enquiry integration */
+async function submitSupabaseLead(lead){
+  if(typeof SUPABASE_URL==='undefined' || typeof SUPABASE_PUBLISHABLE_KEY==='undefined') throw new Error('Supabase configuration missing.');
+  const response=await fetch(`${SUPABASE_REST_URL}/leads`,{
+    method:'POST',
+    headers:{'apikey':SUPABASE_PUBLISHABLE_KEY,'Authorization':`Bearer ${SUPABASE_PUBLISHABLE_KEY}`,'Content-Type':'application/json','Prefer':'return=minimal'},
+    body:JSON.stringify(lead)
+  });
+  if(!response.ok) throw new Error(await response.text()||'Supabase request failed');
+  // Send an email notification through the Supabase Edge Function.
+  try{
+    await fetch(`${SUPABASE_URL}/functions/v1/notify-lead`,{
+      method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(lead)
+    });
+  }catch(e){ console.warn('Email notification failed:',e); }
+  return true;
+}
 const insurers=[
 ['United India Insurance','uii'],['National Insurance','national'],['The Oriental Insurance','oriental'],['Shriram General Insurance','shriram'],['Go Digit General Insurance','digit'],['SBI General Insurance','sbi'],['ICICI Lombard','icici'],['HDFC ERGO','hdfc'],['Bajaj Allianz General Insurance','bajaj'],['Tata AIG','tataaig'],['Reliance General Insurance','reliance'],['ACKO General Insurance','acko']
 ];
@@ -84,7 +33,34 @@ function getQuote(){
  status.innerHTML=`<b>Vehicle:</b> ${v} &nbsp; <span class="success">Quote options are ready.</span>`;
  out.innerHTML=insurers.map((x,i)=>{let p=Math.round(base*(1+(i%5-2)*.035));return `<div class="quote-card"><div class="insurer-mini"><div class="ins-logo logo-${x[1]}">${x[0].split(' ').map(w=>w[0]).slice(0,2).join('')}</div><div><b>${x[0]}</b><small>${cover==='comprehensive'?'Comprehensive':cover==='thirdparty'?'Third Party':'Limited Third Party'}</small></div></div><div><b>${type==='bike'?'Two Wheeler':'Car'}</b><small>${v}</small></div><div class="price">₹${p.toLocaleString('en-IN')}</div><button class="btn primary" onclick="requestQuote('${x[0]}',${p})">Request</button></div>`}).join('');
 }
-function requestQuote(insurer,price){const v=document.getElementById('vehicleNo').value; const subject=encodeURIComponent('Insurance Quote Request - Shanvi Insurance Services'); const body=encodeURIComponent(`Customer insurance request\n\nInsurance Company: ${insurer}\nQuoted Premium: ₹${price}\nVehicle: ${v}\n\nPlease contact me.\n\nShanvi Insurance Services\n${SHANVI.supportPhone}`); window.location.href=`mailto:${SHANVI.supportEmail}?subject=${subject}&body=${body}`;}
+async function requestQuote(insurer,price){
+  const v=document.getElementById('vehicleNo').value.trim().toUpperCase();
+  const vehicleType=document.getElementById('vehicleType')?.value||'';
+  const cover=document.getElementById('cover')?.value||'';
+  const name=prompt('Customer name / नाम दर्ज करें:');
+  if(!name) return;
+  const mobile=prompt('Mobile number / मोबाइल नंबर दर्ज करें:');
+  if(!mobile) return;
+  const lead={
+    name:name.trim(),
+    mobile:mobile.trim(),
+    email:'',
+    insurance_type:`${vehicleType==='bike'?'Bike':'Car'} Insurance - ${cover} - ${insurer}`,
+    message:`Quote Request\nVehicle: ${v}\nQuoted Premium: ₹${price}\nInsurer: ${insurer}`
+  };
+  try{
+    const saved=await submitSupabaseLead(lead);
+    if(saved){
+      const st=document.getElementById('quoteStatus');
+      if(st) st.innerHTML='<b>Request received.</b> <span class="success">Shanvi team will contact you shortly.</span>';
+    }
+  }catch(err){
+    // Keep a mailto fallback if the backend is temporarily unavailable.
+    const subject=encodeURIComponent('Insurance Quote Request - Shanvi Insurance Services');
+    const body=encodeURIComponent(`Customer: ${lead.name}\nMobile: ${lead.mobile}\nVehicle: ${v}\nInsurance Company: ${insurer}\nQuoted Premium: ₹${price}\n`);
+    window.location.href=`mailto:${SHANVI.supportEmail}?subject=${subject}&body=${body}`;
+  }
+}
 function store(key,val){localStorage.setItem(key,JSON.stringify(val));} function load(key,def){try{return JSON.parse(localStorage.getItem(key))??def}catch{return def}}
 function nextAgentCode(){let n=Number(localStorage.getItem('shanviAgentSerial')||600)+1;localStorage.setItem('shanviAgentSerial',n);return `SIS2022${String(n).padStart(3,'0')}`}
 function hashLite(s){let h=0;for(let i=0;i<s.length;i++)h=((h<<5)-h+s.charCodeAt(i))|0;return String(Math.abs(h));}
@@ -177,28 +153,11 @@ function updateSessionUI(remaining){
   if(sec<=120){n.textContent='⚠️ Session soon expire hogi — activity karein ya Logout karein.';document.getElementById('shanviSessionBar').classList.add('warning')}
 }
 function protectPortalLinks(type){
-  const safe={
-    admin:new Set(['admin-portal.html','admin-settings.html','admin-login.html']),
-    agent:new Set(['agent-portal.html','agent-certificate.html','agent-login.html','pi.html']),
-    customer:new Set(['customer-portal.html','customer-login.html','pi.html'])
-  };
-  const current=(location.pathname.split('/').pop()||'index.html').toLowerCase();
-  document.querySelectorAll('a[href]').forEach(a=>{
-    if(a.dataset.portalGuardBound==='1')return;
-    a.dataset.portalGuardBound='1';
-    a.addEventListener('click',e=>{
-      const href=(a.getAttribute('href')||'').split('#')[0].split('?')[0];
-      if(!href || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('upi:'))return;
-      const file=(href.split('/').pop()||'').toLowerCase();
-      if(file==='')return;
-      const isLogout=(a.textContent||'').toLowerCase().includes('logout') || a.getAttribute('onclick')?.includes('logoutPortal');
-      if(isLogout)return;
-      if(!safe[type]?.has(file)){
-        e.preventDefault();
-        alert('Pehle current portal se Logout karein. Uske baad Website ya kisi doosre portal par ja sakte hain.');
-      }
-    });
-  });
+  const other={admin:['agent-login.html','agent-portal.html','customer-login.html','customer-portal.html'],agent:['admin-login.html','admin-portal.html','customer-login.html','customer-portal.html'],customer:['admin-login.html','admin-portal.html','agent-login.html','agent-portal.html']};
+  document.querySelectorAll('a[href]').forEach(a=>a.addEventListener('click',e=>{
+    const href=(a.getAttribute('href')||'').split('?')[0];
+    if(other[type]?.includes(href)){e.preventDefault();alert('Pehle current portal se Logout karein, uske baad dusre portal mein login karein.');}
+  }));
 }
 function recordSiteVisit(page='index.html', customer){
   try{
@@ -238,4 +197,58 @@ function getPIForCustomer(u){
   return load('shanviPIRequests',[]).filter(x=>u && ((x.email||'').toLowerCase()===(u.email||'').toLowerCase())).pop();
 }
 
-if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initLeadForm)}else{initLeadForm()}
+/* v22 premium conversion + WhatsApp helpers */
+function shanviWhatsApp(text){
+  const url=`https://wa.me/919664029638?text=${encodeURIComponent(text)}`;
+  window.open(url,'_blank','noopener');
+}
+function quoteCustomer(){
+  return {
+    name:(document.getElementById('quoteName')?.value||'').trim(),
+    mobile:(document.getElementById('quoteMobile')?.value||'').trim(),
+    email:(document.getElementById('quoteEmail')?.value||'').trim().toLowerCase()
+  };
+}
+function getQuote(){
+  const el=id=>document.getElementById(id); const v=cleanVehicle(el('vehicleNo').value), type=el('vehicleType').value, cover=el('cover').value;
+  const out=el('quoteResults'), status=el('quoteStatus'), customer=quoteCustomer();
+  if(customer.name.length<2){status.innerHTML='<span class="error">Please enter customer name.</span>';return}
+  if(!/^[6-9]\d{9}$/.test(customer.mobile.replace(/\D/g,''))){status.innerHTML='<span class="error">Please enter a valid 10-digit mobile number.</span>';return}
+  if(v.length<6){status.innerHTML='<span class="error">Please enter a valid vehicle number.</span>';out.innerHTML='';return}
+  const base=type==='bike'?(cover==='comprehensive'?1850:843):(cover==='comprehensive'?7200:cover==='thirdparty'?3416:2800);
+  status.innerHTML=`<b>Vehicle:</b> ${v} &nbsp; <span class="success">Quote options are ready for ${customer.name}.</span>`;
+  out.innerHTML=insurers.map((x,i)=>{let p=Math.round(base*(1+(i%5-2)*.035));return `<div class="quote-card"><div class="insurer-mini"><div class="ins-logo logo-${x[1]}">${x[0].split(' ').map(w=>w[0]).slice(0,2).join('')}</div><div><b>${x[0]}</b><small>${cover==='comprehensive'?'Comprehensive':cover==='thirdparty'?'Third Party':'Limited Third Party'}</small></div></div><div><b>${type==='bike'?'Two Wheeler':'Car'}</b><small>${v}</small></div><div class="price">₹${p.toLocaleString('en-IN')}</div><button class="btn primary" onclick="requestQuote('${x[0]}',${p})">WhatsApp Request →</button></div>`}).join('');
+}
+async function requestQuote(insurer,price){
+  const v=document.getElementById('vehicleNo').value.trim().toUpperCase();
+  const vehicleType=document.getElementById('vehicleType')?.value||'';
+  const cover=document.getElementById('cover')?.value||'';
+  const q=quoteCustomer();
+  if(!q.name || !q.mobile){getQuote();return}
+  const lead={name:q.name,mobile:q.mobile,email:q.email,insurance_type:`${vehicleType==='bike'?'Bike':'Car'} Insurance - ${cover} - ${insurer}`,message:`Quote Request\nVehicle: ${v}\nQuoted Premium: ₹${price}\nInsurer: ${insurer}`};
+  const wa=`Hello Shanvi Insurance Services,\nI want an insurance quote.\n\nName: ${q.name}\nMobile: ${q.mobile}\nVehicle: ${v}\nVehicle Type: ${vehicleType}\nCover: ${cover}\nInsurer: ${insurer}\nIndicative Premium: ₹${price}`;
+  try{
+    await submitSupabaseLead(lead);
+    const st=document.getElementById('quoteStatus'); if(st) st.innerHTML='<b>Request saved.</b> <span class="success">WhatsApp is opening with your enquiry.</span>';
+  }catch(err){console.warn(err)}
+  shanviWhatsApp(wa);
+}
+
+const SHANVI_MAX_IMAGE = 8*1024*1024;
+const SHANVI_MAX_VIDEO = 35*1024*1024;
+async function uploadPIFile(file, requestId, folder){
+  if(!file) throw new Error(`${folder} file is required.`);
+  const isVideo=file.type.startsWith('video/');
+  const limit=isVideo?SHANVI_MAX_VIDEO:SHANVI_MAX_IMAGE;
+  if(file.size>limit) throw new Error(`${file.name} is too large. Images max 8 MB, video max 35 MB.`);
+  const safe=file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
+  const path=`${requestId}/${folder}-${Date.now()}-${safe}`;
+  const r=await fetch(`${SUPABASE_URL}/storage/v1/object/pi-documents/${path}`,{method:'POST',headers:{apikey:SUPABASE_PUBLISHABLE_KEY,Authorization:`Bearer ${SUPABASE_PUBLISHABLE_KEY}`,'Content-Type':file.type||'application/octet-stream','x-upsert':'true'},body:file});
+  if(!r.ok) throw new Error(await r.text()||`Upload failed: ${file.name}`);
+  return `pi-documents/${path}`;
+}
+async function savePIRequestBackend(req){
+  const r=await fetch(`${SUPABASE_REST_URL}/pi_requests`,{method:'POST',headers:{apikey:SUPABASE_PUBLISHABLE_KEY,Authorization:`Bearer ${SUPABASE_PUBLISHABLE_KEY}`,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(req)});
+  if(!r.ok) throw new Error(await r.text()||'PI request could not be saved.');
+  try{await fetch(`${SUPABASE_URL}/functions/v1/notify-pi`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(req)})}catch(e){console.warn('PI email notification failed',e)}
+}
