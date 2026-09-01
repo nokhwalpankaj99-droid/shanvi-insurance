@@ -44,3 +44,7 @@ This is a static/GitHub Pages frontend. `localStorage` is browser/device-specifi
 - Linked Sub-Agent can download the Policy PDF from Sub-Agent Portal.
 - PI PDF remains Admin-uploaded after verification and is available to the linked Sub-Agent and Customer where the request is associated.
 - Static hosting limitation remains: localStorage is browser/device specific; central multi-device document delivery requires a backend/database/object storage.
+
+
+## Smart Tax Solution Portal
+The `tax-gst.html` page has been redesigned as the independent Smart Tax Solution tax portal with Income Tax, GST, MSME/Udyam, FSSAI, audit/compliance, daily tax-news feed, daily quiz, Unique Accountant Academy courses, certificate information and tax tools.
