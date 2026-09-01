@@ -243,7 +243,7 @@ async function uploadPIFile(file, requestId, folder){
   if(file.size>limit) throw new Error(`${file.name} is too large. Images max 8 MB, video max 35 MB.`);
   const safe=file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
   const path=`${requestId}/${folder}-${Date.now()}-${safe}`;
-  const r=await fetch(`${SUPABASE_URL}/storage/v1/object/INSURANCE/${path}`,{method:'POST',headers:{apikey:SUPABASE_PUBLISHABLE_KEY,Authorization:`Bearer ${SUPABASE_PUBLISHABLE_KEY}`,'Content-Type':file.type||'application/octet-stream','x-upsert':'true'},body:file});
+  const r=await fetch(`${SUPABASE_URL}/storage/v1/object/INSURANCE/${path}`,{method:'POST',headers:{apikey:SUPABASE_PUBLISHABLE_KEY,Authorization:`Bearer ${SUPABASE_PUBLISHABLE_KEY}`,'Content-Type':file.type||'application/octet-stream'},body:file});
   if(!r.ok) throw new Error(await r.text()||`Upload failed: ${file.name}`);
   return `INSURANCE/${path}`;
 }

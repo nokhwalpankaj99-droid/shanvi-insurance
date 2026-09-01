@@ -34,8 +34,14 @@ on conflict (id) do nothing;
 
 drop policy if exists "Public can upload PI documents" on storage.objects;
 create policy "Public can upload PI documents"
-on storage.objects for insert to anon, authenticated
+on storage.objects
+for insert
+to anon, authenticated
 with check (bucket_id = 'INSURANCE');
+
+-- Allow the public website to upload new objects only.
+-- The frontend uses unique object paths, so it does not need upsert/update permission.
+
 
 -- The existing INSURANCE bucket is public in this project.
 -- For production, consider making it private and using signed URLs for document access.

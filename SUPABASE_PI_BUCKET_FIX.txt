@@ -1,12 +1,6 @@
-Shanvi Insurance - PI Storage Fix
+PI upload RLS fix
 
-The live website uses the existing Supabase Storage bucket:
-INSURANCE
-
-The frontend and notify-pi Edge Function have been updated to use INSURANCE instead of pi-documents.
-
-Important:
-- The INSURANCE bucket must exist.
-- An INSERT policy for anon/authenticated on storage.objects with bucket_id = 'INSURANCE' is required.
-- The bucket is currently public in the Supabase project. For production, consider making it private and using signed URLs.
-- No Supabase secret/service-role key is included in frontend files.
+1. In Supabase SQL Editor, run supabase_pi_setup.sql (or just rerun the storage policy section).
+2. The website now uploads with POST without x-upsert, so only INSERT permission is required.
+3. Bucket name: INSURANCE.
+4. Do not send or use the Supabase secret key in the browser.
