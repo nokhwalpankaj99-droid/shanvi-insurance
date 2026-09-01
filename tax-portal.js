@@ -1,3 +1,6 @@
+function escapeHTML(value){
+  return String(value ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
 const STS_FEEDS = {
   tax: { q:'Income Tax India CBDT ITR TDS', official:'https://www.incometax.gov.in/iec/foportal/latest-news' },
   gst: { q:'GST India GSTN GST Council tax', official:'https://www.gst.gov.in/' },
@@ -74,7 +77,7 @@ function calcGSTNew(){
   document.getElementById('gstResult').innerHTML='<b>Taxable:</b> ₹'+base.toFixed(2)+' &nbsp; <b>GST:</b> ₹'+gst.toFixed(2)+' &nbsp; <b>Total:</b> ₹'+total.toFixed(2);
 }
 document.addEventListener('DOMContentLoaded',()=>{
-  setToday(); loadDailyQuiz(); loadNews('tax');
+  setToday(); loadNews('tax');
   document.querySelectorAll('.news-tab').forEach(btn=>btn.addEventListener('click',()=>{
     document.querySelectorAll('.news-tab').forEach(x=>x.classList.remove('active')); btn.classList.add('active'); loadNews(btn.dataset.feed);
   }));
@@ -130,7 +133,7 @@ function showCertificateForm(){
  const area=document.getElementById('certificateArea'); if(!area)return; area.innerHTML=`<div class="certificate-form"><label>Certificate name</label><input id="certificateName" value="${escapeHTML(examState.name)}" maxlength="80"><button class="sts-btn primary" onclick="renderCertificate()">Create Certificate</button><small style="display:block;margin-top:8px;color:#7d8796;font-size:9px">Use the same name you want printed on the certificate.</small></div>`;
 }
 function renderCertificate(){
- const name=(document.getElementById('certificateName')?.value||examState.name).trim(); if(!name){alert('Enter the certificate name.');return;} const id='Accountant Academy-'+new Date().getFullYear()+'-'+Math.random().toString(36).slice(2,8).toUpperCase(); const date=new Date().toLocaleDateString('en-IN',{day:'2-digit',month:'long',year:'numeric'}); const area=document.getElementById('certificateArea');
+ const name=(document.getElementById('certificateName')?.value||examState.name).trim(); if(!name){alert('Enter the certificate name.');return;} const id='STS2026S02317'; const date=new Date().toLocaleDateString('en-IN',{day:'2-digit',month:'long',year:'numeric'}); const area=document.getElementById('certificateArea');
  area.innerHTML=`<div class="certificate-preview" id="printCertificate"><div class="cert-org">ACCOUNTANT ACADEMY</div><h2>Certificate of Completion</h2><p>This certificate is proudly presented to</p><div class="cert-name">${escapeHTML(name)}</div><p>for successfully passing the Accounting & GST Certification Examination conducted through<br><b>Accountant Academy</b> in association with <b>Smart Tax Solution</b>.</p><p><b>Examination Score: ${Math.round((examState.answers.filter((v,i)=>v===ACCOUNTING_EXAM[i].a).length/ACCOUNTING_EXAM.length)*100)}%</b><br>Certificate ID: ${id}<br>Date: ${date}</p><div class="cert-footer"><span class="cert-founder">Adv. Pankaj Nokhwal<br>Founder, Smart Tax Solution</span><span>Accountant Academy<br>Course Completion Certificate</span></div></div><button class="sts-btn primary" style="margin-top:12px" onclick="printCertificate()">Print / Save Certificate</button>`;
 }
 function printCertificate(){const el=document.getElementById('printCertificate');if(!el)return;const w=window.open('','_blank','width=1000,height=750');w.document.write(`<html><head><title>Accountant Academy Certificate</title><style>body{font-family:Arial,sans-serif;padding:30px}.certificate-preview{border:7px double #b18a4d;padding:70px 40px;text-align:center;min-height:520px}.cert-org{letter-spacing:2px;font-weight:900}.certificate-preview h2{font-family:Georgia,serif;font-size:36px}.cert-name{font-family:Georgia,serif;font-size:30px;font-weight:700;border-bottom:1px solid #b18a4d;display:inline-block;padding:0 25px 10px}.certificate-preview p{line-height:1.7}.cert-footer{display:flex;justify-content:space-between;margin-top:45px;font-size:12px}</style></head><body>${el.outerHTML}</body></html>`);w.document.close();w.focus();w.print();}

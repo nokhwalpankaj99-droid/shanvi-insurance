@@ -1,158 +1,224 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Shanvi Insurance Services | Insurance Partner</title>
-<meta name="description" content="Shanvi Insurance Services - car, bike, health, travel, renewal, third-party and PI assistance.">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Smart Tax Solution | Income Tax, GST, MSME, FSSAI, Audit & Accounting</title>
+<meta name="description" content="Smart Tax Solution — professional tax information portal for Income Tax, GST, MSME Udyam, FSSAI, audit, tax news, daily quiz and accounting courses.">
+<meta name="theme-color" content="#0b1730">
 <link rel="stylesheet" href="style.css">
 </head>
-<body onload="initHome()">
-<div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:20px 0">
-<a href="tax-gst.html">Tax & GST Portal</a>
-<a href="daily-quiz.html">Daily Quiz</a>
-<a href="accounting-exam.html">Accounting Exam</a>
-</div>
+<body class="sts-portal">
 <a href="index.html" aria-label="Smart Tax Solution"><img src="assets/smart-tax-solution-logo.svg" alt="Smart Tax Solution" style="max-width:320px;width:100%;height:auto;display:block;margin:12px auto;"></a>
-<header class="topbar pb-header">
-  <a class="brand brand-link" href="index.html">
-    <div class="logo">🛡️</div><div><b>Shanvi</b><span>Insurance Services</span><small>Secure Today, Protected Tomorrow</small></div>
+<header class="sts-header">
+  <a class="sts-brand" href="tax-gst.html" aria-label="Smart Tax Solution home">
+    <span class="sts-mark">ST<span>S</span></span>
+    <span><b>Smart Tax Solution</b><small>Tax • GST • Compliance • Learning</small></span>
   </a>
-  <nav class="main-nav">
-    <a class="active" href="index.html">Home</a>
-    <a href="#quick-quote">Quick Quote</a>
-    <a href="pi.html">PI / Inspection</a>
-    <a href="third-party-rates.html">TP Rates</a>
-    <a href="tax-gst.html" target="_blank" rel="noopener">🧾 Income Tax & GST ↗</a>
-    <a href="#insurers">Insurers</a>
-    <a href="agent-login.html">Sub-Agent Portal</a>
-    <a href="customer-login.html">Customer Login</a>
-    <a href="admin-login.html">Admin</a>
+  <nav class="sts-nav">
+    <a href="#portals">Portals</a>
+    <a href="#services">Services</a>
+    <a href="#news">Tax News</a>
+    <a href="#quiz">Daily Quiz</a>
+    <a href="#academy">Academy</a>
+    <a href="#exam">Accounting Exam</a>
+    <a href="#contact">Contact</a>
   </nav>
-  <a class="phone" href="tel:9664029638">☎ 96640-29638</a>
+  <a class="sts-top-btn" href="mailto:smarttaxsolutionsgnr@gmail.com">Get Tax Help</a>
 </header>
 
-<div class="promo ticker-bar"><div id="headlineRotator" class="headline-rotator">💰 Agent Commission — Bike ₹75 | Car ₹210 per policy</div><div class="promo-sub">Special offers, agent commission updates & important insurance messages</div></div>
+<div class="sts-ticker">
+  <div><span class="live-dot"></span><b>SMART TAX UPDATE</b></div>
+  <div id="tickerText">Income Tax • GST • MSME • FSSAI • Audit • Accounting</div>
+  <div class="ticker-date" id="todayDate"></div>
+</div>
 
 <main>
-<section class="pb-hero">
+<section class="sts-hero">
   <div class="hero-copy">
-    <span class="eyebrow">FAST • SIMPLE • TRUSTED</span>
-    <h1>Insurance made simple for every family.</h1>
-    <p>Car, bike, renewal, third-party, comprehensive, health, travel और PI assistance — सब एक जगह.</p>
-    <div class="actions">
-      <a class="btn primary" href="#quick-quote">🚗 Get Quick Quote</a>
-      <a class="btn whatsapp" href="https://wa.me/919664029638" target="_blank" rel="noopener">💬 WhatsApp Us</a>
-      <a class="btn light" href="customer-login.html">👤 Customer Login</a>
+    <div class="eyebrow-gold">SMART TAX SOLUTION</div>
+    <h1>India's practical <span>Tax & Compliance</span> portal.</h1>
+    <p>Income Tax, GST, MSME/Udyam, FSSAI, audit support, daily tax news and professional accounting learning — organised in one clean workspace.</p>
+    <div class="hero-actions">
+      <a class="sts-btn primary" href="#portals">Explore Tax Portals <span>→</span></a>
+      <a class="sts-btn outline" href="#academy">Explore Courses</a>
     </div>
-    <div class="hero-points"><span>✓ Multiple insurers</span><span>✓ Fast assistance</span><span>✓ Policy delivery</span></div>
+    <div class="founder-mini"><span>Founder</span><b>Adv. Pankaj Nokhwal</b><i>•</i><a href="mailto:smarttaxsolutionsgnr@gmail.com">smarttaxsolutionsgnr@gmail.com</a></div>
   </div>
-  <div class="hero-side">
-    <div class="hero-side-icon">🚘</div>
-    <b>Multiple Insurance Options</b>
-    <span>Third Party • Comprehensive • Own Damage • Renewal</span>
-    <a href="#products">Explore Products →</a>
-  </div>
-</section>
-
-<section class="poster-wrap">
-  <div class="poster-heading"><span>🌸 TODAY'S HIGHLIGHT</span><b>Festival Campaign</b></div>
-  <img class="festival-poster" src="assets/raksha-bandhan-2026.jpg" alt="Happy Raksha Bandhan - Shanvi Insurance Services">
-</section>
-
-<section class="service-strip" id="products">
-  <a class="service-card tax-service-card" href="tax-gst.html" target="_blank" rel="noopener"><span>🧾</span><div><b>INCOME TAX & GST</b><small>ITR • GST Portal • Returns • Tax Help</small><strong>Open Help Desk →</strong></div></a>
-
-  <a class="service-card" href="#quick-quote"><span>🚗</span><div><b>CAR INSURANCE</b><small>Comprehensive & Third Party</small></div></a>
-  <a class="service-card" href="#quick-quote"><span>🏍️</span><div><b>BIKE INSURANCE</b><small>Comprehensive & Third Party</small></div></a>
-  <a class="service-card" href="third-party-rates.html"><span>📋</span><div><b>OTHER INSURANCE</b><small>Health, Travel, Shop, Commercial & More</small></div></a>
-  <a class="service-card pi-highlight" href="pi.html"><span>📄</span><div><b>PI SERVICE</b><small>Get your PI assistance</small><strong>₹190/-</strong></div></a>
-</section>
-
-<section class="broker-section">
-  <div class="section-title"><span>OUR BROKERS</span><h2>Trusted insurance marketplace partners</h2></div>
-  <div class="broker-grid">
-    <div class="broker-card"><div class="broker-logo insurance-dekho">iD</div><div><b>InsuranceDekho</b><small>Insurance marketplace</small></div></div>
-    <div class="broker-card"><div class="broker-logo policy-bazaar">PB</div><div><b>Policybazaar.com</b><small>Insurance marketplace</small></div></div>
+  <div class="hero-panel">
+    <div class="panel-head"><span>SMART TAX DESK</span><b>2026</b></div>
+    <div class="panel-number">01</div>
+    <h3>Tax. Compliance.<br>Knowledge.</h3>
+    <div class="panel-line"><span>Income Tax</span><b>ITR / TDS / AIS</b></div>
+    <div class="panel-line"><span>GST</span><b>Returns / Search / Payment</b></div>
+    <div class="panel-line"><span>Business</span><b>MSME / FSSAI / Audit</b></div>
   </div>
 </section>
 
-<section class="section home-pi-qr" id="pi-payment"><div class="pay-card"><div class="qr-wrap"><span class="payment-badge">PI / INSPECTION FEE</span><div class="fee">₹190</div><b>Scan & Pay via UPI</b><img class="qr-large" id="home-pi-qr" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAeoAAAHqAQAAAADjFjCXAAAEGElEQVR4nO2dUYrjSAyGP60N/WjDHqCP4txgjjTskfYG8VFygAb7MeCgeahSVSXLsBBnSIf8emjsJB+VwI9Ukkpuc3bY/NceGoQLFy5cuHDhwoU/FrdsPWZjvmW2HjusPfkNM4M1Pnp43OrC3w3H3d2Z3N196XJuMfnGzS0M7kxL5w1xfOnfLvzZ+Brua1rA/xkBhrOl2+P64e4nM4Dk+h67uvD3wvube59HgPXDYR1x2HqDDpv+7TZ78OrChQPYzwWY/GwwbDCP4EcuFn/+6OrC3wMPXzc4sILPn8m5uTF8YdBjk4NBtwHQ1pVf+rcLfzI+m1lKX3+ePpxpAaZ01Tmsfdrw2YGL5Wz2gasLfzM8+brqvnz+PJvPY0fKJhjO5vPnhsPZ/NrTPfvLC39RvFROtnw/LfW9LlVTkh3pPMonoMqJ8B2WJTV4klS6mpYulDhs1Kuo4XWq1wnfY+HIyKW6bBtZf77ROLf0hlQnfJ9llS1dcnPh+jZIEdbrVbYcZqU64ftwOwwbTKceO3Cxq6QVYNhKq9bMfXns6sLfDW98HVM4suThphJNAfwIhOBKhvHSv134s3AiaG6k1n5OVXO7P2e4RZNJmFKd8H1WdVX1Vzd32QkupOQi57rKJoTvs4iwOYYm1R2hrdwlTS5dq0n5OuH3W1OvK/u6OF9HSO93Ka1UJ/wuayonWWb5KhQG5JAaGUZJPaQ64fdZBMsoCzeOjNBf6VdEXa9s/V76twt/Fh45LK2ksktL0iPaEgupkJJrKFKd8H24H4ezpVIx5KNNaVAnvbb2MI+1pLJd4ztXF/5u+O2Zk3BkkU0wlGpe2teVTaB8nfC7re7rIq7mfKENrrHraySqbEL4/Xa1r6P0waIsnLLZpU1pY+sn1Qm/15p8NXUfIM483YzH1tqw6nXC91kOmqnxVdqtC9RmbO1XRCFFvk74Lmt92HDV3z9CiKscXm+7FFKd8DstTybOBwAMn8ev3ln/Bug25vGrBy4WUzrd1bjOS/924c/F7VB6XtC5HeoH1j5qKHGVHrZzeNzqwt8NLzlsaTzU801RSLmZ21FvQviDVNf0HOJAXSmkpNcoGW7BpDrh91lVXZ79qvWSpZy5q+eLy61yWOE78RpS07D/9SGnnM2ePsoRvHM8Z+c7fHnhL4c3+zraBDVmdDwKee14tvqwwvdZtFbd64xEDp/DVZpxPUamCCt8h0VvAvKWbihl4djNxaBOibrqTQjfZbfP6mQ6XnpnWPCoDbtBv9l06vH5x1cfrz1gdeHCAfy4ZiHmU50A03KxmuFaejzAn1hd+HvhpRg3j8B0MmP+zMeIm+fCzuPFaLKO7/Hlhb8Y/p8ctp0Ca4cnIuvQPKzw3bj5/3/m96b/XidcuHDhwoULF/5d8F//ilAQoxqjewAAAABJRU5ErkJggg==" alt="Shanvi PI payment QR ₹190" loading="eager" onerror="this.style.display='none';document.getElementById('home-pi-qr-fallback').style.display='block'"><div id="home-pi-qr-fallback" class="qr-fallback" style="display:none">QR image load नहीं हुई। <a href="upi://pay?pa=9664029638-2@ybl&pn=PANKAJ%20SO%20RAJ%20KUMAR&am=190.00&cu=INR">Tap here to pay ₹190 by UPI</a></div><div class="qr-note">₹190 only · PhonePe / any UPI app</div><div class="actions center"><a class="btn primary" href="pi.html">📄 Continue to PI / Inspection</a><a class="btn whatsapp" href="upi://pay?pa=9664029638-2@ybl&pn=PANKAJ%20SO%20RAJ%20KUMAR&am=190.00&cu=INR">📱 Open UPI App</a></div></div></div></section>
-<section class="section quote-section" id="quick-quote">
-  <div class="section-title"><span>QUICK QUOTE</span><h2>Enter Vehicle Number & Get a Quick Quote</h2><p>Vehicle number se quick estimate compare karein. Final premium insurer terms ke according confirm hota hai.</p></div>
-  <div class="quote-box pb-quote">
-    <input id="quoteName" placeholder="Customer Name" autocomplete="name">
-    <input id="quoteMobile" placeholder="Mobile Number" inputmode="numeric" autocomplete="tel">
-    <input id="quoteEmail" placeholder="Email (optional)" type="email" autocomplete="email">
-    <input id="vehicleNo" placeholder="Enter Vehicle Number e.g. RJ13BS5985" autocomplete="off">
-    <select id="vehicleType"><option value="bike">🏍️ Bike / Two Wheeler</option><option value="car">🚗 Car</option></select>
-    <select id="cover"><option value="comprehensive">Comprehensive</option><option value="thirdparty">Third Party</option><option value="limited">Limited Third Party</option></select>
-    <button class="btn quote-btn" onclick="getQuote()">Get Quote →</button>
+<section class="sts-trustbar">
+  <div><b>Smart Tax Solution</b><small>Professional tax information & assistance</small></div>
+    <div><b>Founder</b><small>Adv. Pankaj Nokhwal</small></div>
+</section>
+
+<section class="sts-section" id="portals">
+  <div class="sts-heading"><span>OFFICIAL ACCESS</span><h2>Government Tax Portals</h2><p>Login, registration and filing should always be completed on the official government website.</p></div>
+  <div class="portal-grid-sts">
+    <a class="portal-card income" href="https://www.incometax.gov.in/iec/foportal/" target="_blank" rel="noopener">
+      <div class="portal-icon">IT</div><div><span>DIRECT TAX</span><h3>Income Tax e-Filing</h3><p>ITR, e-Verify, AIS/TIS, tax payment, notices and taxpayer services.</p><b>Open official portal ↗</b></div>
+    </a>
+    <a class="portal-card gst" href="https://www.gst.gov.in/" target="_blank" rel="noopener">
+      <div class="portal-icon">GST</div><div><span>INDIRECT TAX</span><h3>GST Portal</h3><p>Registration, returns, challan, taxpayer search, ledgers and advisories.</p><b>Open official portal ↗</b></div>
+    </a>
+    <a class="portal-card msme" href="https://udyamregistration.gov.in/" target="_blank" rel="noopener">
+      <div class="portal-icon">MS</div><div><span>BUSINESS REGISTRATION</span><h3>MSME / Udyam Registration</h3><p>Official Udyam registration, verification and MSME information.</p><b>Open official portal ↗</b></div>
+    </a>
+    <a class="portal-card fssai" href="https://foscos.fssai.gov.in/" target="_blank" rel="noopener">
+      <div class="portal-icon">F</div><div><span>FOOD COMPLIANCE</span><h3>FSSAI / FoSCoS</h3><p>Food licence/registration, renewal, modification, tracking and annual return.</p><b>Open FoSCoS ↗</b></div>
+    </a>
   </div>
-  <div id="quoteStatus" class="status"></div><div id="quoteResults" class="quote-results"></div>
-  <div class="quote-help"><b>Need help?</b> Call <a href="tel:9664029638">96640-29638</a> or <a href="https://wa.me/919664029638" target="_blank" rel="noopener">WhatsApp us</a>.</div>
 </section>
 
-<section class="section">
- <div class="section-title"><span>INSURANCE PRODUCTS</span><h2>Protection for what matters</h2></div>
- <div class="cards product-cards">
-  <div class="info-card"><div>🚗</div><h3>Car Insurance</h3><p>Third Party, Comprehensive and renewal assistance for private cars.</p><a href="#quick-quote">Get Quote →</a></div>
-  <div class="info-card"><div>🏍️</div><h3>Bike Insurance</h3><p>Two-wheeler insurance options with quick renewal and policy assistance.</p><a href="#quick-quote">Get Quote →</a></div>
-  <div class="info-card"><div>❤️</div><h3>Health & Life</h3><p>Explore health, term and life insurance assistance for individuals and families.</p><a href="mailto:nokhwalpankaj99@gmail.com">Ask Us →</a></div>
-  <div class="info-card"><div>✈️</div><h3>Travel & Other</h3><p>Travel, home, commercial and other general insurance assistance.</p><a href="mailto:nokhwalpankaj99@gmail.com">Ask Us →</a></div>
- </div>
-</section>
-
-<section class="section insurers-section" id="insurers">
- <div class="section-title"><span>OUR INSURANCE PARTNERS</span><h2>Compare options from leading insurers</h2><p>Brand names and logos are shown for identification; policy issuance remains subject to the respective insurer's rules and availability.</p></div>
- <div class="insurer-grid">
-  <a class="insurer-tile" href="#quick-quote"><img src="assets/logos/bajaj-allianz.svg" alt="Bajaj Allianz General Insurance logo" loading="eager" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="brand-mark bajaj" style="display:none">BA</span><b>Bajaj Allianz General Insurance</b></a>
-  <a class="insurer-tile" href="#quick-quote"><img src="assets/logos/icici-lombard.svg" alt="ICICI Lombard logo" loading="eager" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="brand-mark icici" style="display:none">IL</span><b>ICICI Lombard</b></a>
-  <a class="insurer-tile" href="#quick-quote"><img src="assets/logos/hdfc-ergo.svg" alt="HDFC ERGO logo" loading="eager" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="brand-mark hdfc" style="display:none">HE</span><b>HDFC ERGO</b></a>
-  <a class="insurer-tile" href="#quick-quote"><img src="assets/logos/sbi-general.svg" alt="SBI General Insurance logo" loading="eager" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="brand-mark sbi" style="display:none">SBI</span><b>SBI General Insurance</b></a>
-  <a class="insurer-tile" href="#quick-quote"><img src="assets/logos/digit.svg" alt="Go Digit General Insurance logo" loading="eager" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="brand-mark digit" style="display:none">GO</span><b>Go Digit General Insurance</b></a>
-  <a class="insurer-tile" href="#quick-quote"><img src="assets/logos/united-india.svg" alt="United India Insurance logo" loading="eager" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="brand-mark united" style="display:none">UI</span><b>United India Insurance</b></a>
-  <a class="insurer-tile" href="#quick-quote"><img src="assets/logos/national-insurance.svg" alt="National Insurance logo" loading="eager" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="brand-mark national" style="display:none">NI</span><b>National Insurance</b></a>
-  <a class="insurer-tile" href="#quick-quote"><img src="assets/logos/oriental-insurance.svg" alt="The Oriental Insurance logo" loading="eager" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="brand-mark oriental" style="display:none">OI</span><b>The Oriental Insurance</b></a>
-  <a class="insurer-tile" href="#quick-quote"><img src="assets/logos/shriram.svg" alt="Shriram General Insurance logo" loading="eager" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="brand-mark shriram" style="display:none">SG</span><b>Shriram General Insurance</b></a>
-  <a class="insurer-tile" href="#quick-quote"><img src="assets/logos/tata-aig.svg" alt="Tata AIG logo" loading="eager" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="brand-mark tata" style="display:none">TA</span><b>Tata AIG</b></a>
-  <a class="insurer-tile" href="#quick-quote"><img src="assets/logos/reliance.svg" alt="Reliance General Insurance logo" loading="eager" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="brand-mark reliance" style="display:none">RG</span><b>Reliance General Insurance</b></a>
-  <a class="insurer-tile" href="#quick-quote"><img src="assets/logos/acko.svg" alt="ACKO General Insurance logo" loading="eager" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><span class="brand-mark acko" style="display:none">AK</span><b>ACKO General Insurance</b></a>
- </div>
-</section>
-
-<section class="section journey-section">
- <div class="section-title"><span>HOW SHANVI WORKS</span><h2>Simple process — customer ko samjhana easy</h2><p>Quote se policy delivery tak ek clear digital journey.</p></div>
- <div class="journey-grid">
-  <a href="#quick-quote" class="journey-card"><b>01</b><strong>Enter Details</strong><span>Vehicle number, mobile aur cover select karein.</span></a>
-  <a href="#quick-quote" class="journey-card"><b>02</b><strong>Compare Options</strong><span>Available insurer options aur indicative premium dekhein.</span></a>
-  <a href="https://wa.me/919664029638" target="_blank" rel="noopener" class="journey-card"><b>03</b><strong>WhatsApp Confirmation</strong><span>Request ke baad Shanvi team se WhatsApp par connect karein.</span></a>
-  <a href="pi.html" class="journey-card"><b>04</b><strong>Documents & PI</strong><span>RC/KYC/photos/video safely submit karke inspection process start karein.</span></a>
- </div>
- <div class="ready-strip"><b>📌 Documents ready rakhein:</b> RC Front & Back · ID Front & Back · Vehicle Photos · Vehicle Video · Previous Policy (if available)</div>
-</section>
-
-<section class="section about-preview" id="about">
- <div class="about-grid">
-  <div><span class="eyebrow">ABOUT SHANVI</span><h2>Insurance assistance with a personal touch.</h2>
-   <p>Shanvi Insurance Services customer ko insurance options samajhne, quote compare karne, renewal aur policy-document assistance mein support karta hai. हमारा focus simple process, clear communication और timely assistance पर है.</p>
-   <p><b>Owner:</b> Pankaj Nokhwal</p><a class="btn primary blue-btn" href="about-us.html">Know More About Us →</a>
+<section class="sts-section compact" id="services">
+  <div class="sts-heading"><span>TAX & BUSINESS SERVICES</span><h2>One portal for practical compliance</h2></div>
+  <div class="service-grid-sts">
+    <a href="https://www.incometax.gov.in/iec/foportal/" target="_blank" rel="noopener"><strong>01</strong><h3>Income Tax</h3><p>ITR, TDS, advance tax, AIS/TIS, notices & compliance.</p></a>
+    <a href="https://www.gst.gov.in/" target="_blank" rel="noopener"><strong>02</strong><h3>GST Services</h3><p>Registration, GSTR filing, payment, reconciliation & notices.</p></a>
+    <a href="https://udyamregistration.gov.in/" target="_blank" rel="noopener"><strong>03</strong><h3>MSME Registration</h3><p>Udyam registration guidance and official portal access.</p></a>
+    <a href="https://foscos.fssai.gov.in/" target="_blank" rel="noopener"><strong>04</strong><h3>Food Licence</h3><p>FSSAI/FoSCoS registration, renewal & compliance guidance.</p></a>
+    <a href="#audit"><strong>05</strong><h3>Audit & Review</h3><p>Tax audit support, GST reconciliation and compliance review.</p></a>
+    <a href="#academy"><strong>06</strong><h3>Accounting Courses</h3><p>Practical accounting, GST, TDS, Excel and return filing learning.</p></a>
   </div>
-  <div class="about-facts"><div><b>₹190</b><span>PI service fee</span></div><div><b>₹75</b><span>Bike agent commission</span></div><div><b>₹210</b><span>Car agent commission</span></div><div><b>10 min</b><span>Portal inactivity session</span></div></div>
- </div>
 </section>
 
-<section class="cta premium-cta"><h2>Need help choosing the right cover?</h2><p>Comprehensive, Third Party, renewal or PI assistance — Shanvi Insurance Services se assistance lein.</p><div class="actions center"><a class="btn whatsapp" href="https://wa.me/919664029638" target="_blank" rel="noopener">💬 WhatsApp Us</a><a class="btn light dark-text" href="mailto:nokhwalpankaj99@gmail.com">✉ Contact Us</a><a class="btn light dark-text" href="pi.html">📄 PI ₹190</a></div></section>
+<section class="sts-section split-section" id="audit">
+  <div class="audit-copy">
+    <div class="sts-heading left"><span>COMPLIANCE DESK</span><h2>Audit & Tax Review</h2><p>Structured support for businesses, professionals and learners who want cleaner books and better compliance.</p></div>
+    <ul class="check-list">
+      <li><b>Tax Audit Support</b><span>Working-paper and compliance review support.</span></li>
+      <li><b>GST Reconciliation</b><span>Books vs GSTR data review and mismatch checklist.</span></li>
+      <li><b>TDS / TCS Review</b><span>Deduction, payment and return preparation checklist.</span></li>
+      <li><b>FSSAI Compliance</b><span>Food licence and compliance documentation guidance.</span></li>
+      <li><b>MSME Compliance</b><span>Udyam and business-registration information.</span></li>
+    </ul>
+  </div>
+  <div class="audit-card">
+    <div class="audit-badge">COMPLIANCE<br>CHECK</div>
+    <h3>Need a review?</h3>
+    <p>Share your requirement with Smart Tax Solution and our team can guide you on the next step.</p>
+    <a class="sts-btn primary full" href="mailto:smarttaxsolutionsgnr@gmail.com?subject=Tax%20%26%20Compliance%20Review">Request Review</a>
+  </div>
+</section>
+
+<section class="sts-section news-section" id="news">
+  <div class="sts-heading"><span>UPDATED DAILY</span><h2>Tax, GST & Business News</h2><p>Fresh tax-related headlines are loaded on page visit. Official government update pages are also provided for verification.</p></div>
+  <div class="news-layout">
+    <div class="news-main">
+      <div class="news-tabs">
+        <button class="news-tab active" data-feed="tax">Income Tax</button>
+        <button class="news-tab" data-feed="gst">GST</button>
+        <button class="news-tab" data-feed="business">MSME & Business</button>
+        <button class="news-tab" data-feed="food">FSSAI</button>
+      </div>
+      <div id="newsList" class="news-list"><div class="loading-card">Loading latest tax news…</div></div>
+    </div>
+    <aside class="official-box">
+      <span>OFFICIAL SOURCES</span>
+      <a href="https://www.incometax.gov.in/iec/foportal/latest-news" target="_blank" rel="noopener">Income Tax — Latest News ↗</a>
+      <a href="https://www.gst.gov.in/" target="_blank" rel="noopener">GST — News & Updates ↗</a>
+      <a href="https://udyamregistration.gov.in/" target="_blank" rel="noopener">MSME / Udyam ↗</a>
+      <a href="https://fssai.gov.in/business" target="_blank" rel="noopener">FSSAI — Business Updates ↗</a>
+      <small>News links may open the publisher's page. Always verify important compliance changes from the official department notification.</small>
+    </aside>
+  </div>
+</section>
+
+<section class="sts-section quiz-section" id="quiz">
+  <div class="quiz-head">
+    <div class="sts-heading left"><span>DAILY LEARNING</span><h2>Daily Tax & Accounting Quiz</h2><p>Every day a fresh 10-question quiz across Income Tax, GST, TDS, MSME, FSSAI, Audit and Accounting.</p></div>
+    <div class="quiz-day">DAY <b id="quizDay">01</b><small id="quizDateLabel"></small></div>
+  </div>
+  <div class="daily-quiz-dashboard">
+    <div><span>Today</span><b id="dailyQuizStatus">Not attempted</b></div>
+    <div><span>Best Score</span><b id="dailyBestScore">—</b></div>
+    <div><span>Streak</span><b id="dailyStreak">0 days</b></div>
+    <div><span>Attempts</span><b id="dailyAttempts">0</b></div>
+  </div>
+  <div class="quiz-card quiz-card-full">
+    <div class="quiz-content">
+      <div class="daily-quiz-top"><span id="quizProgress">Question 1 of 10</span><span id="quizTimer">10:00</span></div>
+      <div id="dailyQuizArea">
+        <span id="quizTopic">GST BASICS</span>
+        <h3 id="quizQuestion">Loading today's quiz…</h3>
+        <div id="quizOptions" class="quiz-options"></div>
+        <div id="quizResult" class="quiz-result" aria-live="polite"></div>
+        <div class="quiz-actions"><button class="sts-btn primary small" id="quizNext" onclick="dailyQuizNext()">Next Question →</button><button class="sts-btn outline small" id="quizSubmit" onclick="submitDailyQuiz()" style="display:none">Submit Quiz ✓</button></div>
+      </div>
+      <div id="dailyQuizFinal" style="display:none"></div>
+    </div>
+  </div>
+</section>
+
+<section class="sts-section academy-section" id="academy">
+  <div class="sts-heading"><span>ACCOUNTANT ACADEMY</span><h2>Practical Accounting & Tax Courses</h2><p>Courses designed for students, accountants, business owners and working professionals.</p></div>
+  <div class="academy-grid">
+    <article class="course-card featured"><div class="course-top"><span>POPULAR</span><b>01</b></div><h3>Practical Accounting + GST</h3><p>Accounting fundamentals, GST entries, invoicing, reconciliation and return workflow.</p><ul><li>Accounting basics</li><li>GST practical work</li><li>Reconciliation</li><li>Business case studies</li></ul><a class="course-link" href="mailto:smarttaxsolutionsgnr@gmail.com?subject=Course%20Enquiry%20-%20Practical%20Accounting%20%2B%20GST">Enquire →</a></article>
+    <article class="course-card"><div class="course-top"><span>CAREER</span><b>02</b></div><h3>Tally Prime + GST</h3><p>Company creation, ledgers, vouchers, GST configuration and reports.</p><ul><li>Tally Prime</li><li>GST setup</li><li>Reports & books</li><li>Practical assignments</li></ul><a class="course-link" href="mailto:smarttaxsolutionsgnr@gmail.com?subject=Course%20Enquiry%20-%20Tally%20Prime%20%2B%20GST">Enquire →</a></article>
+    <article class="course-card"><div class="course-top"><span>SKILL</span><b>03</b></div><h3>Advanced Excel for Accounts</h3><p>Functions, lookups, MIS, reconciliation sheets and accounting dashboards.</p><ul><li>Excel formulas</li><li>Data cleaning</li><li>MIS reports</li><li>Practical templates</li></ul><a class="course-link" href="mailto:smarttaxsolutionsgnr@gmail.com?subject=Course%20Enquiry%20-%20Advanced%20Excel">Enquire →</a></article>
+    <article class="course-card"><div class="course-top"><span>TAX</span><b>04</b></div><h3>Income Tax & TDS Practical</h3><p>ITR workflow, TDS concepts, AIS/TIS and compliance-oriented practice.</p><ul><li>ITR concepts</li><li>TDS/TCS</li><li>AIS/TIS</li><li>Notice basics</li></ul><a class="course-link" href="mailto:smarttaxsolutionsgnr@gmail.com?subject=Course%20Enquiry%20-%20Income%20Tax%20%26%20TDS">Enquire →</a></article>
+  </div>
+  <div class="certificate-banner">
+    <div><span>CERTIFICATION</span><h3>Learn through us. Earn your learning certificate.</h3><p>Students enrolling through Smart Tax Solution / Accountant Academy can receive an academy course-completion certificate subject to course completion and academy verification.</p></div>
+    <div class="certificate-seal">Accountant Academy<br><small>CERTIFIED</small></div>
+  </div>
+</section>
+
+<section class="sts-section exam-section" id="exam">
+  <div class="sts-heading"><span>ACCOUNTANT ACADEMY</span><h2>Accounting Certification Exam</h2><p>Complete the online accounting exam. Pass the required score to generate your course-completion certificate.</p></div>
+  <div class="exam-shell">
+    <div class="exam-intro">
+      <div class="exam-stat"><b>20</b><span>Questions</span></div>
+      <div class="exam-stat"><b>70%</b><span>Pass Mark</span></div>
+      <div class="exam-stat"><b>30 min</b><span>Suggested Time</span></div>
+      <div class="exam-stat"><b>Accountant Academy</b><span>Certificate</span></div>
+    </div>
+    <div id="examStart" class="exam-start">
+      <h3>Start your Accounting & GST examination</h3>
+      <p>Enter the student's name exactly as it should appear on the certificate.</p>
+      <input id="studentName" class="exam-name" maxlength="80" placeholder="Student full name" autocomplete="name">
+      <button class="sts-btn primary" onclick="startAccountingExam()">Start Exam →</button>
+      <small>Certificate is issued by Accountant Academy / Smart Tax Solution after passing the exam. This is an academy course-completion certificate.</small>
+    </div>
+    <div id="examBody" class="exam-body" style="display:none">
+      <div class="exam-progress"><span id="examProgress">Question 1 of 20</span><span id="examTimer">30:00</span></div>
+      <div id="examQuestion" class="exam-question"></div>
+      <div id="examOptions" class="exam-options"></div>
+      <div class="exam-actions"><button class="sts-btn primary" id="examNext" onclick="nextExamQuestion()">Next Question →</button></div>
+    </div>
+    <div id="examResult" class="exam-result-panel" style="display:none"></div>
+  </div>
+</section>
+
+<section class="sts-section tools-section">
+  <div class="sts-heading"><span>FREE QUICK TOOLS</span><h2>Useful Tax Calculators</h2></div>
+  <div class="tools-grid">
+    <div class="tool-card"><span>GST</span><h3>GST Calculator</h3><div class="tool-fields"><input id="gstAmount" type="number" min="0" placeholder="Amount ₹"><select id="gstRate"><option value="5">5%</option><option value="12">12%</option><option value="18" selected>18%</option><option value="28">28%</option></select><select id="gstMode"><option value="exclusive">GST extra</option><option value="inclusive">GST included</option></select></div><button class="sts-btn primary full" onclick="calcGSTNew()">Calculate GST</button><div id="gstResult" class="tool-result">Enter amount to calculate.</div></div>
+    <div class="tool-card"><span>INCOME TAX</span><h3>Tax Planning Checklist</h3><p>Use this quick checklist before discussing your return with a tax professional.</p><ul class="mini-list"><li>Form 16 / salary details</li><li>Bank interest & other income</li><li>AIS / TIS review</li><li>Investment / deduction proofs</li><li>Capital gains, if applicable</li></ul></div>
+    <div class="tool-card"><span>GST</span><h3>GST Compliance Checklist</h3><ul class="mini-list"><li>Sales & purchase reconciliation</li><li>GSTR-1 / 3B review</li><li>ITC mismatch check</li><li>Tax payment & challan</li><li>E-invoice / e-way bill review</li></ul></div>
+  </div>
+</section>
+
+<section class="sts-contact" id="contact">
+  <div><span>SMART TAX SOLUTION</span><h2>Need professional tax guidance?</h2><p>Connect for Income Tax, GST, MSME, FSSAI, accounting and compliance-related assistance.</p></div>
+  <div class="contact-details"><b>Adv. Pankaj Nokhwal</b><a href="mailto:smarttaxsolutionsgnr@gmail.com">smarttaxsolutionsgnr@gmail.com</a><a href="https://wa.me/?text=Hello%20Smart%20Tax%20Solution%2C%20I%20need%20tax%20assistance." target="_blank" rel="noopener">WhatsApp Enquiry ↗</a></div>
+</section>
 </main>
 
-<footer>
- <div class="footer-grid">
-  <div><b>Shanvi Insurance Services</b><p>Secure Today, Protected Tomorrow</p></div>
-  <div><b>Contact</b><p>96640-29638<br>nokhwalpankaj99@gmail.com</p></div>
-  <div><b>Office</b><p>58 LNP Ridmalsar Road<br>Sri Ganganagar, Rajasthan - 335061</p></div>
-  <div><b>Owner</b><p>Pankaj Nokhwal</p></div>
- </div>
- <div class="small">© 2026 Shanvi Insurance Services. Insurance assistance and facilitation subject to applicable insurer terms.</div>
+<footer class="sts-footer">
+  <div><b>Smart Tax Solution</b><small>Income Tax • GST • MSME • FSSAI • Audit • Accounting</small></div>
+  <div><b>Founder: Adv. Pankaj Nokhwal</b><a href="mailto:smarttaxsolutionsgnr@gmail.com">smarttaxsolutionsgnr@gmail.com</a></div>
+  <div class="footer-note">This portal is an independent information and assistance platform. Government portals are linked for direct access; always verify applicable law, notifications and due dates from official sources.</div>
 </footer>
-<a class="floating-wa" href="https://wa.me/919664029638" target="_blank" rel="noopener">💬</a>
-<script src="supabase-config.js"></script><script src="script.js"></script>
-</body></html>
+
+<script src="tax-portal.js"></script>
+</body>
+</html>
