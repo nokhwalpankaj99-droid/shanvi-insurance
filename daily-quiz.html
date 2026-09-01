@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Daily Tax Quiz | Smart Tax Solution</title>
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:#f5f8fc;color:#172033}
+header{background:linear-gradient(90deg,#082d6b,#0b3d91);color:#fff;padding:18px 20px}
+.wrap{max-width:900px;margin:auto}.brand{display:flex;align-items:center;gap:14px}.brand img{width:190px;background:#fff;border-radius:8px}
+.card{background:#fff;border:1px solid #dbe5f2;border-radius:14px;padding:24px;margin:22px 0;box-shadow:0 8px 24px rgba(11,61,145,.08)}
+button{background:#0b3d91;color:#fff;border:0;border-radius:8px;padding:12px 18px;cursor:pointer;font-weight:700}
+button:disabled{opacity:.5}.option{display:block;border:1px solid #dbe5f2;padding:14px;margin:10px 0;border-radius:9px;cursor:pointer}.option input{margin-right:8px}
+.timer{font-weight:700;color:#b00020}.meta{color:#52627a}.result{font-size:20px;font-weight:700}
+</style>
+</head>
+<body>
+<header><div class="wrap brand"><img src="assets/smart-tax-solution-logo.svg" alt="Smart Tax Solution"></div></header>
+<main class="wrap">
+<div class="card" id="start">
+<h1>Daily Tax & GST Quiz</h1>
+<p class="meta">10 objective questions • 10 minutes • Daily practice</p>
+<p>Topics: Income Tax, GST, TDS, MSME, FSSAI, Audit & Accounting.</p>
+<button onclick="startQuiz()">Start Today's Quiz</button>
+</div>
+<div class="card" id="quiz" style="display:none">
+<div><span id="progress"></span> &nbsp; <span class="timer" id="timer">10:00</span></div>
+<div id="questions"></div>
+<button onclick="submitQuiz()">Submit Quiz</button>
+</div>
+<div class="card" id="result" style="display:none"></div>
+</main>
+<script>
+const bank=[
+["GST registration is generally required when aggregate turnover crosses the applicable threshold under the GST law. Which statement is safest?","Threshold depends on the applicable category, State/UT and legal provisions.","It is always exactly ₹10 lakh.","It is always exactly ₹20 lakh.","It is never required."],
+["TDS stands for:","Tax Deducted at Source","Tax Deposited System","Total Duty Statement","Tax Data Service"],
+["PAN is issued by:","Income Tax Department","GST Council","RBI","MCA"],
+["GSTIN is primarily associated with:","GST registration","Income-tax return filing only","Passport issuance","Bank account opening"],
+["An audit primarily involves:","Independent examination of financial information","Only preparing invoices","Only collecting cash","Only marketing a business"],
+["A balance sheet presents:","Assets, liabilities and equity at a point in time","Only sales for a day","Only tax rates","Only bank deposits"],
+["MSME/Udyam registration relates to:","Micro, Small and Medium Enterprises","Food safety licensing","Income-tax slabs","Passport services"],
+["FSSAI is associated with:","Food safety and food business licensing/registration","GST return filing","Income-tax assessment","Company incorporation"],
+["A GST invoice normally contains:","Supplier/recipient and tax-related invoice details","Only a phone number","Only a bank PIN","Only an employee ID"],
+["Input Tax Credit under GST generally relates to:","Eligible GST paid on business inputs/input services, subject to conditions","Personal expenses without conditions","Income-tax refund only","Salary deduction"]
+];
+let remaining=600, interval, started=false;
+function startQuiz(){started=true;document.getElementById('start').style.display='none';document.getElementById('quiz').style.display='block';render();interval=setInterval(()=>{remaining--;document.getElementById('timer').textContent=fmt(remaining);if(remaining<=0)submitQuiz(true)},1000)}
+function fmt(n){return String(Math.floor(n/60)).padStart(2,'0')+':'+String(n%60).padStart(2,'0')}
+function render(){document.getElementById('progress').textContent='10 Questions';let h='';bank.forEach((q,i)=>{h+=`<section><h3>${i+1}. ${q[0]}</h3>`;q.slice(1).forEach((o,j)=>{h+=`<label class="option"><input type="radio" name="q${i}" value="${j}">${o}</label>`});h+='</section>'});document.getElementById('questions').innerHTML=h}
+function submitQuiz(auto=false){if(!started)return;clearInterval(interval);let score=0;bank.forEach((q,i)=>{let a=document.querySelector(`input[name=q${i}]:checked`);if(a&&Number(a.value)===0)score++});let pct=Math.round(score*10);let pass=pct>=70;localStorage.setItem('stsDailyQuiz',JSON.stringify({date:new Date().toISOString().slice(0,10),score,pct,pass}));document.getElementById('quiz').style.display='none';let r=document.getElementById('result');r.style.display='block';r.innerHTML=`<h2>Today's Quiz Result</h2><p class="result">${score}/10 (${pct}%)</p><p>${pass?'Practice target achieved.':'Practice target not achieved. Review the topics and try again.'}</p><button onclick="location.reload()">Take Quiz Again</button>`}
+</script>
+</body></html>

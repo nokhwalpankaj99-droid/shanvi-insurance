@@ -1,0 +1,32 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Accounting Exam | Accountant Academy</title>
+<style>body{font-family:Arial;margin:0;background:#f5f8fc;color:#172033}header{background:#0b3d91;color:#fff;padding:20px}.wrap{max-width:900px;margin:auto}.card{background:#fff;padding:24px;border-radius:14px;margin:20px 0;border:1px solid #dbe5f2}button{background:#0b3d91;color:#fff;border:0;padding:12px 18px;border-radius:8px;font-weight:700;cursor:pointer}.option{display:block;padding:12px;border:1px solid #dbe5f2;border-radius:8px;margin:8px 0}.cert{border:8px double #0b3d91;padding:35px;text-align:center;background:#fff}</style></head>
+<body><header><div class="wrap"><h1>Accountant Academy</h1><div>Accounting & Tax Practical Examination</div></div></header>
+<main class="wrap"><div class="card" id="start"><h2>Start Accounting Exam</h2><input id="name" placeholder="Student full name" style="padding:12px;width:90%"><p>20 questions • Passing score 70%</p><button onclick="begin()">Start Exam</button></div>
+<div class="card" id="exam" style="display:none"><div id="qs"></div><button onclick="finish()">Submit Exam</button></div><div class="card" id="out" style="display:none"></div></main>
+<script>
+const Q=[
+["The accounting equation is:","Assets = Liabilities + Equity","Assets = Revenue + Expense","Liabilities = Assets + Revenue","Equity = Assets + Expense"],
+["A debit generally increases:","Assets","Revenue","Capital","Liabilities"],
+["A credit generally increases:","Revenue","Assets","Drawings","Expenses"],
+["Trial balance is prepared primarily to check:","Arithmetical agreement of ledger balances","Profit tax rate","Bank interest","GST registration"],
+["Depreciation is:","Allocation of depreciable cost over useful life","Cash received from customer","Owner withdrawal","Tax collected"],
+["GST is a:","Consumption-based indirect tax","Direct tax on salary only","Property tax","Customs-only tax"],
+["TDS means:","Tax Deducted at Source","Tax Deposit Statement","Total Duty Schedule","Tax Data Sheet"],
+["Balance sheet shows:","Financial position at a point in time","Only cash sales","Only purchases","Only tax payments"],
+["Profit and loss statement reports:","Income and expenses for a period","Assets only","Liabilities only","Bank balance only"],
+["Working capital is commonly:","Current assets minus current liabilities","Fixed assets minus capital","Sales minus purchases","Cash plus drawings"],
+["Outstanding expense is generally:","Expense incurred but not yet paid","Income received in advance","Asset sold","Capital introduced"],
+["Prepaid expense is:","Payment made in advance for a future expense","Expense unpaid","Revenue earned","Loan received"],
+["Bank reconciliation compares:","Cash book and bank statement balances","Sales and purchases","Assets and liabilities","GST and TDS"],
+["Input tax credit under GST is subject to:","Eligibility and statutory conditions","No conditions","Only cash sales","Only salary payment"],
+["An invoice primarily records:","A sale or supply transaction","A personal diary entry","A bank password","A tax audit appointment"],
+["Capital introduced by owner increases:","Equity and usually assets/cash","Expenses only","Liabilities only","Revenue only"],
+["Closing stock is relevant to:","Determining cost of goods sold/profit and balance-sheet presentation","TDS only","Bank reconciliation only","Payroll only"],
+["A ledger contains:","Account-wise transaction postings","Only invoices","Only tax returns","Only bank statements"],
+["Accrual accounting recognizes income/expense when:","Earned/incurred subject to applicable accounting rules","Only when cash moves","Only at year-end","Never"],
+["Audit evidence is used to:","Support audit conclusions","Create GSTIN","Open a bank account","Issue PAN"]
+];
+function begin(){if(!document.getElementById('name').value.trim()){alert('Please enter student name');return}document.getElementById('start').style.display='none';document.getElementById('exam').style.display='block';let h='';Q.forEach((q,i)=>{h+=`<section><h3>${i+1}. ${q[0]}</h3>`;q.slice(1).forEach((o,j)=>h+=`<label class="option"><input type="radio" name="q${i}" value="${j}"> ${o}</label>`) });document.getElementById('qs').innerHTML=h}
+function finish(){let s=0;Q.forEach((q,i)=>{let a=document.querySelector(`input[name=q${i}]:checked`);if(a&&+a.value===0)s++});let p=Math.round(s/20*100),n=document.getElementById('name').value.trim(),o=document.getElementById('out');document.getElementById('exam').style.display='none';o.style.display='block';o.innerHTML=p>=70?`<div class="cert"><h1>Certificate of Achievement</h1><h2>Accountant Academy</h2><p>This certifies that</p><h2>${n}</h2><p>has successfully completed the Accounting & Tax Practical Examination</p><p><b>Score:</b> ${s}/20 (${p}%)</p><p><b>Certificate Number:</b> STS2026S02317</p><p><b>Date:</b> ${new Date().toLocaleDateString('en-IN')}</p><p>Smart Tax Solution</p><p><b>Adv. Pankaj Nokhwal</b><br>Founder</p><button onclick="window.print()">Print / Save PDF</button></div>`:`<h2>Exam Result</h2><p>Score: ${s}/20 (${p}%)</p><p>Passing score is 70%. Please review the course material and retake the exam.</p><button onclick="location.reload()">Retake Exam</button>`}
+</script></body></html>
