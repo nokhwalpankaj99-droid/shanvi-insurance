@@ -20,6 +20,7 @@
     <a href="#news">Tax News</a>
     <a href="#quiz">Daily Quiz</a>
     <a href="#academy">Academy</a>
+    <a href="#exam">Accounting Exam</a>
     <a href="#contact">Contact</a>
   </nav>
   <a class="sts-top-btn" href="mailto:smarttaxsolutionsgnr@gmail.com">Get Tax Help</a>
@@ -55,8 +56,7 @@
 
 <section class="sts-trustbar">
   <div><b>Smart Tax Solution</b><small>Professional tax information & assistance</small></div>
-  <div><b>Unique Accountant Academy</b><small>Accounting & practical tax learning</small></div>
-  <div><b>Founder</b><small>Adv. Pankaj Nokhwal</small></div>
+    <div><b>Founder</b><small>Adv. Pankaj Nokhwal</small></div>
 </section>
 
 <section class="sts-section" id="portals">
@@ -133,23 +133,32 @@
 
 <section class="sts-section quiz-section" id="quiz">
   <div class="quiz-head">
-    <div class="sts-heading left"><span>DAILY LEARNING</span><h2>Today's Tax Quiz</h2><p>One short question every day to keep your tax knowledge sharp.</p></div>
-    <div class="quiz-day">DAY <b id="quizDay">01</b></div>
+    <div class="sts-heading left"><span>DAILY LEARNING</span><h2>Daily Tax & Accounting Quiz</h2><p>Every day a fresh 10-question quiz across Income Tax, GST, TDS, MSME, FSSAI, Audit and Accounting.</p></div>
+    <div class="quiz-day">DAY <b id="quizDay">01</b><small id="quizDateLabel"></small></div>
   </div>
-  <div class="quiz-card">
-    <div class="quiz-number">Q</div>
+  <div class="daily-quiz-dashboard">
+    <div><span>Today</span><b id="dailyQuizStatus">Not attempted</b></div>
+    <div><span>Best Score</span><b id="dailyBestScore">—</b></div>
+    <div><span>Streak</span><b id="dailyStreak">0 days</b></div>
+    <div><span>Attempts</span><b id="dailyAttempts">0</b></div>
+  </div>
+  <div class="quiz-card quiz-card-full">
     <div class="quiz-content">
-      <span id="quizTopic">GST BASICS</span>
-      <h3 id="quizQuestion">Loading today's question…</h3>
-      <div id="quizOptions" class="quiz-options"></div>
-      <div id="quizResult" class="quiz-result" aria-live="polite"></div>
-      <button class="sts-btn outline small" id="quizNext" onclick="loadDailyQuiz()" style="display:none">Try today's quiz again</button>
+      <div class="daily-quiz-top"><span id="quizProgress">Question 1 of 10</span><span id="quizTimer">10:00</span></div>
+      <div id="dailyQuizArea">
+        <span id="quizTopic">GST BASICS</span>
+        <h3 id="quizQuestion">Loading today's quiz…</h3>
+        <div id="quizOptions" class="quiz-options"></div>
+        <div id="quizResult" class="quiz-result" aria-live="polite"></div>
+        <div class="quiz-actions"><button class="sts-btn primary small" id="quizNext" onclick="dailyQuizNext()">Next Question →</button><button class="sts-btn outline small" id="quizSubmit" onclick="submitDailyQuiz()" style="display:none">Submit Quiz ✓</button></div>
+      </div>
+      <div id="dailyQuizFinal" style="display:none"></div>
     </div>
   </div>
 </section>
 
 <section class="sts-section academy-section" id="academy">
-  <div class="sts-heading"><span>UNIQUE ACCOUNTANT ACADEMY</span><h2>Practical Accounting & Tax Courses</h2><p>Courses designed for students, accountants, business owners and working professionals.</p></div>
+  <div class="sts-heading"><span>ACCOUNTANT ACADEMY</span><h2>Practical Accounting & Tax Courses</h2><p>Courses designed for students, accountants, business owners and working professionals.</p></div>
   <div class="academy-grid">
     <article class="course-card featured"><div class="course-top"><span>POPULAR</span><b>01</b></div><h3>Practical Accounting + GST</h3><p>Accounting fundamentals, GST entries, invoicing, reconciliation and return workflow.</p><ul><li>Accounting basics</li><li>GST practical work</li><li>Reconciliation</li><li>Business case studies</li></ul><a class="course-link" href="mailto:smarttaxsolutionsgnr@gmail.com?subject=Course%20Enquiry%20-%20Practical%20Accounting%20%2B%20GST">Enquire →</a></article>
     <article class="course-card"><div class="course-top"><span>CAREER</span><b>02</b></div><h3>Tally Prime + GST</h3><p>Company creation, ledgers, vouchers, GST configuration and reports.</p><ul><li>Tally Prime</li><li>GST setup</li><li>Reports & books</li><li>Practical assignments</li></ul><a class="course-link" href="mailto:smarttaxsolutionsgnr@gmail.com?subject=Course%20Enquiry%20-%20Tally%20Prime%20%2B%20GST">Enquire →</a></article>
@@ -157,8 +166,34 @@
     <article class="course-card"><div class="course-top"><span>TAX</span><b>04</b></div><h3>Income Tax & TDS Practical</h3><p>ITR workflow, TDS concepts, AIS/TIS and compliance-oriented practice.</p><ul><li>ITR concepts</li><li>TDS/TCS</li><li>AIS/TIS</li><li>Notice basics</li></ul><a class="course-link" href="mailto:smarttaxsolutionsgnr@gmail.com?subject=Course%20Enquiry%20-%20Income%20Tax%20%26%20TDS">Enquire →</a></article>
   </div>
   <div class="certificate-banner">
-    <div><span>CERTIFICATION</span><h3>Learn through us. Earn your learning certificate.</h3><p>Students enrolling through Smart Tax Solution / Unique Accountant Academy can receive an academy course-completion certificate subject to course completion and academy verification.</p></div>
+    <div><span>CERTIFICATION</span><h3>Learn through us. Earn your learning certificate.</h3><p>Students enrolling through Smart Tax Solution / Accountant Academy can receive an academy course-completion certificate subject to course completion and academy verification.</p></div>
     <div class="certificate-seal">UAA<br><small>CERTIFIED</small></div>
+  </div>
+</section>
+
+<section class="sts-section exam-section" id="exam">
+  <div class="sts-heading"><span>ACCOUNTANT ACADEMY</span><h2>Accounting Certification Exam</h2><p>Complete the online accounting exam. Pass the required score to generate your course-completion certificate.</p></div>
+  <div class="exam-shell">
+    <div class="exam-intro">
+      <div class="exam-stat"><b>20</b><span>Questions</span></div>
+      <div class="exam-stat"><b>70%</b><span>Pass Mark</span></div>
+      <div class="exam-stat"><b>30 min</b><span>Suggested Time</span></div>
+      <div class="exam-stat"><b>UAA</b><span>Certificate</span></div>
+    </div>
+    <div id="examStart" class="exam-start">
+      <h3>Start your Accounting & GST examination</h3>
+      <p>Enter the student's name exactly as it should appear on the certificate.</p>
+      <input id="studentName" class="exam-name" maxlength="80" placeholder="Student full name" autocomplete="name">
+      <button class="sts-btn primary" onclick="startAccountingExam()">Start Exam →</button>
+      <small>Certificate is issued by Accountant Academy / Smart Tax Solution after passing the exam. This is an academy course-completion certificate.</small>
+    </div>
+    <div id="examBody" class="exam-body" style="display:none">
+      <div class="exam-progress"><span id="examProgress">Question 1 of 20</span><span id="examTimer">30:00</span></div>
+      <div id="examQuestion" class="exam-question"></div>
+      <div id="examOptions" class="exam-options"></div>
+      <div class="exam-actions"><button class="sts-btn primary" id="examNext" onclick="nextExamQuestion()">Next Question →</button></div>
+    </div>
+    <div id="examResult" class="exam-result-panel" style="display:none"></div>
   </div>
 </section>
 
@@ -179,7 +214,6 @@
 
 <footer class="sts-footer">
   <div><b>Smart Tax Solution</b><small>Income Tax • GST • MSME • FSSAI • Audit • Accounting</small></div>
-  <div><b>Unique Accountant Academy</b><small>Practical accounting & tax learning</small></div>
   <div><b>Founder: Adv. Pankaj Nokhwal</b><a href="mailto:smarttaxsolutionsgnr@gmail.com">smarttaxsolutionsgnr@gmail.com</a></div>
   <div class="footer-note">This portal is an independent information and assistance platform. Government portals are linked for direct access; always verify applicable law, notifications and due dates from official sources.</div>
 </footer>
