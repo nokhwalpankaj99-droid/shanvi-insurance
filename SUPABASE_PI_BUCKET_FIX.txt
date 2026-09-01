@@ -1,0 +1,12 @@
+Shanvi Insurance - PI Storage Fix
+
+The live website uses the existing Supabase Storage bucket:
+INSURANCE
+
+The frontend and notify-pi Edge Function have been updated to use INSURANCE instead of pi-documents.
+
+Important:
+- The INSURANCE bucket must exist.
+- An INSERT policy for anon/authenticated on storage.objects with bucket_id = 'INSURANCE' is required.
+- The bucket is currently public in the Supabase project. For production, consider making it private and using signed URLs.
+- No Supabase secret/service-role key is included in frontend files.
