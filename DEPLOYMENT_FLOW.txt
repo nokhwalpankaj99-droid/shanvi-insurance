@@ -1,0 +1,7 @@
+CORRECT WEBSITE FLOW
+1. GitHub Pages root: index.html -> Shanvi Insurance Services (insurance first).
+2. Insurance navigation has Income Tax & GST -> tax-gst.html.
+3. tax-gst.html -> Smart Tax Solution tax portal.
+4. Tax portal has a Back to Shanvi Insurance Portal link.
+
+IMPORTANT: Upload/replace the files in the GitHub Pages publishing branch/folder and wait for Pages deployment. If the browser shows an older version, use Ctrl+F5 or open an incognito window.

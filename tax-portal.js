@@ -52,7 +52,7 @@ function initDailyQuiz(){
   dailyQuizState={questions:buildDailyQuiz(),index:0,answers:Array(10).fill(null),seconds:600,timer:null,started:true,submitted:false};
   const d=new Date(); const dateLabel=document.getElementById('quizDateLabel'); if(dateLabel) dateLabel.textContent=d.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'});
   const qd=document.getElementById('quizDay'); if(qd) qd.textContent=String(quizDayNumber()).padStart(2,'0');
-  document.getElementById('dailyQuizFinal').style.display='none'; document.getElementById('dailyQuizArea').style.display='block';
+  document.getElementById('dailyQuizFinal').style.display='none'; document.getElementById('dailyQuizArea').style.display='block';  const welcome=document.getElementById('quizWelcome'); if(welcome) welcome.style.display='none'; const qq=document.getElementById('quizQuestion'); if(qq) qq.style.display='block'; const qo=document.getElementById('quizOptions'); if(qo) qo.style.display='grid'; const qa=document.getElementById('quizActions'); if(qa) qa.style.display='flex';
   renderDailyQuizQuestion(); startDailyQuizTimer(); updateDailyQuizStats();
 }
 function startDailyQuizTimer(){clearInterval(dailyQuizState.timer);dailyQuizState.timer=setInterval(()=>{dailyQuizState.seconds--;updateDailyQuizTimer();if(dailyQuizState.seconds<=0)submitDailyQuiz();},1000);updateDailyQuizTimer();}
@@ -76,8 +76,30 @@ function calcGSTNew(){
   if(m==='exclusive'){base=a;gst=a*r;total=a+gst}else{total=a;gst=a-a/(1+r);base=a-gst}
   document.getElementById('gstResult').innerHTML='<b>Taxable:</b> ₹'+base.toFixed(2)+' &nbsp; <b>GST:</b> ₹'+gst.toFixed(2)+' &nbsp; <b>Total:</b> ₹'+total.toFixed(2);
 }
+
+function setToday(){
+  const d=new Date();
+  const el=document.getElementById('todayDate');
+  if(el) el.textContent=d.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'});
+}
+function loadNews(feed){
+  const box=document.getElementById('newsList');
+  const cfg=STS_FEEDS[feed]||STS_FEEDS.tax;
+  if(!box) return;
+  box.innerHTML='<div class="loading-card">Loading latest '+feed+' updates…</div>';
+  const rss='https://news.google.com/rss/search?q='+encodeURIComponent(cfg.q+' when:1d')+'&hl=en-IN&gl=IN&ceid=IN:en';
+  const proxy='https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(rss);
+  fetch(proxy).then(r=>r.json()).then(data=>{
+    const items=(data.items||[]).slice(0,6);
+    if(!items.length) throw new Error('No items');
+    box.innerHTML=items.map(x=>`<article class="news-item"><span>${escapeHTML(feed.toUpperCase())}</span><h3>${escapeHTML(x.title||'Tax update')}</h3><p>${escapeHTML((x.description||'').replace(/<[^>]*>/g,'').slice(0,180))}</p><a href="${escapeHTML(x.link||cfg.official)}" target="_blank" rel="noopener">Read update ↗</a></article>`).join('');
+  }).catch(()=>{
+    box.innerHTML=`<div class="news-fallback"><h3>Latest official ${escapeHTML(feed)} updates</h3><p>Live news feed is temporarily unavailable. Use the official source below for the latest notification.</p><a class="sts-btn primary small" href="${cfg.official}" target="_blank" rel="noopener">Open Official Updates ↗</a></div>`;
+  });
+}
+
 document.addEventListener('DOMContentLoaded',()=>{
-  setToday(); loadNews('tax');
+  try{setToday();}catch(e){} try{loadNews('tax');}catch(e){}
   document.querySelectorAll('.news-tab').forEach(btn=>btn.addEventListener('click',()=>{
     document.querySelectorAll('.news-tab').forEach(x=>x.classList.remove('active')); btn.classList.add('active'); loadNews(btn.dataset.feed);
   }));
