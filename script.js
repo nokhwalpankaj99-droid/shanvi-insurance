@@ -1,5 +1,184 @@
-function escapeHTML(v){return String(v??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
+const SHANVI={
+  supportPhone:'96640-29638', supportEmail:'nokhwalpankaj99@gmail.com', address:'58 LNP Ridmalsar Road, Sri Ganganagar, Rajasthan - 335061', piFee:190,
+  commission:{bike:75,car:210}, agentCodePrefix:'SIS2022'
+};
 
+
+/* Supabase enquiry integration */
+async function submitSupabaseLead(lead){
+  if(typeof SUPABASE_URL==='undefined' || typeof SUPABASE_PUBLISHABLE_KEY==='undefined') throw new Error('Supabase configuration missing.');
+  const response=await fetch(`${SUPABASE_REST_URL}/leads`,{
+    method:'POST',
+    headers:{'apikey':SUPABASE_PUBLISHABLE_KEY,'Authorization':`Bearer ${SUPABASE_PUBLISHABLE_KEY}`,'Content-Type':'application/json','Prefer':'return=minimal'},
+    body:JSON.stringify(lead)
+  });
+  if(!response.ok) throw new Error(await response.text()||'Supabase request failed');
+  // Send an email notification through the Supabase Edge Function.
+  try{
+    await fetch(`${SUPABASE_URL}/functions/v1/notify-lead`,{
+      method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(lead)
+    });
+  }catch(e){ console.warn('Email notification failed:',e); }
+  return true;
+}
+const insurers=[
+['United India Insurance','uii'],['National Insurance','national'],['The Oriental Insurance','oriental'],['Shriram General Insurance','shriram'],['Go Digit General Insurance','digit'],['SBI General Insurance','sbi'],['ICICI Lombard','icici'],['HDFC ERGO','hdfc'],['Bajaj Allianz General Insurance','bajaj'],['Tata AIG','tataaig'],['Reliance General Insurance','reliance'],['ACKO General Insurance','acko']
+];
+function cleanVehicle(v){return (v||'').toUpperCase().replace(/[^A-Z0-9]/g,'')}
+function getQuote(){
+ const el=id=>document.getElementById(id); const v=cleanVehicle(el('vehicleNo').value), type=el('vehicleType').value, cover=el('cover').value;
+ const out=el('quoteResults'), status=el('quoteStatus');
+ if(v.length<6){status.innerHTML='<span class="error">Please enter a valid vehicle number.</span>';out.innerHTML='';return}
+ const base=type==='bike'?(cover==='comprehensive'?1850:843):(cover==='comprehensive'?7200:cover==='thirdparty'?3416:2800);
+ status.innerHTML=`<b>Vehicle:</b> ${v} &nbsp; <span class="success">Quote options are ready.</span>`;
+ out.innerHTML=insurers.map((x,i)=>{let p=Math.round(base*(1+(i%5-2)*.035));return `<div class="quote-card"><div class="insurer-mini"><div class="ins-logo logo-${x[1]}">${x[0].split(' ').map(w=>w[0]).slice(0,2).join('')}</div><div><b>${x[0]}</b><small>${cover==='comprehensive'?'Comprehensive':cover==='thirdparty'?'Third Party':'Limited Third Party'}</small></div></div><div><b>${type==='bike'?'Two Wheeler':'Car'}</b><small>${v}</small></div><div class="price">₹${p.toLocaleString('en-IN')}</div><button class="btn primary" onclick="requestQuote('${x[0]}',${p})">Request</button></div>`}).join('');
+}
+async function requestQuote(insurer,price){
+  const v=document.getElementById('vehicleNo').value.trim().toUpperCase();
+  const vehicleType=document.getElementById('vehicleType')?.value||'';
+  const cover=document.getElementById('cover')?.value||'';
+  const name=prompt('Customer name / नाम दर्ज करें:');
+  if(!name) return;
+  const mobile=prompt('Mobile number / मोबाइल नंबर दर्ज करें:');
+  if(!mobile) return;
+  const lead={
+    name:name.trim(),
+    mobile:mobile.trim(),
+    email:'',
+    insurance_type:`${vehicleType==='bike'?'Bike':'Car'} Insurance - ${cover} - ${insurer}`,
+    message:`Quote Request\nVehicle: ${v}\nQuoted Premium: ₹${price}\nInsurer: ${insurer}`
+  };
+  try{
+    const saved=await submitSupabaseLead(lead);
+    if(saved){
+      const st=document.getElementById('quoteStatus');
+      if(st) st.innerHTML='<b>Request received.</b> <span class="success">Shanvi team will contact you shortly.</span>';
+    }
+  }catch(err){
+    // Keep a mailto fallback if the backend is temporarily unavailable.
+    const subject=encodeURIComponent('Insurance Quote Request - Shanvi Insurance Services');
+    const body=encodeURIComponent(`Customer: ${lead.name}\nMobile: ${lead.mobile}\nVehicle: ${v}\nInsurance Company: ${insurer}\nQuoted Premium: ₹${price}\n`);
+    window.location.href=`mailto:${SHANVI.supportEmail}?subject=${subject}&body=${body}`;
+  }
+}
+function store(key,val){localStorage.setItem(key,JSON.stringify(val));} function load(key,def){try{return JSON.parse(localStorage.getItem(key))??def}catch{return def}}
+function nextAgentCode(){let n=Number(localStorage.getItem('shanviAgentSerial')||600)+1;localStorage.setItem('shanviAgentSerial',n);return `SIS2022${String(n).padStart(3,'0')}`}
+function hashLite(s){let h=0;for(let i=0;i<s.length;i++)h=((h<<5)-h+s.charCodeAt(i))|0;return String(Math.abs(h));}
+function recordLogin(role, uid, name, email=''){
+  try{
+    const logs=load('shanviLoginHistory',[]);
+    logs.push({role,uid,name:name||uid,email:email||'',at:new Date().toISOString()});
+    store('shanviLoginHistory',logs.slice(-2000));
+  }catch(e){}
+}
+function registerCustomer(e){e.preventDefault(); const name=c('cName').value.trim(),email=c('cEmail').value.trim().toLowerCase(),mobile=c('cMobile').value.trim(),pass=c('cPass').value,uid=c('cUid').value.trim(); if(!name||!email||!mobile||!pass||!uid)return; let users=load('shanviCustomers',[]); if(users.some(u=>u.uid===uid||u.email===email)){msg('regMsg','User ID or email already registered.','error');return} users.push({name,email,mobile,uid,pwd:hashLite(pass),createdAt:new Date().toISOString()});store('shanviCustomers',users);store('shanviCurrentCustomer',uid);location.href='customer-portal.html';}
+function loginCustomer(e){e.preventDefault();let uid=c('cLoginUid').value.trim(),pwd=c('cLoginPass').value,users=load('shanviCustomers',[]);let u=users.find(x=>x.uid===uid&&x.pwd===hashLite(pwd));if(!u){msg('loginMsg','Invalid User ID or Password.','error');return}store('shanviCurrentCustomer',u.uid);recordLogin('Customer',u.uid,u.name,u.email);startPortalSession('customer',u.uid);location.href='customer-portal.html'}
+function registerAgent(e){
+ e.preventDefault();
+ let name=c('aName').value.trim(),email=c('aEmail').value.trim().toLowerCase(),mobile=c('aMobile').value.trim(),uid=c('aUid').value.trim(),pass=c('aPass').value;
+ if(!name||!email||!mobile||!uid||!pass){msg('agentRegMsg','All fields are mandatory.','error');return}
+ let users=load('shanviAgents',[]);
+ if(users.some(u=>u.uid===uid||u.email===email)){msg('agentRegMsg','User ID or email already registered.','error');return}
+ let u={name,email,mobile,uid,pwd:hashLite(pass),code:null,certificateIssued:false,certificateNo:null,issuedAt:null,createdAt:new Date().toISOString()};
+ users.push(u);store('shanviAgents',users);store('shanviCurrentAgent',uid);
+ msg('agentRegMsg',`Registration submitted successfully.<br><b>Agent:</b> ${name}<br><b>User ID:</b> ${uid}<br><br>Admin approval और certificate issue होने के बाद Agent Login active होगा.`,`success`);
+}
+function loginAgent(e){e.preventDefault();let uid=c('aLoginUid').value.trim(),pwd=c('aLoginPass').value,users=load('shanviAgents',[]),u=users.find(x=>x.uid===uid&&x.pwd===hashLite(pwd));if(!u){msg('agentLoginMsg','Invalid User ID or Password.','error');return}if(u.deactivated){msg('agentLoginMsg','This agent account is deactivated by Admin.','error');return}if(u.certificateRejected){msg('agentLoginMsg','Certificate rejected by Admin. Please contact Shanvi Admin.','error');return}if(!u.certificateIssued){msg('agentLoginMsg','Agent certificate must be issued before login.','error');return}store('shanviCurrentAgent',u.uid);recordLogin('Agent',u.uid,u.name,u.email);startPortalSession('agent',u.uid);location.href='agent-portal.html'}
+function c(id){return document.getElementById(id)} function msg(id,text,cls='notice'){if(c(id))c(id).innerHTML=`<div class="${cls}">${text}</div>`}
+function currentAgent(){let uid=localStorage.getItem('shanviCurrentAgent');return load('shanviAgents',[]).find(x=>x.uid===uid)}
+function currentCustomer(){let uid=localStorage.getItem('shanviCurrentCustomer');return load('shanviCustomers',[]).find(x=>x.uid===uid)}
+function downloadText(filename,text){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type:'text/html'}));a.download=filename;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500)}
+
+function saveInsuranceRequest(req){let a=load('shanviInsuranceRequests',[]);a.push(req);store('shanviInsuranceRequests',a)}
+
+
+/* Shanvi portal session security: 10-minute inactivity timeout + portal isolation */
+const SHANVI_SESSION_TIMEOUT = 10 * 60 * 1000;
+function startPortalSession(type, id){
+  const key = 'shanviSession_'+type;
+  localStorage.setItem(key, JSON.stringify({id:id, lastActivity:Date.now()}));
+  bindPortalSession(type);
+}
+function touchPortalSession(type){
+  const key='shanviSession_'+type;
+  try{const x=JSON.parse(localStorage.getItem(key)||'null'); if(x){x.lastActivity=Date.now();localStorage.setItem(key,JSON.stringify(x));}}catch(e){}
+}
+function clearPortalSession(type){localStorage.removeItem('shanviSession_'+type);}
+function guardPortalSession(type, loginPage){
+  const key='shanviSession_'+type;
+  let x=null;
+  try{x=JSON.parse(localStorage.getItem(key)||'null')}catch(e){}
+  if(!x || !x.id || Date.now()-Number(x.lastActivity||0)>SHANVI_SESSION_TIMEOUT){
+    clearPortalSession(type);
+    if(type==='agent') localStorage.removeItem('shanviCurrentAgent');
+    if(type==='customer') localStorage.removeItem('shanviCurrentCustomer');
+    if(type==='admin') localStorage.removeItem('shanviAdmin');
+    location.href=loginPage+'?timeout=1'; return false;
+  }
+  bindPortalSession(type); return true;
+}
+function bindPortalSession(type){
+  if(window.__shanviBound===type)return;
+  window.__shanviBound=type;
+  ['click','keydown','mousemove','scroll','touchstart'].forEach(ev=>window.addEventListener(ev,()=>touchPortalSession(type),{passive:true}));
+  setupSessionUI(type);
+  clearInterval(window.__shanviSessionTimer);
+  window.__shanviSessionTimer=setInterval(()=>{
+    const key='shanviSession_'+type;
+    try{
+      const x=JSON.parse(localStorage.getItem(key)||'null');
+      if(!x){return}
+      const remaining=Math.max(0,SHANVI_SESSION_TIMEOUT-(Date.now()-Number(x.lastActivity||0)));
+      updateSessionUI(remaining);
+      if(remaining<=0){
+        clearPortalSession(type);
+        if(type==='agent')localStorage.removeItem('shanviCurrentAgent');
+        if(type==='customer')localStorage.removeItem('shanviCurrentCustomer');
+        if(type==='admin')localStorage.removeItem('shanviAdmin');
+        location.href=(type==='agent'?'agent-login.html':type==='customer'?'customer-login.html':'admin-login.html')+'?timeout=1';
+      }
+    }catch(e){}
+  },1000);
+}
+function setupSessionUI(type){
+  if(document.getElementById('shanviSessionBar'))return;
+  const bar=document.createElement('div');bar.id='shanviSessionBar';bar.className='session-bar';
+  bar.innerHTML=`<span>🔐 Session active</span><b id="shanviSessionTimer">10:00</b><span id="shanviSessionNotice">Auto logout after 10 min inactivity</span>`;
+  document.body.appendChild(bar);
+  protectPortalLinks(type);
+}
+function updateSessionUI(remaining){
+  const el=document.getElementById('shanviSessionTimer'), n=document.getElementById('shanviSessionNotice'); if(!el)return;
+  const sec=Math.ceil(remaining/1000),m=Math.floor(sec/60),s=sec%60; el.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  if(sec<=120){n.textContent='⚠️ Session soon expire hogi — activity karein ya Logout karein.';document.getElementById('shanviSessionBar').classList.add('warning')}
+}
+function protectPortalLinks(type){
+  const other={admin:['agent-login.html','agent-portal.html','customer-login.html','customer-portal.html'],agent:['admin-login.html','admin-portal.html','customer-login.html','customer-portal.html'],customer:['admin-login.html','admin-portal.html','agent-login.html','agent-portal.html']};
+  document.querySelectorAll('a[href]').forEach(a=>a.addEventListener('click',e=>{
+    const href=(a.getAttribute('href')||'').split('?')[0];
+    if(other[type]?.includes(href)){e.preventDefault();alert('Pehle current portal se Logout karein, uske baad dusre portal mein login karein.');}
+  }));
+}
+function recordSiteVisit(page='index.html', customer){
+  try{
+    let visits=load('shanviSiteVisits',[]);
+    const visitorId=localStorage.getItem('shanviVisitorId')||('VIS-'+Math.random().toString(36).slice(2,10).toUpperCase());
+    localStorage.setItem('shanviVisitorId',visitorId);
+    visits.push({visitorId,page,customerUid:customer?.uid||'',customerName:customer?.name||'Guest',customerEmail:customer?.email||'',at:new Date().toISOString()});
+    store('shanviSiteVisits',visits.slice(-500));
+  }catch(e){}
+}
+function logoutPortal(type, page){clearPortalSession(type);if(type==='agent')localStorage.removeItem('shanviCurrentAgent');if(type==='customer')localStorage.removeItem('shanviCurrentCustomer');if(type==='admin')localStorage.removeItem('shanviAdmin');location.href=page;}
+
+
+/* v17 Home + Admin helpers */
+function initHome(){
+  recordSiteVisit('index.html', currentCustomer());
+  const defaults=[
+    '💰 Agent Commission — Bike ₹75 | Car ₹210 per policy',
+    '🪔 श्री कृष्ण जन्माष्टमी Special — Smart Tax Solution & Shanvi Insurance',
+    '🛡️ Shanvi Insurance Services — Secure Today, Protected Tomorrow'
+  ];
   const saved=load('shanviSiteSettings',{}), heads=(saved.headlines&&saved.headlines.length?saved.headlines:defaults); const poster=document.querySelector('.festival-poster'); if(poster&&saved.poster?.data)poster.src=saved.poster.data;
   const el=document.getElementById('headlineRotator');
   if(el){let i=0;el.textContent=heads[0]||defaults[0];setInterval(()=>{i=(i+1)%heads.length;el.classList.remove('ticker-in');void el.offsetWidth;el.classList.add('ticker-in');el.textContent=heads[i]||defaults[0]},3500)}
@@ -87,39 +266,4 @@ function calcGST(){
   else { base=amount; gst=amount*rate/100; total=base+gst; }
   const cgst=gst/2, sgst=gst/2;
   out.innerHTML=`<b>Taxable Amount:</b> ₹${base.toFixed(2)} &nbsp; | &nbsp; <b>GST:</b> ₹${gst.toFixed(2)}<br><b>CGST:</b> ₹${cgst.toFixed(2)} &nbsp; <b>SGST:</b> ₹${sgst.toFixed(2)}<br><b>Total:</b> ₹${total.toFixed(2)}`;
-}
-
-const DAILY_QUIZ=[
- {q:"GST stands for?",o:["Goods and Services Tax","General Sales Tax","Government Service Tax","Goods Supply Tariff"],a:0},
- {q:"Which return is generally used to report outward supplies?",o:["GSTR-1","GSTR-2","GSTR-9C","ITR-1"],a:0},
- {q:"PAN is issued by which department?",o:["Income Tax Department","GST Council","MCA","RBI"],a:0},
- {q:"TDS means?",o:["Tax Deducted at Source","Tax Deposit System","Total Duty Statement","Tax Data Service"],a:0},
- {q:"Udyam registration relates to?",o:["MSME","Passport","Vehicle RC","Income certificate"],a:0},
- {q:"FSSAI relates mainly to?",o:["Food safety","Insurance","Banking","Transport"],a:0},
- {q:"A balance sheet reports?",o:["Assets, liabilities and equity","Only sales","Only tax","Only cash"],a:0},
- {q:"GST is a?",o:["Indirect tax","Direct tax","Property tax only","Income tax only"],a:0},
- {q:"ITR is filed for?",o:["Income-tax reporting","GST registration only","Food licence only","Vehicle insurance"],a:0},
- {q:"TallyPrime is mainly used for?",o:["Accounting and business management","Passport issuance","GST lawmaking","Bank licensing"],a:0}
-];
-let quiz={i:0,ans:Array(10).fill(null),started:false,sec:600,timer:null};
-function initDailyQuiz(){
- quiz={i:0,ans:Array(10).fill(null),started:true,sec:600,timer:null};
- const w=document.getElementById('quizWelcome'); if(w) w.style.display='none';
- const q=document.getElementById('quizQuestion'); if(q) q.style.display='block';
- const o=document.getElementById('quizOptions'); if(o) o.style.display='grid';
- const a=document.getElementById('quizActions'); if(a) a.style.display='flex';
- renderQuiz(); clearInterval(quiz.timer); quiz.timer=setInterval(()=>{quiz.sec--; const t=document.getElementById('quizTimer'); if(t)t.textContent=Math.floor(quiz.sec/60)+":"+String(quiz.sec%60).padStart(2,'0'); if(quiz.sec<=0) submitDailyQuiz();},1000);
-}
-function renderQuiz(){
- const q=DAILY_QUIZ[quiz.i], title=document.getElementById('quizQuestion'), box=document.getElementById('quizOptions');
- if(title) title.innerHTML=`Question ${quiz.i+1} of 10: ${escapeHTML(q.q)}`;
- if(box) box.innerHTML=q.o.map((x,i)=>`<button type="button" class="quiz-option ${quiz.ans[quiz.i]===i?'selected':''}" onclick="answerQuiz(${i})"><span>${String.fromCharCode(65+i)}</span>${escapeHTML(x)}</button>`).join('');
- const next=document.getElementById('quizNextBtn'); if(next) next.disabled=quiz.ans[quiz.i]===null;
-}
-function answerQuiz(i){quiz.ans[quiz.i]=i;renderQuiz();}
-function nextDailyQuestion(){if(quiz.i<9){quiz.i++;renderQuiz();}else submitDailyQuiz();}
-function submitDailyQuiz(){
- clearInterval(quiz.timer); let score=0; DAILY_QUIZ.forEach((q,i)=>{if(quiz.ans[i]===q.a)score++;});
- const pct=score*10; const final=document.getElementById('dailyQuizFinal'); if(final){final.style.display='block';final.innerHTML=`<div class="quiz-result"><div class="daily-final-score">${score}/10 (${pct}%)</div><p>${pct>=70?'Congratulations! You passed today’s quiz.':'Keep learning and try again tomorrow.'}</p></div>`;}
- const area=document.getElementById('dailyQuizArea'); if(area) area.style.display='none';
 }

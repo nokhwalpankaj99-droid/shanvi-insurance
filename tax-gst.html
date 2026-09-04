@@ -1,4 +1,4 @@
-<!doctype html><div class="back-insurance"><a href="index.html">← Back to Shanvi Insurance Portal</a></div>
+<!doctype html><div style="background:#fff;border-bottom:1px solid #ddd;padding:8px 16px;text-align:center"><a href="index.html" style="font-weight:700;text-decoration:none">← Back to Shanvi Insurance Portal</a></div>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -8,25 +8,23 @@
 <meta name="theme-color" content="#0b1730">
 <link rel="stylesheet" href="style.css">
 </head>
-<body class="sts-portal">
+<body class="sts-portal"><div class="sts-logo-strip"><img src="assets/smart-tax-solution-logo.png" alt="Smart Tax Solution"></div>
 <header class="sts-header">
   <a class="sts-brand" href="tax-gst.html" aria-label="Smart Tax Solution home">
-    <img src="assets/smart-tax-solution-logo.png" alt="Smart Tax Solution" style="width:190px;height:auto;background:#fff;border-radius:7px">
+    <span class="sts-mark">ST<span>S</span></span>
+    <span><b>Smart Tax Solution</b><small>Tax • GST • Compliance • Learning</small></span>
   </a>
   <nav class="sts-nav">
     <a href="#portals">Portals</a>
-    <a href="#services">Services</a>
+    <a href="#services">Services</a><a href="tax-book.html">Tax Book</a>
     <a href="#news">Tax News</a>
-    <a href="tax-book.html">Tax Book</a>
     <a href="#quiz">Daily Quiz</a>
     <a href="#academy">Academy</a>
     <a href="#exam">Accounting Exam</a>
     <a href="#contact">Contact</a>
   <a href="admin-portal.html">Admin</a></nav>
-  <a class="sts-top-btn" href="https://wa.me/919664029638?text=Hello%20Smart%20Tax%20Solution%2C%20I%20need%20tax%20help" target="_blank" rel="noopener">WhatsApp Help</a>
+  <a class="sts-top-btn" href="mailto:smarttaxsolutionsgnr@gmail.com">Get Tax Help</a>
 </header>
-<div class="festival-headline"><span>🪔 श्री कृष्ण जन्माष्टमी 2026</span> • Smart Tax Solution की ओर से हार्दिक शुभकामनाएँ • Tax & GST services available on WhatsApp <a href="https://wa.me/919664029638?text=Hello%20Smart%20Tax%20Solution" target="_blank" rel="noopener">96640-29638</a></div>
-<div class="festival-poster"><img src="assets/janmashtami-poster.png" alt="Janmashtami 2026 poster"></div>
 
 <div class="sts-ticker">
   <div><span class="live-dot"></span><b>SMART TAX UPDATE</b></div>
@@ -34,7 +32,7 @@
   <div class="ticker-date" id="todayDate"></div>
 </div>
 
-<main>
+<div class="festival-poster tax-festival"><img src="assets/janmashtami-poster.png" alt="श्री कृष्ण जन्माष्टमी"></div><div class="janmashtami-headline">🪔 श्री कृष्ण जन्माष्टमी की हार्दिक शुभकामनाएं • Janmashtami 2026</div><main>
 <section class="sts-hero">
   <div class="hero-copy">
     <div class="eyebrow-gold">SMART TAX SOLUTION</div>
@@ -44,7 +42,7 @@
       <a class="sts-btn primary" href="#portals">Explore Tax Portals <span>→</span></a>
       <a class="sts-btn outline" href="#academy">Explore Courses</a>
     </div>
-    <div class="founder-mini"><span>Founder</span><b>Adv. Pankaj Nokhwal</b><i>•</i><a href="https://wa.me/919664029638?text=Hello%20Smart%20Tax%20Solution%2C%20I%20need%20tax%20service%20information">smarttaxsolutionsgnr@gmail.com</a></div>
+    <div class="founder-mini"><span>Founder</span><b>Adv. Pankaj Nokhwal</b><i>•</i><a href="mailto:smarttaxsolutionsgnr@gmail.com">smarttaxsolutionsgnr@gmail.com</a></div>
   </div>
   <div class="hero-panel">
     <div class="panel-head"><span>SMART TAX DESK</span><b>2026</b></div>
@@ -106,7 +104,7 @@
     <div class="audit-badge">COMPLIANCE<br>CHECK</div>
     <h3>Need a review?</h3>
     <p>Share your requirement with Smart Tax Solution and our team can guide you on the next step.</p>
-    <a class="sts-btn primary full" href="https://wa.me/919664029638?text=Tax%20%26%20Compliance%20Review%20-%20Course%20Enquiry" target="_blank" rel="noopener">Request Review</a>
+    <a class="sts-btn primary full" href="mailto:smarttaxsolutionsgnr@gmail.com?subject=Tax%20%26%20Compliance%20Review">Request Review</a>
   </div>
 </section>
 
@@ -148,29 +146,24 @@
     <div class="quiz-content">
       <div class="daily-quiz-top"><span id="quizProgress">Question 1 of 10</span><span id="quizTimer">10:00</span></div>
       <div id="dailyQuizArea">
-        <div id="quizWelcome" class="quiz-welcome">
-          <h3>Start Today's Quiz</h3>
-          <p>10 questions • 10 minutes • Income Tax, GST, TDS, MSME, FSSAI, Audit & Accounting.</p>
-          <button class="sts-btn primary small" id="quizStartBtn" type="button" onclick="initDailyQuiz()">Start Daily Quiz →</button>
-        </div>
-        <span id="quizTopic" style="display:none">GST BASICS</span>
-        <h3 id="quizQuestion" style="display:none">Loading today's quiz…</h3>
-        <div id="quizOptions" class="quiz-options" style="display:none"></div>
+        <span id="quizTopic">GST BASICS</span>
+        <h3 id="quizQuestion">Loading today's quiz…</h3>
+        <div id="quizOptions" class="quiz-options"></div>
         <div id="quizResult" class="quiz-result" aria-live="polite"></div>
-        <div class="quiz-actions" id="quizActions" style="display:none"><button class="sts-btn primary small" id="quizNext" onclick="dailyQuizNext()">Next Question →</button><button class="sts-btn outline small" id="quizSubmit" onclick="submitDailyQuiz()" style="display:none">Submit Quiz ✓</button></div>
+        <div class="quiz-actions"><button class="sts-btn primary small" id="quizNext" onclick="dailyQuizNext()">Next Question →</button><button class="sts-btn outline small" id="quizSubmit" onclick="submitDailyQuiz()" style="display:none">Submit Quiz ✓</button></div>
       </div>
       <div id="dailyQuizFinal" style="display:none"></div>
     </div>
   </div>
 </section>
 
-<section class="sts-section academy-section" id="academy">
-  <div class="sts-heading"><span>SHREE BALAJI ACCOUNTING</span><img src="assets/shree-balaji-accounting-logo.svg" alt="Shree Balaji Accounting" class="academy-logo"><h2>Practical Accounting & Tax Courses</h2><p>Courses designed for students, accountants, business owners and working professionals.</p></div>
+<div style="max-width:1100px;margin:20px auto;text-align:center"><img src="assets/shree-balaji-accounting-logo.png" alt="Shree Balaji Accounting" style="max-width:360px;width:100%;background:#fff;border-radius:10px"></div><section class="sts-section academy-section" id="academy">
+  <div class="sts-heading"><span>ACCOUNTANT ACADEMY</span><h2>Practical Accounting & Tax Courses</h2><p>Courses designed for students, accountants, business owners and working professionals.</p></div>
   <div class="academy-grid">
-    <article class="course-card featured"><div class="course-top"><span>POPULAR</span><b>01</b></div><h3>Practical Accounting + GST</h3><p>Accounting fundamentals, GST entries, invoicing, reconciliation and return workflow.</p><ul><li>Accounting basics</li><li>GST practical work</li><li>Reconciliation</li><li>Business case studies</li></ul><a class="course-link" href="https://wa.me/919664029638?text=Course%20Enquiry%20-%20Practical%20Accounting%20%20%20GST%20-%20Course%20Enquiry" target="_blank" rel="noopener">Enquire →</a></article>
-    <article class="course-card"><div class="course-top"><span>CAREER</span><b>02</b></div><h3>Tally Prime + GST</h3><p>Company creation, ledgers, vouchers, GST configuration and reports.</p><ul><li>Tally Prime</li><li>GST setup</li><li>Reports & books</li><li>Practical assignments</li></ul><a class="course-link" href="https://wa.me/919664029638?text=Course%20Enquiry%20-%20Tally%20Prime%20%20%20GST%20-%20Course%20Enquiry" target="_blank" rel="noopener">Enquire →</a></article>
-    <article class="course-card"><div class="course-top"><span>SKILL</span><b>03</b></div><h3>Advanced Excel for Accounts</h3><p>Functions, lookups, MIS, reconciliation sheets and accounting dashboards.</p><ul><li>Excel formulas</li><li>Data cleaning</li><li>MIS reports</li><li>Practical templates</li></ul><a class="course-link" href="https://wa.me/919664029638?text=Course%20Enquiry%20-%20Advanced%20Excel%20-%20Course%20Enquiry" target="_blank" rel="noopener">Enquire →</a></article>
-    <article class="course-card"><div class="course-top"><span>TAX</span><b>04</b></div><h3>Income Tax & TDS Practical</h3><p>ITR workflow, TDS concepts, AIS/TIS and compliance-oriented practice.</p><ul><li>ITR concepts</li><li>TDS/TCS</li><li>AIS/TIS</li><li>Notice basics</li></ul><a class="course-link" href="https://wa.me/919664029638?text=Course%20Enquiry%20-%20Income%20Tax%20%26%20TDS%20-%20Course%20Enquiry" target="_blank" rel="noopener">Enquire →</a></article>
+    <article class="course-card featured"><div class="course-top"><span>POPULAR</span><b>01</b></div><h3>Practical Accounting + GST</h3><p>Accounting fundamentals, GST entries, invoicing, reconciliation and return workflow.</p><ul><li>Accounting basics</li><li>GST practical work</li><li>Reconciliation</li><li>Business case studies</li></ul><a class="course-link" href="mailto:smarttaxsolutionsgnr@gmail.com?subject=Course%20Enquiry%20-%20Practical%20Accounting%20%2B%20GST">Enquire by Email →</a> <a class="course-link" href="https://wa.me/919664029638?text=Hello%20Smart%20Tax%20Solution%2C%20I%20want%20course%20enquiry." target="_blank" rel="noopener">WhatsApp →</a></article>
+    <article class="course-card"><div class="course-top"><span>CAREER</span><b>02</b></div><h3>Tally Prime + GST</h3><p>Company creation, ledgers, vouchers, GST configuration and reports.</p><ul><li>Tally Prime</li><li>GST setup</li><li>Reports & books</li><li>Practical assignments</li></ul><a class="course-link" href="mailto:smarttaxsolutionsgnr@gmail.com?subject=Course%20Enquiry%20-%20Tally%20Prime%20%2B%20GST">Enquire by Email →</a> <a class="course-link" href="https://wa.me/919664029638?text=Hello%20Smart%20Tax%20Solution%2C%20I%20want%20course%20enquiry." target="_blank" rel="noopener">WhatsApp →</a></article>
+    <article class="course-card"><div class="course-top"><span>SKILL</span><b>03</b></div><h3>Advanced Excel for Accounts</h3><p>Functions, lookups, MIS, reconciliation sheets and accounting dashboards.</p><ul><li>Excel formulas</li><li>Data cleaning</li><li>MIS reports</li><li>Practical templates</li></ul><a class="course-link" href="mailto:smarttaxsolutionsgnr@gmail.com?subject=Course%20Enquiry%20-%20Advanced%20Excel">Enquire by Email →</a> <a class="course-link" href="https://wa.me/919664029638?text=Hello%20Smart%20Tax%20Solution%2C%20I%20want%20course%20enquiry." target="_blank" rel="noopener">WhatsApp →</a></article>
+    <article class="course-card"><div class="course-top"><span>TAX</span><b>04</b></div><h3>Income Tax & TDS Practical</h3><p>ITR workflow, TDS concepts, AIS/TIS and compliance-oriented practice.</p><ul><li>ITR concepts</li><li>TDS/TCS</li><li>AIS/TIS</li><li>Notice basics</li></ul><a class="course-link" href="mailto:smarttaxsolutionsgnr@gmail.com?subject=Course%20Enquiry%20-%20Income%20Tax%20%26%20TDS">Enquire by Email →</a> <a class="course-link" href="https://wa.me/919664029638?text=Hello%20Smart%20Tax%20Solution%2C%20I%20want%20course%20enquiry." target="_blank" rel="noopener">WhatsApp →</a></article>
   </div>
   <div class="certificate-banner">
     <div><span>CERTIFICATION</span><h3>Learn through us. Earn your learning certificate.</h3><p>Students enrolling through Smart Tax Solution / Shree Balaji Accounting can receive an academy course-completion certificate subject to course completion and academy verification.</p></div>
@@ -179,7 +172,7 @@
 </section>
 
 <section class="sts-section exam-section" id="exam">
-  <div class="sts-heading"><span>SHREE BALAJI ACCOUNTING</span><h2>Accounting Certification Exam</h2><p>Complete the online accounting exam. Pass the required score to generate your course-completion certificate.</p></div>
+  <div class="sts-heading"><span>ACCOUNTANT ACADEMY</span><h2>Accounting Certification Exam</h2><p>Complete the online accounting exam. Pass the required score to generate your course-completion certificate.</p></div>
   <div class="exam-shell">
     <div class="exam-intro">
       <div class="exam-stat"><b>20</b><span>Questions</span></div>
@@ -213,51 +206,15 @@
   </div>
 </section>
 
-
-<section class="sts-section" id="business-services">
-  <div class="sts-heading"><span>BUSINESS • TAX • REGISTRATION</span><h2>Complete Business & Tax Services</h2><p>Service enquiry के लिए सीधे WhatsApp करें.</p></div>
-  <div class="service-grid-sts">
-    <a href="https://wa.me/919664029638?text=Hello%20Smart%20Tax%20Solution%2C%20I%20need%20Income%20Tax%20services" target="_blank" rel="noopener"><strong>01</strong><h3>Income Tax & ITR</h3><p>ITR filing, revised return, advance tax, tax computation, notices, AIS/TIS and TDS-related assistance.</p><b>WhatsApp Enquiry →</b></a>
-    <a href="https://wa.me/919664029638?text=Hello%20Smart%20Tax%20Solution%2C%20I%20need%20GST%20services" target="_blank" rel="noopener"><strong>02</strong><h3>GST Registration & Returns</h3><p>GST registration, amendment, GSTR-1, GSTR-3B, annual return, reconciliation, e-invoice/e-way bill guidance and notices.</p><b>WhatsApp Enquiry →</b></a>
-    <a href="https://wa.me/919664029638?text=Hello%20Smart%20Tax%20Solution%2C%20I%20need%20MSME%20registration" target="_blank" rel="noopener"><strong>03</strong><h3>MSME / Udyam</h3><p>Udyam registration, update, verification and MSME compliance assistance.</p><b>WhatsApp Enquiry →</b></a>
-    <a href="https://wa.me/919664029638?text=Hello%20Smart%20Tax%20Solution%2C%20I%20need%20FSSAI%20licence" target="_blank" rel="noopener"><strong>04</strong><h3>FSSAI / Food Licence</h3><p>Food licence/registration, renewal, modification and compliance guidance.</p><b>WhatsApp Enquiry →</b></a>
-    <a href="https://wa.me/919664029638?text=Hello%20Smart%20Tax%20Solution%2C%20I%20need%20company%20registration" target="_blank" rel="noopener"><strong>05</strong><h3>Company / LLP / Firm Registration</h3><p>Company incorporation, LLP registration, partnership/firm setup and related MCA compliance support.</p><b>WhatsApp Enquiry →</b></a>
-    <a href="https://wa.me/919664029638?text=Hello%20Smart%20Tax%20Solution%2C%20I%20need%20audit%20and%20compliance" target="_blank" rel="noopener"><strong>06</strong><h3>Audit & Compliance</h3><p>Tax audit support, GST reconciliation, TDS/TCS review, accounting review and compliance checklists.</p><b>WhatsApp Enquiry →</b></a>
-  </div>
-</section>
-<section class="sts-section" id="accounting-software">
-  <div class="sts-heading"><span>ACCOUNTING SOFTWARE</span><h2>Accounting Software & Pricing</h2><p>Published vendor pricing; GST/taxes and vendor terms may apply.</p></div>
-  <div class="service-grid-sts">
-    <a href="https://tallysolutions.com/buy-tally/" target="_blank" rel="noopener"><strong>TALLYPRIME</strong><h3>From ₹750 + 18% GST</h3><p>Silver monthly plan; annual and lifetime options also available.</p><b>Official Pricing ↗</b></a>
-    <a href="https://busy.in/pricing/" target="_blank" rel="noopener"><strong>BUSY</strong><h3>From ₹5,000 / 360 days</h3><p>Billing, accounting and GST plans with different feature levels.</p><b>Official Pricing ↗</b></a>
-    <a href="https://www.zoho.com/in/books/pricing/" target="_blank" rel="noopener"><strong>ZOHO BOOKS</strong><h3>Free + paid from ₹749/month yearly</h3><p>Cloud accounting, GST, invoicing, banking and reports.</p><b>Official Pricing ↗</b></a>
-    <a href="https://wa.me/919664029638?text=Hello%20Smart%20Tax%20Solution%2C%20I%20want%20accounting%20software%20details" target="_blank" rel="noopener"><strong>SOFTWARE SUPPORT</strong><h3>Setup • Training • Migration</h3><p>Tally/BUSY/Zoho Books setup, company creation, GST configuration, data migration and practical training.</p><b>WhatsApp Enquiry →</b></a>
-  </div>
-</section>
-<section class="sts-section" id="official-portals">
-  <div class="sts-heading"><span>OFFICIAL GOVERNMENT LINKS</span><h2>Tax & Business Government Portals</h2><p>Highlighted official links for tax and compliance services.</p></div>
-  <div class="official-link-grid">
-    <a href="https://www.incometax.gov.in/iec/foportal/" target="_blank" rel="noopener">Income Tax e-Filing ↗</a>
-    <a href="https://www.gst.gov.in/" target="_blank" rel="noopener">GST Portal ↗</a>
-    <a href="https://www.tdscpc.gov.in/" target="_blank" rel="noopener">TRACES / TDS ↗</a>
-    <a href="https://www.udyamregistration.gov.in/" target="_blank" rel="noopener">Udyam / MSME ↗</a>
-    <a href="https://foscos.fssai.gov.in/" target="_blank" rel="noopener">FSSAI FoSCoS ↗</a>
-    <a href="https://www.mca.gov.in/" target="_blank" rel="noopener">MCA / Company Affairs ↗</a>
-    <a href="https://www.cbic.gov.in/" target="_blank" rel="noopener">CBIC ↗</a>
-    <a href="https://www.icegate.gov.in/" target="_blank" rel="noopener">ICEGATE ↗</a>
-    <a href="https://www.epfindia.gov.in/" target="_blank" rel="noopener">EPFO ↗</a>
-    <a href="https://esic.gov.in/" target="_blank" rel="noopener">ESIC ↗</a>
-  </div>
-</section>
 <section class="sts-contact" id="contact">
   <div><span>SMART TAX SOLUTION</span><h2>Need professional tax guidance?</h2><p>Connect for Income Tax, GST, MSME, FSSAI, accounting and compliance-related assistance.</p></div>
-  <div class="contact-details"><b>Adv. Pankaj Nokhwal</b><div class="tax-contact-extra"><b>Mobile / WhatsApp:</b> <a href="https://wa.me/919664029638?text=Hello%20Smart%20Tax%20Solution%2C%20I%20need%20tax%20service%20information" target="_blank" rel="noopener">96640-29638</a><br><b>Email:</b> <a href="mailto:smarttaxsolutionsgnr@gmail.com">smarttaxsolutionsgnr@gmail.com</a><br><b>Address:</b> Sri Ganganagar, Rajasthan - 335001</div><a href="https://wa.me/919664029638?text=Hello%20Smart%20Tax%20Solution%2C%20I%20need%20tax%20service%20information">smarttaxsolutionsgnr@gmail.com</a><a href="https://wa.me/?text=Hello%20Smart%20Tax%20Solution%2C%20I%20need%20tax%20assistance." target="_blank" rel="noopener">WhatsApp Enquiry ↗</a></div>
+  <div class="contact-details"><b>Adv. Pankaj Nokhwal</b><span>☎ 96640-29638</span><span>Sri Ganganagar, Rajasthan - 335001</span><a href="mailto:smarttaxsolutionsgnr@gmail.com">smarttaxsolutionsgnr@gmail.com</a><a href="https://wa.me/?text=Hello%20Smart%20Tax%20Solution%2C%20I%20need%20tax%20assistance." target="_blank" rel="noopener">WhatsApp Enquiry ↗</a></div>
 </section>
 </main>
 
 <footer class="sts-footer">
   <div><b>Smart Tax Solution</b><small>Income Tax • GST • MSME • FSSAI • Audit • Accounting</small></div>
-  <div><b>Founder: Adv. Pankaj Nokhwal</b><a href="https://wa.me/919664029638?text=Hello%20Smart%20Tax%20Solution%2C%20I%20need%20tax%20service%20information">smarttaxsolutionsgnr@gmail.com</a></div>
+  <div><b>Founder: Adv. Pankaj Nokhwal</b><a href="mailto:smarttaxsolutionsgnr@gmail.com">smarttaxsolutionsgnr@gmail.com</a></div>
   <div class="footer-note">This portal is an independent information and assistance platform. Government portals are linked for direct access; always verify applicable law, notifications and due dates from official sources.</div>
 </footer>
 
