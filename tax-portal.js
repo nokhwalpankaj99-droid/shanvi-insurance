@@ -99,7 +99,7 @@ function loadNews(feed){
 }
 
 document.addEventListener('DOMContentLoaded',()=>{
-  try{setToday();}catch(e){} try{loadNews('tax');}catch(e){} try{initDailyQuiz();}catch(e){console.error('Daily Quiz init failed',e);}
+  try{setToday();}catch(e){} try{loadNews('tax');}catch(e){}
   document.querySelectorAll('.news-tab').forEach(btn=>btn.addEventListener('click',()=>{
     document.querySelectorAll('.news-tab').forEach(x=>x.classList.remove('active')); btn.classList.add('active'); loadNews(btn.dataset.feed);
   }));

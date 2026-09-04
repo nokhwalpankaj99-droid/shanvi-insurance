@@ -176,7 +176,7 @@ function initHome(){
   recordSiteVisit('index.html', currentCustomer());
   const defaults=[
     '💰 Agent Commission — Bike ₹75 | Car ₹210 per policy',
-    '🪔 श्री कृष्ण जन्माष्टमी Special — Smart Tax Solution & Shanvi Insurance',
+    '🌸 Raksha Bandhan Special — Protect your family & vehicle today',
     '🛡️ Shanvi Insurance Services — Secure Today, Protected Tomorrow'
   ];
   const saved=load('shanviSiteSettings',{}), heads=(saved.headlines&&saved.headlines.length?saved.headlines:defaults); const poster=document.querySelector('.festival-poster'); if(poster&&saved.poster?.data)poster.src=saved.poster.data;
