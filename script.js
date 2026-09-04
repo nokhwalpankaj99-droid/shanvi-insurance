@@ -1,3 +1,4 @@
+function escapeHTML(v){return String(v??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
 
   const saved=load('shanviSiteSettings',{}), heads=(saved.headlines&&saved.headlines.length?saved.headlines:defaults); const poster=document.querySelector('.festival-poster'); if(poster&&saved.poster?.data)poster.src=saved.poster.data;
   const el=document.getElementById('headlineRotator');
@@ -86,4 +87,39 @@ function calcGST(){
   else { base=amount; gst=amount*rate/100; total=base+gst; }
   const cgst=gst/2, sgst=gst/2;
   out.innerHTML=`<b>Taxable Amount:</b> ₹${base.toFixed(2)} &nbsp; | &nbsp; <b>GST:</b> ₹${gst.toFixed(2)}<br><b>CGST:</b> ₹${cgst.toFixed(2)} &nbsp; <b>SGST:</b> ₹${sgst.toFixed(2)}<br><b>Total:</b> ₹${total.toFixed(2)}`;
+}
+
+const DAILY_QUIZ=[
+ {q:"GST stands for?",o:["Goods and Services Tax","General Sales Tax","Government Service Tax","Goods Supply Tariff"],a:0},
+ {q:"Which return is generally used to report outward supplies?",o:["GSTR-1","GSTR-2","GSTR-9C","ITR-1"],a:0},
+ {q:"PAN is issued by which department?",o:["Income Tax Department","GST Council","MCA","RBI"],a:0},
+ {q:"TDS means?",o:["Tax Deducted at Source","Tax Deposit System","Total Duty Statement","Tax Data Service"],a:0},
+ {q:"Udyam registration relates to?",o:["MSME","Passport","Vehicle RC","Income certificate"],a:0},
+ {q:"FSSAI relates mainly to?",o:["Food safety","Insurance","Banking","Transport"],a:0},
+ {q:"A balance sheet reports?",o:["Assets, liabilities and equity","Only sales","Only tax","Only cash"],a:0},
+ {q:"GST is a?",o:["Indirect tax","Direct tax","Property tax only","Income tax only"],a:0},
+ {q:"ITR is filed for?",o:["Income-tax reporting","GST registration only","Food licence only","Vehicle insurance"],a:0},
+ {q:"TallyPrime is mainly used for?",o:["Accounting and business management","Passport issuance","GST lawmaking","Bank licensing"],a:0}
+];
+let quiz={i:0,ans:Array(10).fill(null),started:false,sec:600,timer:null};
+function initDailyQuiz(){
+ quiz={i:0,ans:Array(10).fill(null),started:true,sec:600,timer:null};
+ const w=document.getElementById('quizWelcome'); if(w) w.style.display='none';
+ const q=document.getElementById('quizQuestion'); if(q) q.style.display='block';
+ const o=document.getElementById('quizOptions'); if(o) o.style.display='grid';
+ const a=document.getElementById('quizActions'); if(a) a.style.display='flex';
+ renderQuiz(); clearInterval(quiz.timer); quiz.timer=setInterval(()=>{quiz.sec--; const t=document.getElementById('quizTimer'); if(t)t.textContent=Math.floor(quiz.sec/60)+":"+String(quiz.sec%60).padStart(2,'0'); if(quiz.sec<=0) submitDailyQuiz();},1000);
+}
+function renderQuiz(){
+ const q=DAILY_QUIZ[quiz.i], title=document.getElementById('quizQuestion'), box=document.getElementById('quizOptions');
+ if(title) title.innerHTML=`Question ${quiz.i+1} of 10: ${escapeHTML(q.q)}`;
+ if(box) box.innerHTML=q.o.map((x,i)=>`<button type="button" class="quiz-option ${quiz.ans[quiz.i]===i?'selected':''}" onclick="answerQuiz(${i})"><span>${String.fromCharCode(65+i)}</span>${escapeHTML(x)}</button>`).join('');
+ const next=document.getElementById('quizNextBtn'); if(next) next.disabled=quiz.ans[quiz.i]===null;
+}
+function answerQuiz(i){quiz.ans[quiz.i]=i;renderQuiz();}
+function nextDailyQuestion(){if(quiz.i<9){quiz.i++;renderQuiz();}else submitDailyQuiz();}
+function submitDailyQuiz(){
+ clearInterval(quiz.timer); let score=0; DAILY_QUIZ.forEach((q,i)=>{if(quiz.ans[i]===q.a)score++;});
+ const pct=score*10; const final=document.getElementById('dailyQuizFinal'); if(final){final.style.display='block';final.innerHTML=`<div class="quiz-result"><div class="daily-final-score">${score}/10 (${pct}%)</div><p>${pct>=70?'Congratulations! You passed today’s quiz.':'Keep learning and try again tomorrow.'}</p></div>`;}
+ const area=document.getElementById('dailyQuizArea'); if(area) area.style.display='none';
 }
