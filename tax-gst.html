@@ -15,7 +15,7 @@
     <span><b>Smart Tax Solution</b><small>Tax • GST • Compliance • Learning</small></span>
   </a>
   <nav class="sts-nav">
-    <a href="#portals">Portals</a><a class="nav-highlight" href="tax-book.html">📘 Tax Book</a>
+    <a href="#portals">Portals</a><a class="nav-highlight" href="tax-book.html">📘 Tax Book</a><a class="nav-highlight" href="verify-certificate.html">🔎 Verify Certificate</a>
     <a href="#services">Services</a>
     <a href="#news">Tax News</a>
     <a href="#quiz">Daily Quiz</a>
@@ -32,7 +32,7 @@
   <div class="ticker-date" id="todayDate"></div>
 </div>
 
-<main>
+<div id="smartTaxManagedPoster" style="display:none;max-width:1160px;margin:14px auto;text-align:center;padding:0 18px"></div><main>
 <section class="sts-hero">
   <div class="hero-copy">
     <div class="eyebrow-gold">SMART TAX SOLUTION</div>
@@ -236,6 +236,6 @@
   <div class="footer-note">This portal is an independent information and assistance platform. Government portals are linked for direct access; always verify applicable law, notifications and due dates from official sources.</div>
 </footer>
 
-<script src="tax-portal.js"></script>
+<script>function loadSmartTaxManagedContent(){try{const x=JSON.parse(localStorage.getItem('smartTaxSettings')||'{}'),b=document.getElementById('smartTaxManagedPoster');if(b&&x.poster){b.innerHTML='<div style="font-weight:800;color:#073b8f;margin-bottom:8px">'+(x.headline||'Smart Tax Solution Update')+'</div><img src="'+x.poster+'" alt="Smart Tax Update" style="width:100%;max-width:1000px;height:auto;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.14)">';b.style.display='block';}}catch(e){}}</script><script>loadSmartTaxManagedContent();</script><script src="tax-portal.js"></script>
 </body>
 </html>
