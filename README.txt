@@ -1,26 +1,38 @@
-SHANVI INSURANCE - UPDATED STATIC WEBSITE
+SHANVI INSURANCE SERVICES — PROFESSIONAL REFRESH
+================================================
 
-Included:
-- index.html: polished insurance-company style homepage
-- Vehicle number quote UI with Car/Bike + Comprehensive/Third Party/Standalone OD
-- Major insurer directory with logo/favicons
-- pi.html: PI / policy issuance document upload page
-  RC Copy, KYC documents, customer/vehicle photos, optional short video, submission timestamp
-- agent-login.html -> agent-dashboard.html: separate Agent Portal login/dashboard
-- Fixed commission: Bike Rs.75 per policy; Car Rs.210 per policy
-- Customer and PI requests are configured to email: nokhwalpankaj99@gmail.com
+CONTENTS
+- index.html: refreshed responsive home page and enquiry form
+- admin.html: admin dashboard for policy records, due reminders, photos, enquiries, notices and backup
+- customer.html: vehicle-number lookup against saved policy records
+- due-insurance.html: due/expired policy list and WhatsApp reminder drafts
+- agent.html: agent registration enquiry form
+- tax-gst.html: official Income Tax/GST/Udyam/FSSAI links and GST calculator
+- style.css, app.js, admin.js: shared styles and functionality
 
-IMPORTANT EMAIL SETUP:
-The static site uses FormSubmit for email delivery. On the first form submission, FormSubmit may ask the recipient to confirm/activate the email address. Complete that confirmation once.
+ADMIN LOGIN
+User ID: shanvi112
+Password: Shanvi@123
 
-PI FILE LIMIT:
-The browser blocks PI submissions above 9.5 MB total to stay below the free FormSubmit 10 MB attachment limit. Keep the video short/compressed.
+IMPORTANT LIMITATIONS (PLEASE READ)
+1. This is a static website package. Admin data is stored in the current browser's localStorage. It does NOT sync across devices or between different visitors.
+2. Admin login is client-side only and is NOT suitable for production security. Do not store sensitive documents or confidential customer information on shared/public devices.
+3. Vehicle lookup only searches policy records manually saved by the administrator. It does not query an RTO or insurer database.
+4. Quick enquiry estimates are not live insurance quotes. This package does not issue policies or connect to PBPartners/insurer APIs.
+5. WhatsApp reminders open a prepared message; the user must press Send. The site does not send messages automatically.
+6. Homepage notice changes in Admin are local-browser settings and do not redeploy the public website.
+7. Photos are stored in local browser storage. Browser storage is limited; upload images under 1.5 MB each and export backups regularly.
+8. For production use with multi-device syncing, secure admin authentication, shared policy records, public gallery updates and real agent/customer accounts, a secure backend (for example Supabase with properly configured database tables, row-level security and storage policies) must be set up and tested.
 
-IMPORTANT QUOTE NOTE:
-The vehicle-number interface is fixed and now gives a clear result state, but it does NOT invent live premiums. Actual live insurer premium/vehicle data requires an authorized insurer/aggregator API. PB Partners private authenticated endpoints must not be copied into frontend code.
+HOW TO TEST
+1. Extract ZIP to a folder.
+2. Open index.html in a modern browser (Chrome/Edge).
+3. Open Admin Login, sign in with the credentials above.
+4. Add a policy record with a vehicle number and expiry date.
+5. Open Customer Portal and search that vehicle number.
+6. Open Due Insurance and confirm it appears if expiry is within 30 days.
+7. Test WhatsApp button (it opens WhatsApp; sending is manual).
+8. Add a small photo, then delete it. Export a backup and test restoring it.
+9. Test the GST calculator.
 
-AGENT LOGIN (PREVIEW ONLY):
-Agent ID: agent01
-Password: demo123
-
-GitHub Pages is static hosting. This login is only a front-end preview and is NOT secure production authentication. For real authentication/database, move auth to a backend/Supabase/Firebase/etc.
+Note: This package is a refreshed front-end with working local workflows, not a verified live multi-user production CRM.
