@@ -1,6 +1,12 @@
 (()=> {
 const $=id=>document.getElementById(id), K=SIS.keys;
 function logged(){return sessionStorage.getItem(K.currentAdmin)==="1"}
+async function passwordHash(password,salt){
+  const enc=new TextEncoder();
+  const material=await crypto.subtle.importKey("raw",enc.encode(password),"PBKDF2",false,["deriveBits"]);
+  const bits=await crypto.subtle.deriveBits({name:"PBKDF2",salt:enc.encode(salt),iterations:120000,hash:"SHA-256"},material,256);
+  return Array.from(new Uint8Array(bits)).map(b=>b.toString(16).padStart(2,"0")).join("");
+}
 function showDashboard(){ $("loginPanel").hidden=true;$("dashboard").hidden=false;renderAll()}
 function safeDate(){return new Date().toISOString().slice(0,10)}
 function csv(rows){return rows.map(r=>r.map(x=>'"'+String(x??"").replace(/"/g,'""')+'"').join(",")).join("\r\n")}
@@ -12,7 +18,24 @@ function renderDue(){const p=SIS.get(K.policies,[]).map(x=>({...x,days:SIS.daysU
 function renderPhotos(){const ph=SIS.get(K.photos,[]);$("photoGrid").innerHTML=ph.map(x=>`<div class="photo-item"><img src="${x.data}" alt="${SIS.escape(x.title)}"><div class="photo-meta"><b>${SIS.escape(x.title)}</b><br><span class="muted">${SIS.date(x.date)}</span></div><button class="btn btn-outline" data-photo-delete="${x.id}">Delete photo</button></div>`).join("");$("photoEmpty").hidden=ph.length>0}
 function renderEnquiries(){const e=SIS.get(K.enquiries,[]);$("enquiryRows").innerHTML=e.map(x=>`<tr><td>${new Date(x.createdAt).toLocaleDateString("en-IN")}</td><td>${SIS.escape(x.name)}</td><td>${SIS.escape(x.mobile)}</td><td>${SIS.escape(x.vehicle)}</td><td>${SIS.escape(x.cover||"")}<br><small>${SIS.escape(x.type||"")}</small></td><td><button class="btn btn-outline" data-enquiry-delete="${x.id}">Delete</button></td></tr>`).join("");$("enquiryEmpty").hidden=e.length>0}
 function clearPolicy(){ $("policyForm").reset();$("policyId").value="";$("policyFormTitle").textContent="Add policy record"}
-$("adminLoginForm").addEventListener("submit",e=>{e.preventDefault();if($("adminUid").value===SIS.adminUser&&$("adminPwd").value===SIS.adminPass){sessionStorage.setItem(K.currentAdmin,"1");showDashboard()}else SIS.status($("loginMessage"),"Incorrect Admin ID or password.","error")});
+$("adminLoginForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ const uid=$("adminUid").value.trim(),pwd=$("adminPwd").value,stored=SIS.get("sis_admin_credentials_v1",null);
+ if(uid.length<4||pwd.length<12){SIS.status($("loginMessage"),"Use an Admin ID of at least 4 characters and a password of at least 12 characters.","error");return}
+ try{
+   if(!stored){
+     const salt=crypto.getRandomValues(new Uint8Array(16));
+     const saltHex=Array.from(salt).map(b=>b.toString(16).padStart(2,"0")).join("");
+     const hash=await passwordHash(pwd,saltHex);
+     SIS.set("sis_admin_credentials_v1",{uid,salt:saltHex,hash});
+     SIS.status($("loginMessage"),"Local demo credentials created for this browser. This is NOT secure server-side authentication.","warn");
+     sessionStorage.setItem(K.currentAdmin,"1");showDashboard();return;
+   }
+   const hash=await passwordHash(pwd,stored.salt);
+   if(uid===stored.uid&&hash===stored.hash){sessionStorage.setItem(K.currentAdmin,"1");showDashboard()}
+   else SIS.status($("loginMessage"),"Incorrect Admin ID or password.","error");
+ }catch(err){SIS.status($("loginMessage"),"Browser security functions are unavailable. Please use a modern browser on HTTPS.","error")}
+});
 $("logoutAdmin").addEventListener("click",()=>{sessionStorage.removeItem(K.currentAdmin);location.reload()});
 $("adminTabs").addEventListener("click",e=>{const b=e.target.closest("[data-tab]");if(!b)return;document.querySelectorAll(".admin-side [data-tab]").forEach(x=>x.classList.toggle("active",x===b));document.querySelectorAll(".tab-panel").forEach(x=>x.classList.toggle("active",x.id==="tab-"+b.dataset.tab));if(b.dataset.tab==="due")renderDue()});
 $("refreshStats").addEventListener("click",renderAll);$("policyFilter").addEventListener("input",renderPolicies);$("cancelEdit").addEventListener("click",clearPolicy);
