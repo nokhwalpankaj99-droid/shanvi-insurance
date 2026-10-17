@@ -76,3 +76,12 @@ body{background:#f4f7fc;color:#122750}
 @media(max-width:600px){.sts-logo-img{width:180px}.sts-hero{margin:10px;padding:24px}.sts-hero h1{font-size:32px}.portal-grid-sts,.service-grid-sts,.academy-grid,.tools-grid,.daily-quiz-dashboard{grid-template-columns:1fr}.sts-trustbar{grid-template-columns:1fr}.sts-trustbar div{border-right:0;border-bottom:1px solid #e0e7f0}.hero-actions,.sts-contact{flex-direction:column}.quiz-head{align-items:flex-start;flex-direction:column}.sts-section{padding:30px 12px}}
 
 .nav-highlight{font-weight:900!important;text-decoration:underline;text-underline-offset:4px}.gov-links-grid,.admin-page-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}.gov-links-grid a{display:block;padding:14px;background:#eaf2ff;border:1px solid #bfd1ea;border-radius:9px;color:#073b8f;text-decoration:none;font-weight:800;box-shadow:0 4px 12px rgba(7,59,143,.07)}.gov-links-grid a:hover{transform:translateY(-1px);background:#dceaff}.admin-page-grid a{text-align:center;text-decoration:none}.smart-tax-logo-fix{text-align:center;background:#fff;padding:10px}.smart-tax-logo-fix img{max-width:280px;width:100%;height:auto}
+
+/* Shanvi professional quick portal rail */
+.shanvi-side-shortcuts{position:fixed;z-index:1000;left:12px;top:42%;display:flex;flex-direction:column;gap:12px;width:132px}
+.shanvi-side-shortcuts a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;min-height:132px;padding:12px 8px;text-align:center;text-decoration:none;color:#fff;background:linear-gradient(145deg,#092b62,#1267b2);border:1px solid #8dbdf0;border-radius:16px;box-shadow:0 8px 24px #061c3a30;transition:transform .18s,box-shadow .18s}
+.shanvi-side-shortcuts a:hover{transform:translateX(4px);box-shadow:0 12px 28px #061c3a45}
+.shanvi-side-shortcuts a:nth-child(2){background:linear-gradient(145deg,#064e3b,#0f9870)}
+.shanvi-side-shortcuts span{font-size:38px;line-height:1.1}.shanvi-side-shortcuts b{font-size:12px;line-height:1.25;letter-spacing:.3px}.shanvi-side-shortcuts small{font-size:10px;opacity:.9}
+@media(min-width:1250px){body:has(.shanvi-side-shortcuts) main{margin-left:155px;margin-right:18px}}
+@media(max-width:800px){.shanvi-side-shortcuts{position:static;width:auto;display:grid;grid-template-columns:1fr 1fr;padding:10px 14px;background:#f3f7fc}.shanvi-side-shortcuts a{min-height:86px;flex-direction:row;gap:10px}.shanvi-side-shortcuts span{font-size:30px}.shanvi-side-shortcuts b{font-size:11px}.shanvi-side-shortcuts small{display:none}}
