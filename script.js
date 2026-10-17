@@ -46,9 +46,9 @@ async function requestQuote(insurer){
    await submitSupabaseLead(lead);
    const st=el('quoteStatus'); if(st)st.textContent='Enquiry saved to the shared lead database. Opening WhatsApp so you can send the request to Shanvi.';
  }catch(err){
-   const subject=encodeURIComponent('Insurance Quote Enquiry - Shanvi Insurance Services');
-   const body=encodeURIComponent(`Customer: ${lead.name}\nMobile: ${lead.mobile}\nVehicle: ${v}\nInsurance Company: ${insurer}\nCoverage: ${cover}\nNo premium has been calculated; please obtain a live insurer quote.\n`);
-   window.location.href=`mailto:${SHANVI.supportEmail}?subject=${subject}&body=${body}`;
+   const st=el('quoteStatus');
+   if(st)st.textContent='The shared database is unavailable or not configured. The enquiry has not been confirmed as saved; please send the WhatsApp message to contact Shanvi.';
+
  }
  const text=encodeURIComponent(`Hello Shanvi Insurance Services, please help me get a live quote.\nName: ${lead.name}\nMobile: ${lead.mobile}\nVehicle: ${v}\nInsurer: ${insurer}\nCoverage: ${cover}\nPlease confirm the actual insurer premium.`); const waUrl='https://wa.me/919664029638?text='+text; if(waWindow)waWindow.location.href=waUrl;else window.location.href=waUrl;
 }
