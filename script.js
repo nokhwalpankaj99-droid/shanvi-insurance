@@ -40,6 +40,7 @@ async function requestQuote(insurer){
  const name=prompt('Customer name / नाम दर्ज करें:'); if(!name)return;
  const mobile=prompt('Mobile number / मोबाइल नंबर दर्ज करें:'); if(!mobile)return;
  if(!/^[6-9]\d{9}$/.test(mobile.trim())){alert('Please enter a valid 10-digit Indian mobile number.');return}
+ const waWindow=window.open('about:blank','_blank');
  const lead={name:name.trim(),mobile:mobile.trim(),email:'',insurance_type:`${vehicleType==='bike'?'Bike':'Car'} Insurance - ${cover} - ${insurer}`,message:`Quote enquiry only. No premium calculated. Vehicle: ${v}. Insurer requested: ${insurer}. Actual premium subject to insurer confirmation.`,vehicle_number:v,source:'insurer enquiry'};
  try{
    await submitSupabaseLead(lead);
@@ -49,8 +50,7 @@ async function requestQuote(insurer){
    const body=encodeURIComponent(`Customer: ${lead.name}\nMobile: ${lead.mobile}\nVehicle: ${v}\nInsurance Company: ${insurer}\nCoverage: ${cover}\nNo premium has been calculated; please obtain a live insurer quote.\n`);
    window.location.href=`mailto:${SHANVI.supportEmail}?subject=${subject}&body=${body}`;
  }
- const text=encodeURIComponent(`Hello Shanvi Insurance Services, please help me get a live quote.\nName: ${lead.name}\nMobile: ${lead.mobile}\nVehicle: ${v}\nInsurer: ${insurer}\nCoverage: ${cover}\nPlease confirm the actual insurer premium.`);
- window.open('https://wa.me/919664029638?text='+text,'_blank','noopener');
+ const text=encodeURIComponent(`Hello Shanvi Insurance Services, please help me get a live quote.\nName: ${lead.name}\nMobile: ${lead.mobile}\nVehicle: ${v}\nInsurer: ${insurer}\nCoverage: ${cover}\nPlease confirm the actual insurer premium.`); const waUrl='https://wa.me/919664029638?text='+text; if(waWindow)waWindow.location.href=waUrl;else window.location.href=waUrl;
 }
 function store(key,val){localStorage.setItem(key,JSON.stringify(val));} function load(key,def){try{return JSON.parse(localStorage.getItem(key))??def}catch{return def}}
 function nextAgentCode(){let n=Number(localStorage.getItem('shanviAgentSerial')||600)+1;localStorage.setItem('shanviAgentSerial',n);return `SIS2022${String(n).padStart(3,'0')}`}
