@@ -22,3 +22,13 @@
   .quick-rail small{display:none}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.quick-rail a{transition:none}}
+
+/* Quick-access portal rail: high-contrast, easy-to-find actions */
+.quick-rail{top:34%;gap:12px;filter:drop-shadow(0 12px 18px rgba(16,38,74,.12))}
+.quick-rail a{width:118px;min-height:116px;padding:14px 10px;border:1px solid #dce6f5;border-left:0;border-radius:0 18px 18px 0;gap:4px;transition:width .18s,transform .18s,box-shadow .18s}
+.quick-rail a:hover,.quick-rail a:focus-visible{width:132px;transform:translateX(2px);box-shadow:0 14px 28px rgba(16,38,74,.16);outline:3px solid #9dbdff;outline-offset:2px}
+.quick-rail .rail-icon{display:grid;place-items:center;width:42px;height:42px;border-radius:14px;background:#e9f1ff;color:#1e51b7;font:800 26px Manrope, sans-serif}
+.quick-rail .rail-due .rail-icon{background:#fff2dc;color:#9a5b00}
+.quick-rail b{font-size:10px;line-height:1.45;letter-spacing:.35px;margin:5px 0 2px}
+.quick-rail small{font-size:10px}
+@media(max-width:760px){.quick-rail{top:auto;bottom:12px;left:10px;right:10px;display:grid;grid-template-columns:1fr 1fr;gap:8px;filter:drop-shadow(0 8px 15px rgba(16,38,74,.16))}.quick-rail a,.quick-rail a:hover,.quick-rail a:focus-visible{width:auto;min-height:0;display:flex;align-items:center;justify-content:flex-start;gap:9px;border:1px solid #dce6f5;border-radius:15px;padding:10px 12px;transform:none}.quick-rail .rail-icon{width:35px;height:35px;flex:0 0 35px;font-size:20px}.quick-rail b{font-size:9px;margin:0;text-align:left}.quick-rail small{display:none}body{padding-bottom:68px}}
