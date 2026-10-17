@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded",()=>{
   const toggle=document.getElementById("menuToggle"), nav=document.getElementById("mainNav");
   if(toggle&&nav)toggle.addEventListener("click",()=>nav.classList.toggle("open"));
   const q=document.getElementById("quoteForm");
-  if(q)q.addEventListener("submit",e=>{
+  if(q)q.addEventListener("submit",async e=>{
     e.preventDefault();const f=new FormData(q),lead={id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),name:String(f.get("name")).trim(),mobile:String(f.get("mobile")).trim(),vehicle:String(f.get("vehicle")).trim().toUpperCase(),type:f.get("type"),cover:f.get("cover"),createdAt:new Date().toISOString()};
     if(!/^[6-9]\d{9}$/.test(lead.mobile)){document.getElementById("quoteMessage").innerHTML='<span class="error">Please enter a valid 10-digit mobile number.</span>';return}
     const arr=SIS.get(SIS.keys.enquiries,[]);arr.unshift(lead);SIS.set(SIS.keys.enquiries,arr);
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded",()=>{
     const msg=document.getElementById("quoteMessage");
     try{await saveSharedLead({...lead,source:"homepage quick enquiry"});msg.textContent="Enquiry saved to the shared database. WhatsApp is opening; press Send to contact Shanvi.";msg.className="form-message success"}
     catch(err){msg.textContent="Enquiry saved only in this browser because the shared database is not configured or unavailable. WhatsApp is opening; press Send to contact Shanvi.";msg.className="form-message error"}
-    SIS.whatsApp(`Hello Shanvi Insurance Services, I need insurance assistance.\\nName: ${lead.name}\\nMobile: ${lead.mobile}\\nVehicle: ${lead.vehicle}\\nType: ${lead.type}\\nRequirement: ${lead.cover}`);
+    if(waWindow)waWindow.location.href=waUrl;else window.location.href=waUrl;
     q.reset();
   });
 });
