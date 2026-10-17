@@ -15,8 +15,7 @@
 - Updated Excel workbook: `Shanvi_Insurance_Agent_Portal_v18.xlsx` with payout/UPI fields.
 
 ## Admin login
-User ID: `shanvi112`
-Password: `Shanvi@123`
+The old hard-coded demo credentials have been removed. On first use, choose an Admin ID and a password of at least 12 characters in the Admin page. This credential is stored only in that browser. It is **not** server-side authentication and must not be used to protect shared/customer-sensitive data.
 
 ## Contact
 Support: 96640-29638  
@@ -48,3 +47,12 @@ This is a static/GitHub Pages frontend. `localStorage` is browser/device-specifi
 
 ## Smart Tax Solution Portal
 The `tax-gst.html` page has been redesigned as the independent Smart Tax Solution tax portal with Income Tax, GST, MSME/Udyam, FSSAI, audit/compliance, daily tax-news feed, daily quiz, Accountant Academy courses, certificate information and tax tools.
+
+
+## Reliability and security corrections (October 2026)
+- Removed fixed sample premium amounts from the insurer quote screen. It now labels insurer options as enquiry-only; no live insurer premium is calculated.
+- Customer local policy lookup now asks for the registered 10-digit mobile number as an additional check.
+- Homepage and agent enquiries attempt to save to the Supabase `public.leads` table, then disclose if the enquiry could only be saved locally. WhatsApp still requires the user to press Send.
+- To enable shared lead storage, run `SUPABASE_LEADS_SETUP.sql` in the Supabase SQL Editor for the project configured in `supabase-config.js`. Then test homepage and agent enquiries and confirm rows appear in `public.leads`. The SQL enables public INSERT only; it does not enable public SELECT or create a secure admin dashboard.
+- Admin, policy, reminder, photo and customer/agent account workflows still use browser-local storage in the static version. They are not secure multi-user services. Do not store confidential documents or treat this login as secure authentication until a server-side authenticated backend and storage policies are implemented.
+- Email notification functions are optional and require deployed/configured Supabase Edge Functions; a successful lead insert does not guarantee email delivery.

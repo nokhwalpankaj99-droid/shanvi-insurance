@@ -11,8 +11,7 @@ CONTENTS
 - style.css, app.js, admin.js: shared styles and functionality
 
 ADMIN LOGIN
-User ID: shanvi112
-Password: Shanvi@123
+Old hard-coded demo credentials removed. First use: set a local Admin ID and a password of at least 12 characters. This is browser-local demo access only, not secure server-side authentication.
 
 IMPORTANT LIMITATIONS (PLEASE READ)
 1. This is a static website package. Admin data is stored in the current browser's localStorage. It does NOT sync across devices or between different visitors.
