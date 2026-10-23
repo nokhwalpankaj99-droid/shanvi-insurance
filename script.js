@@ -10,7 +10,7 @@ async function submitSupabaseLead(lead){
   const response=await fetch(`${SUPABASE_REST_URL}/leads`,{
     method:'POST',
     headers:{'apikey':SUPABASE_PUBLISHABLE_KEY,'Authorization':`Bearer ${SUPABASE_PUBLISHABLE_KEY}`,'Content-Type':'application/json','Prefer':'return=minimal'},
-    body:JSON.stringify({name:lead.name,mobile:lead.mobile,email:lead.email||null,insurance_type:lead.insurance_type||"Insurance enquiry",message:lead.message||"",vehicle_number:lead.vehicle_number||null,source:lead.source||"website enquiry"})
+    body:JSON.stringify(lead)
   });
   if(!response.ok) throw new Error(await response.text()||'Supabase request failed');
   // Send an email notification through the Supabase Edge Function.
@@ -26,31 +26,40 @@ const insurers=[
 ];
 function cleanVehicle(v){return (v||'').toUpperCase().replace(/[^A-Z0-9]/g,'')}
 function getQuote(){
- const el=id=>document.getElementById(id);
- const v=cleanVehicle(el('vehicleNo')?.value), type=el('vehicleType')?.value, cover=el('cover')?.value;
+ const el=id=>document.getElementById(id); const v=cleanVehicle(el('vehicleNo').value), type=el('vehicleType').value, cover=el('cover').value;
  const out=el('quoteResults'), status=el('quoteStatus');
- if(!out||!status)return;
- if(v.length<6){status.textContent='Please enter a valid vehicle registration number.';out.innerHTML='';return}
- status.textContent='These are insurer contact options, not live quotes. Actual premium must be confirmed by the insurer using vehicle, registration, IDV, NCB and other policy details.';
- out.innerHTML=insurers.map(x=>`<div class="quote-card"><div class="insurer-mini"><div class="ins-logo logo-${x[1]}">${x[0].split(' ').map(w=>w[0]).slice(0,2).join('')}</div><div><b>${x[0]}</b><small>${type==='bike'?'Two-wheeler':'Car'} · ${cover||'Coverage to be confirmed'}</small></div></div><div><b>Live premium</b><small>Not available on this website</small></div><div class="price">Request quote</div><button class="btn primary" type="button" onclick="requestQuote('${x[0]}')">Request</button></div>`).join('');
+ if(v.length<6){status.innerHTML='<span class="error">Please enter a valid vehicle number.</span>';out.innerHTML='';return}
+ const base=type==='bike'?(cover==='comprehensive'?1850:843):(cover==='comprehensive'?7200:cover==='thirdparty'?3416:2800);
+ status.innerHTML=`<b>Vehicle:</b> ${v} &nbsp; <span class="success">Quote options are ready.</span>`;
+ out.innerHTML=insurers.map((x,i)=>{let p=Math.round(base*(1+(i%5-2)*.035));return `<div class="quote-card"><div class="insurer-mini"><div class="ins-logo logo-${x[1]}">${x[0].split(' ').map(w=>w[0]).slice(0,2).join('')}</div><div><b>${x[0]}</b><small>${cover==='comprehensive'?'Comprehensive':cover==='thirdparty'?'Third Party':'Limited Third Party'}</small></div></div><div><b>${type==='bike'?'Two Wheeler':'Car'}</b><small>${v}</small></div><div class="price">₹${p.toLocaleString('en-IN')}</div><button class="btn primary" onclick="requestQuote('${x[0]}',${p})">Request</button></div>`}).join('');
 }
-async function requestQuote(insurer){
- const el=id=>document.getElementById(id);
- const v=cleanVehicle(el('vehicleNo')?.value), vehicleType=el('vehicleType')?.value||'', cover=el('cover')?.value||'';
- const name=prompt('Customer name / नाम दर्ज करें:'); if(!name)return;
- const mobile=prompt('Mobile number / मोबाइल नंबर दर्ज करें:'); if(!mobile)return;
- if(!/^[6-9]\d{9}$/.test(mobile.trim())){alert('Please enter a valid 10-digit Indian mobile number.');return}
- const waWindow=window.open('about:blank','_blank');
- const lead={name:name.trim(),mobile:mobile.trim(),email:'',insurance_type:`${vehicleType==='bike'?'Bike':'Car'} Insurance - ${cover} - ${insurer}`,message:`Quote enquiry only. No premium calculated. Vehicle: ${v}. Insurer requested: ${insurer}. Actual premium subject to insurer confirmation.`,vehicle_number:v,source:'insurer enquiry'};
- try{
-   await submitSupabaseLead(lead);
-   const st=el('quoteStatus'); if(st)st.textContent='Enquiry saved to the shared lead database. Opening WhatsApp so you can send the request to Shanvi.';
- }catch(err){
-   const st=el('quoteStatus');
-   if(st)st.textContent='The shared database is unavailable or not configured. The enquiry has not been confirmed as saved; please send the WhatsApp message to contact Shanvi.';
-
- }
- const text=encodeURIComponent(`Hello Shanvi Insurance Services, please help me get a live quote.\nName: ${lead.name}\nMobile: ${lead.mobile}\nVehicle: ${v}\nInsurer: ${insurer}\nCoverage: ${cover}\nPlease confirm the actual insurer premium.`); const waUrl='https://wa.me/919664029638?text='+text; if(waWindow)waWindow.location.href=waUrl;else window.location.href=waUrl;
+async function requestQuote(insurer,price){
+  const v=document.getElementById('vehicleNo').value.trim().toUpperCase();
+  const vehicleType=document.getElementById('vehicleType')?.value||'';
+  const cover=document.getElementById('cover')?.value||'';
+  const name=prompt('Customer name / नाम दर्ज करें:');
+  if(!name) return;
+  const mobile=prompt('Mobile number / मोबाइल नंबर दर्ज करें:');
+  if(!mobile) return;
+  const lead={
+    name:name.trim(),
+    mobile:mobile.trim(),
+    email:'',
+    insurance_type:`${vehicleType==='bike'?'Bike':'Car'} Insurance - ${cover} - ${insurer}`,
+    message:`Quote Request\nVehicle: ${v}\nQuoted Premium: ₹${price}\nInsurer: ${insurer}`
+  };
+  try{
+    const saved=await submitSupabaseLead(lead);
+    if(saved){
+      const st=document.getElementById('quoteStatus');
+      if(st) st.innerHTML='<b>Request received.</b> <span class="success">Shanvi team will contact you shortly.</span>';
+    }
+  }catch(err){
+    // Keep a mailto fallback if the backend is temporarily unavailable.
+    const subject=encodeURIComponent('Insurance Quote Request - Shanvi Insurance Services');
+    const body=encodeURIComponent(`Customer: ${lead.name}\nMobile: ${lead.mobile}\nVehicle: ${v}\nInsurance Company: ${insurer}\nQuoted Premium: ₹${price}\n`);
+    window.location.href=`mailto:${SHANVI.supportEmail}?subject=${subject}&body=${body}`;
+  }
 }
 function store(key,val){localStorage.setItem(key,JSON.stringify(val));} function load(key,def){try{return JSON.parse(localStorage.getItem(key))??def}catch{return def}}
 function nextAgentCode(){let n=Number(localStorage.getItem('shanviAgentSerial')||600)+1;localStorage.setItem('shanviAgentSerial',n);return `SIS2022${String(n).padStart(3,'0')}`}
